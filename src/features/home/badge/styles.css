@@ -1,0 +1,36 @@
+#badgePrice {
+  position: absolute;
+  right: 0;
+}
+
+.pin {
+  position: absolute;
+  top: -10px;
+  right: 18px;
+}
+
+.badge {
+  transform-origin: 104px 40px;
+  animation: swing 10s ease 0s infinite normal none;
+}
+@keyframes swing {
+  0% {
+  }
+  2% {
+    transform: rotate(6deg);
+  }
+  4% {
+    transform: rotate(-6deg);
+  }
+  6% {
+    transform: rotate(3.6deg);
+  }
+  8% {
+    transform: rotate(-2.4deg);
+  }
+  10% {
+    transform: rotate(1.2deg);
+  }
+  100% {
+  }
+}

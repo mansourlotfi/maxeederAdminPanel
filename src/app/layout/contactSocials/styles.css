@@ -1,0 +1,116 @@
+:root {
+  --txt-color: #7d8fb3;
+  --heading-color: #2f3942;
+  --sub-txt-color: #566686;
+  --line-color: #e5eaf5;
+  --primary-color: #f25081;
+  --border-color: #e0e4ed;
+  --gray-color: #222222;
+  --fur-primary-color: #09acb5;
+  --fur-text-color: #2f3942;
+  --white-color: rgb(255, 255, 255);
+  --red-color: rgb(220 53 69);
+
+  /* GENERAL CONTAINER VARIABLES */
+  --container-width-lg: 76%;
+  --container-width-md: 90%;
+
+  /* BORDER RADIUS VARIABLES */
+  --border-radius-1: 1.2rem;
+  --border-radius-2: 0.8rem;
+  --border-radius-3: 0.5rem;
+
+  /* GENERAL TRANSITION VARIABLE */
+  --transition: all 500ms ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  list-style: none;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+.c-social-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: -5px;
+  list-style: none;
+}
+.c-social-list > li > a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--primary-color);
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  margin: 5px 5px;
+  z-index: 1;
+  position: relative;
+}
+.c-social-list > li > a:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  z-index: -1;
+  box-shadow: inset 0 0 0 35px var(--primary-color);
+  -webkit-transform: scale3d(0.9, 0.9, 1);
+  transform: scale3d(0.9, 0.9, 1);
+  -webkit-transition: box-shadow 0.3s, -webkit-transform 0.3;
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+.c-social-list > li > a:hover::after {
+  box-shadow: inset 0 0 0 1px #7ab7ba;
+  -webkit-transform: scale3d(1, 1, 1);
+  transform: scale3d(1, 1, 1);
+}
+.c-social-list > li > a:hover > svg path {
+  fill: var(--white-color);
+}
+.c-social-list > li > a > svg {
+  -webkit-transition: all 0.5s linear 0s;
+  -moz-transition: all 0.5s linear 0s;
+  -ms-transition: all 0.5s linear 0s;
+  -o-transition: all 0.5s linear 0s;
+  transition: all 0.5s linear 0s;
+}
+.c-social-list > li > a:hover > svg {
+  transform: rotate(-360deg);
+}
+
+footer {
+  padding-top: 4rem;
+}
+
+footer .nav__menu {
+  justify-content: center;
+}
+
+.footer__socials {
+  width: fit-content;
+  display: flex;
+  gap: 1.5rem;
+  margin: 3rem auto 4rem;
+}
+
+.footer__socials a {
+  background: var(--color-black);
+  color: var(--white-color);
+  padding: 0.6rem;
+  border-radius: var(--border-radius-3);
+}
+
+.footer__socials a:hover {
+  opacity: 0.7;
+  transform: translateY(-0.5rem);
+}

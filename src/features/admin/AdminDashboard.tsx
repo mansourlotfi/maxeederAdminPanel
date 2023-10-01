@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Paper,
   Grid,
@@ -7,12 +8,15 @@ import {
   List,
   ListItem,
   ListItemButton,
+  Collapse,
 } from "@mui/material";
 import Header from "../../app/layout/Header";
 import { useAppSelector } from "../../app/store/configureStore";
 import { NavLink, Outlet } from "react-router-dom";
 import { AdminLinks } from "./data";
-
+import { useState } from "react";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 const navStyles = {
   color: "inherit",
   textDecoration: "none",
@@ -26,6 +30,74 @@ const navStyles = {
     backgroundColor: "primary.light",
   },
 };
+
+const SingleLevel = ({ item }: any) => {
+  return (
+    <ListItem
+      to={item?.link ? item.link : ""}
+      key={item.id}
+      disablePadding
+      component={NavLink}
+      sx={navStyles}
+    >
+      <ListItemButton>
+        <ListItemIcon>{item.icon}</ListItemIcon>
+        <ListItemText primary={item.title} />
+      </ListItemButton>
+    </ListItem>
+  );
+};
+
+const MultiLevel = ({ item }: any) => {
+  const { items: children } = item;
+
+  const [open, setOpen] = useState(false);
+
+  const handleClick = () => {
+    setOpen((prev) => !prev);
+  };
+
+  return (
+    <React.Fragment>
+      <ListItem button onClick={handleClick}>
+        <ListItemIcon>{item.icon}</ListItemIcon>
+        <ListItemText primary={item.title} />
+        {open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+      </ListItem>
+      <Collapse in={open} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          {children.map((child: any, key: any) => (
+            <DynamicMenuItem key={key} item={child} />
+          ))}
+        </List>
+      </Collapse>
+    </React.Fragment>
+  );
+};
+
+export function hasChildren(item: any) {
+  const { items: children } = item;
+
+  if (children === undefined) {
+    return false;
+  }
+
+  if (children.constructor !== Array) {
+    return false;
+  }
+
+  if (children.length === 0) {
+    return false;
+  }
+
+  return true;
+}
+
+const DynamicMenuItem = ({ item }: any) => {
+  const Component = hasChildren(item) ? MultiLevel : SingleLevel;
+  return <Component item={item} />;
+};
+
 function AdminDashboard() {
   const { user } = useAppSelector((state) => state.account);
 
@@ -50,19 +122,8 @@ function AdminDashboard() {
           >
             <List>
               {user
-                ? AdminLinks.map((item) => (
-                    <ListItem
-                      key={item.id}
-                      disablePadding
-                      component={NavLink}
-                      to={item.link}
-                      sx={navStyles}
-                    >
-                      <ListItemButton>
-                        <ListItemIcon>{item.icon}</ListItemIcon>
-                        <ListItemText primary={item.title} />
-                      </ListItemButton>
-                    </ListItem>
+                ? AdminLinks.map((item, key): any => (
+                    <DynamicMenuItem key={key} item={item} />
                   ))
                 : null}
             </List>

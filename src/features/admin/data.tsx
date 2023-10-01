@@ -1,7 +1,6 @@
 import BeachAccessIcon from "@mui/icons-material/BeachAccess";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SettingsIcon from "@mui/icons-material/Settings";
-import PermDataSettingIcon from "@mui/icons-material/PermDataSetting";
 import BrandingWatermarkIcon from "@mui/icons-material/BrandingWatermark";
 import CategoryIcon from "@mui/icons-material/Category";
 import InventoryIcon from "@mui/icons-material/Inventory";
@@ -29,7 +28,7 @@ export const AdminLinks = [
   {
     id: 4,
     link: "/admin-dashboard/users",
-    title: "کاربران",
+    title: "همکاران",
     icon: <AccountCircleIcon color="primary" />,
   },
   {
@@ -40,20 +39,29 @@ export const AdminLinks = [
   },
   {
     id: 6,
-    link: "/admin-dashboard/settings",
     title: "تنظیمات",
     icon: <SettingsIcon color="primary" />,
+    items: [
+      {
+        title: "تنظیمات ",
+        link: "/admin-dashboard/settings",
+      },
+      {
+        title: "سئو و بهینه سازی",
+        link: "/admin-dashboard/ceo",
+      },
+    ],
   },
+
   {
     id: 7,
-    link: "/admin-dashboard/ceo",
-    title: "سئو و بهینه سازی",
-    icon: <PermDataSettingIcon color="primary" />,
-  },
-  {
-    id: 7,
-    link: "/admin-dashboard/reports",
     title: "گزارشات",
     icon: <SummarizeIcon color="primary" />,
+    items: [
+      {
+        title: "چارت",
+        link: "/admin-dashboard/reports",
+      },
+    ],
   },
 ];

@@ -24,6 +24,8 @@ import AdminCustomRoles from "../../features/admin/customRoles/CustomRoles";
 import AdminReports from "../../features/admin/reports/Reports";
 import AdminSocialNetworks from "../../features/admin/socialNetworks/SocialNetworks";
 import AdminMainMenu from "../../features/admin/mainMenu/MainMenu";
+import AdminQuickAccessMenu from "../../features/admin/quickAccessMenu/QuickAccessMenu";
+import AdminPartners from "../../features/admin/partners/Partners";
 
 export const router = createBrowserRouter([
   {
@@ -85,6 +87,14 @@ export const router = createBrowserRouter([
               {
                 path: "mainMenu",
                 element: <AdminMainMenu />,
+              },
+              {
+                path: "qickAccessMenu",
+                element: <AdminQuickAccessMenu />,
+              },
+              {
+                path: "partners",
+                element: <AdminPartners />,
               },
             ],
           },

@@ -7,6 +7,9 @@ import InventoryIcon from "@mui/icons-material/Inventory";
 import SummarizeIcon from "@mui/icons-material/Summarize";
 import ConnectWithoutContactIcon from "@mui/icons-material/ConnectWithoutContact";
 import ListIcon from "@mui/icons-material/List";
+import GroupsIcon from "@mui/icons-material/Groups";
+import ApartmentIcon from "@mui/icons-material/Apartment";
+
 export const AdminLinks = [
   {
     id: 1,
@@ -31,6 +34,26 @@ export const AdminLinks = [
     link: "/admin-dashboard/mainMenu",
     title: "منوی اصلی",
     icon: <ListIcon color="primary" />,
+  },
+  {
+    id: 122,
+    link: "/admin-dashboard/qickAccessMenu",
+    title: "منوی دسترسی سریع",
+    icon: <ListIcon color="primary" />,
+  },
+
+  {
+    id: 122,
+    link: "/admin-dashboard/partners",
+    title: "نمایندگان",
+    icon: <GroupsIcon color="primary" />,
+  },
+
+  {
+    id: 122,
+    link: "/admin-dashboard/department",
+    title: "دپارتمان ها",
+    icon: <ApartmentIcon color="primary" />,
   },
 
   {

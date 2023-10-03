@@ -5,10 +5,6 @@ import {
 } from "@reduxjs/toolkit";
 import agent from "../../../app/api/agent";
 import { RootState } from "../../../app/store/configureStore";
-import {
-  SocialNetworks,
-  SocialNetworksParams,
-} from "../../../app/models/socialNetwork";
 import { MetaData } from "../../../app/models/pagination";
 import { MainMenu, MainMenuParams } from "../../../app/models/MainMenu";
 
@@ -43,7 +39,7 @@ export const fetchMainMenusAsync = createAsyncThunk<
   }
 });
 
-function initParams(): SocialNetworksParams {
+function initParams(): MainMenuParams {
   return {
     pageNumber: 1,
     pageSize: 6,

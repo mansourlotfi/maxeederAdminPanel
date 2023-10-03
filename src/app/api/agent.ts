@@ -208,6 +208,21 @@ const Admin = {
   updateMainMenu: (SocialNetwork: any) =>
     requests.putForm("MainMenu", createFormData(SocialNetwork)),
   deleteMainMenu: (id: number) => requests.delete(`MainMenu/${id}`),
+  //QuickAccessMenu
+  quickAccessList: (params: URLSearchParams) =>
+    requests.get("QuickAccess", params),
+  createQuickAccess: (network: any) =>
+    requests.postForm("QuickAccess", createFormData(network)),
+  updateQuickAccess: (SocialNetwork: any) =>
+    requests.putForm("QuickAccess", createFormData(SocialNetwork)),
+  deleteQuickAccess: (id: number) => requests.delete(`QuickAccess/${id}`),
+  //Partners
+  partnersList: (params: URLSearchParams) => requests.get("Partners", params),
+  createPartner: (network: any) =>
+    requests.postForm("Partners", createFormData(network)),
+  updatePartner: (SocialNetwork: any) =>
+    requests.putForm("Partners", createFormData(SocialNetwork)),
+  deletePartner: (id: number) => requests.delete(`Partners/${id}`),
 };
 
 const agent = {

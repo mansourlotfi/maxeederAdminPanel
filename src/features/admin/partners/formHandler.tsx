@@ -6,13 +6,12 @@ import { validationSchema } from "./validation";
 import agent from "../../../app/api/agent";
 import { useAppDispatch } from "../../../app/store/configureStore";
 import { LoadingButton } from "@mui/lab";
-import { setMenu } from "./mainMenuSlice";
+import { setPartner } from "./partnersSlice";
 import { useEffect } from "react";
-import { enNumberConvertor } from "../../../app/util/util";
-import { MainMenu } from "../../../app/models/MainMenu";
+import { Partner } from "../../../app/models/Partner";
 
 interface Props {
-  itemToEdit?: MainMenu;
+  itemToEdit?: Partner;
   closeModalHandler: () => void;
 }
 
@@ -33,13 +32,13 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
 
   async function handleSubmitData(data: FieldValues) {
     try {
-      let response: MainMenu;
+      let response: Partner;
       if (itemToEdit) {
-        response = await agent.Admin.updateMainMenu(data);
+        response = await agent.Admin.updatePartner(data);
       } else {
-        response = await agent.Admin.createMainMenu(data);
+        response = await agent.Admin.createPartner(data);
       }
-      dispatch(setMenu(response));
+      dispatch(setPartner(response));
       closeModalHandler();
     } catch (error) {
       console.log(error);
@@ -49,23 +48,30 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
   return (
     <Box component={Paper} sx={{ p: 4 }}>
       <Typography variant="h4" gutterBottom sx={{ mb: 4 }}>
-        افزودن منو
+        افزودن نماینده جدید
       </Typography>
       <form onSubmit={handleSubmit(handleSubmitData)}>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={12}>
-            <AppTextInput control={control} name="title" label="نام" />
+            <AppTextInput control={control} name="title" label="عنوان" />
           </Grid>
           <Grid item xs={12} sm={12}>
-            <AppTextInput control={control} name="link" label="لینک" />
+            <AppTextInput control={control} name="ceo" label="مدیر" />
           </Grid>
           <Grid item xs={12} sm={12}>
-            <AppTextInput
-              control={control}
-              name="priority"
-              label="اولویت"
-              onKeyPress={enNumberConvertor}
-            />
+            <AppTextInput control={control} name="state" label="استان" />
+          </Grid>
+          <Grid item xs={12} sm={12}>
+            <AppTextInput control={control} name="city" label="شهر" />
+          </Grid>
+          <Grid item xs={12} sm={12}>
+            <AppTextInput control={control} name="tel" label="تلفن" />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <AppTextInput control={control} name="long" label="لانگ" />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <AppTextInput control={control} name="lat" label="لت" />
           </Grid>
         </Grid>
         <Box display="flex" justifyContent="space-between" sx={{ mt: 3 }}>

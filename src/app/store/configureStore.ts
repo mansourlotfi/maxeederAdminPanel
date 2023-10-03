@@ -10,6 +10,8 @@ import { usersSlice } from "../../features/admin/users/usersSlice";
 import { customRolesSlice } from "../../features/admin/customRoles/customRolesSlice";
 import { socialNetworkSlice } from "../../features/admin/socialNetworks/socialnetworksSlice";
 import { mainMenuSlice } from "../../features/admin/mainMenu/mainMenuSlice";
+import { QuickAccessMenulice } from "../../features/admin/quickAccessMenu/quickAccessMenuSlice";
+import { PartnersSlice } from "../../features/admin/partners/partnersSlice";
 
 export const store = configureStore({
   reducer: {
@@ -23,6 +25,8 @@ export const store = configureStore({
     customRoles: customRolesSlice.reducer,
     socialNetworks: socialNetworkSlice.reducer,
     mainMenu: mainMenuSlice.reducer,
+    quickAccess: QuickAccessMenulice.reducer,
+    partners: PartnersSlice.reducer,
   },
 });
 

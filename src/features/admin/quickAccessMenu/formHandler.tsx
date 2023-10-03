@@ -6,7 +6,7 @@ import { validationSchema } from "./validation";
 import agent from "../../../app/api/agent";
 import { useAppDispatch } from "../../../app/store/configureStore";
 import { LoadingButton } from "@mui/lab";
-import { setMenu } from "./mainMenuSlice";
+import { setMenu } from "./quickAccessMenuSlice";
 import { useEffect } from "react";
 import { enNumberConvertor } from "../../../app/util/util";
 import { MainMenu } from "../../../app/models/MainMenu";
@@ -35,9 +35,9 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
     try {
       let response: MainMenu;
       if (itemToEdit) {
-        response = await agent.Admin.updateMainMenu(data);
+        response = await agent.Admin.updateQuickAccess(data);
       } else {
-        response = await agent.Admin.createMainMenu(data);
+        response = await agent.Admin.createQuickAccess(data);
       }
       dispatch(setMenu(response));
       closeModalHandler();
@@ -49,7 +49,7 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
   return (
     <Box component={Paper} sx={{ p: 4 }}>
       <Typography variant="h4" gutterBottom sx={{ mb: 4 }}>
-        افزودن منو
+        افزودن منوی دسترسی سریع
       </Typography>
       <form onSubmit={handleSubmit(handleSubmitData)}>
         <Grid container spacing={3}>

@@ -6,6 +6,7 @@ import CategoryIcon from "@mui/icons-material/Category";
 import InventoryIcon from "@mui/icons-material/Inventory";
 import SummarizeIcon from "@mui/icons-material/Summarize";
 import ConnectWithoutContactIcon from "@mui/icons-material/ConnectWithoutContact";
+import ListIcon from "@mui/icons-material/List";
 export const AdminLinks = [
   {
     id: 1,
@@ -24,6 +25,12 @@ export const AdminLinks = [
     link: "/admin-dashboard/socialNetworks",
     title: "شبکه های اجتماعی",
     icon: <ConnectWithoutContactIcon color="primary" />,
+  },
+  {
+    id: 122,
+    link: "/admin-dashboard/mainMenu",
+    title: "منوی اصلی",
+    icon: <ListIcon color="primary" />,
   },
 
   {

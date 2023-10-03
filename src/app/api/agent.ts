@@ -201,6 +201,13 @@ const Admin = {
   updateSocialNetwork: (SocialNetwork: any) =>
     requests.putForm("SocialNetwork", createFormData(SocialNetwork)),
   deleteSocialNetwork: (id: number) => requests.delete(`SocialNetwork/${id}`),
+  //MainMenu
+  MainMenuList: (params: URLSearchParams) => requests.get("MainMenu", params),
+  createMainMenu: (network: any) =>
+    requests.postForm("MainMenu", createFormData(network)),
+  updateMainMenu: (SocialNetwork: any) =>
+    requests.putForm("MainMenu", createFormData(SocialNetwork)),
+  deleteMainMenu: (id: number) => requests.delete(`MainMenu/${id}`),
 };
 
 const agent = {

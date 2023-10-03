@@ -7,7 +7,6 @@ export interface SocialNetworks {
 }
 
 export interface SocialNetworksParams {
-  searchTerm?: string;
   pageNumber: number;
   pageSize: number;
 }

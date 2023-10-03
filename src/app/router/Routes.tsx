@@ -23,6 +23,7 @@ import AdminUserList from "../../features/admin/users/Users";
 import AdminCustomRoles from "../../features/admin/customRoles/CustomRoles";
 import AdminReports from "../../features/admin/reports/Reports";
 import AdminSocialNetworks from "../../features/admin/socialNetworks/SocialNetworks";
+import AdminMainMenu from "../../features/admin/mainMenu/MainMenu";
 
 export const router = createBrowserRouter([
   {
@@ -80,6 +81,10 @@ export const router = createBrowserRouter([
               {
                 path: "socialNetworks",
                 element: <AdminSocialNetworks />,
+              },
+              {
+                path: "mainMenu",
+                element: <AdminMainMenu />,
               },
             ],
           },

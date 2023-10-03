@@ -9,6 +9,7 @@ import { brokerSlice } from "../../features/admin/broker/brokerSlice";
 import { usersSlice } from "../../features/admin/users/usersSlice";
 import { customRolesSlice } from "../../features/admin/customRoles/customRolesSlice";
 import { socialNetworkSlice } from "../../features/admin/socialNetworks/socialnetworksSlice";
+import { mainMenuSlice } from "../../features/admin/mainMenu/mainMenuSlice";
 
 export const store = configureStore({
   reducer: {
@@ -21,6 +22,7 @@ export const store = configureStore({
     users: usersSlice.reducer,
     customRoles: customRolesSlice.reducer,
     socialNetworks: socialNetworkSlice.reducer,
+    mainMenu: mainMenuSlice.reducer,
   },
 });
 

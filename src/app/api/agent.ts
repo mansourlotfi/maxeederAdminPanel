@@ -193,6 +193,14 @@ const Admin = {
   createCustomRole: (role: any) =>
     requests.postForm("CustomUserRoles", createFormData(role)),
   deleteCustomRole: (id: number) => requests.delete(`CustomUserRoles/${id}`),
+  //SocialNetworks
+  socialNetworksList: (params: URLSearchParams) =>
+    requests.get("SocialNetwork", params),
+  createSocialNetwork: (network: any) =>
+    requests.postForm("SocialNetwork", createFormData(network)),
+  updateSocialNetwork: (SocialNetwork: any) =>
+    requests.putForm("SocialNetwork", createFormData(SocialNetwork)),
+  deleteSocialNetwork: (id: number) => requests.delete(`SocialNetwork/${id}`),
 };
 
 const agent = {

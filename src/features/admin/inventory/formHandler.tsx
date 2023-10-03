@@ -119,7 +119,7 @@ export default function FormHandler({ product, cancelEdit }: Props) {
               <AppCheckbox
                 disabled={false}
                 name="isFeatured"
-                label="محصول پرفروش"
+                label="محصول ویژه"
                 control={control}
               />
             </Box>

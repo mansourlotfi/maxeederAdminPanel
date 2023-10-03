@@ -22,6 +22,7 @@ import AdminCeoOptimazation from "../../features/admin/ceoOptimization/ceoOptimi
 import AdminUserList from "../../features/admin/users/Users";
 import AdminCustomRoles from "../../features/admin/customRoles/CustomRoles";
 import AdminReports from "../../features/admin/reports/Reports";
+import AdminSocialNetworks from "../../features/admin/socialNetworks/SocialNetworks";
 
 export const router = createBrowserRouter([
   {
@@ -75,6 +76,10 @@ export const router = createBrowserRouter([
               {
                 path: "reports",
                 element: <AdminReports />,
+              },
+              {
+                path: "socialNetworks",
+                element: <AdminSocialNetworks />,
               },
             ],
           },

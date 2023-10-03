@@ -8,6 +8,7 @@ import { brandSlice } from "../../features/admin/brands/brandSlice";
 import { brokerSlice } from "../../features/admin/broker/brokerSlice";
 import { usersSlice } from "../../features/admin/users/usersSlice";
 import { customRolesSlice } from "../../features/admin/customRoles/customRolesSlice";
+import { socialNetworkSlice } from "../../features/admin/socialNetworks/socialnetworksSlice";
 
 export const store = configureStore({
   reducer: {
@@ -19,6 +20,7 @@ export const store = configureStore({
     brokers: brokerSlice.reducer,
     users: usersSlice.reducer,
     customRoles: customRolesSlice.reducer,
+    socialNetworks: socialNetworkSlice.reducer,
   },
 });
 

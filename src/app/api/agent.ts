@@ -241,6 +241,13 @@ const Admin = {
     requests.postForm("Logo", createFormData(network)),
   updateLogo: (Logo: any) => requests.putForm("Logo", createFormData(Logo)),
   deleteLogo: (id: number) => requests.delete(`Logo/${id}`),
+  //Artists
+  artistList: (params: URLSearchParams) => requests.get("Artists", params),
+  createArtist: (artist: any) =>
+    requests.postForm("Artists", createFormData(artist)),
+  updateArtist: (artist: any) =>
+    requests.putForm("Artists", createFormData(artist)),
+  deleteArtist: (id: number) => requests.delete(`Artists/${id}`),
 };
 
 const agent = {

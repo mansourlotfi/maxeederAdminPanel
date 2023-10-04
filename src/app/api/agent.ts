@@ -55,7 +55,7 @@ axios.interceptors.response.use(
         toast.error("You are not allowed to do that!");
         break;
       case 404:
-        return toast.error("Not Found!");
+        toast.error("Not Found!");
         break;
       case 500:
         router.navigate("/server-error", { state: { error: data } });

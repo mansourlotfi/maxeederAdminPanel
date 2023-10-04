@@ -4,7 +4,7 @@ export interface Setting {
   email: string | null;
   address: string | null;
   phone: string | null;
+  footerText: string | null;
   contactUsRitchText: string | null;
   servicesRitchText: string | null;
-  servicePictureUrl: string | null;
 }

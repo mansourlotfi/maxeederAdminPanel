@@ -1,16 +1,10 @@
-// import { useState } from "react";
-// import useProducts from "../../../app/hooks/useProducts";
-// import { useAppDispatch } from "../../../app/store/configureStore";
 import { useCallback, useEffect, useState } from "react";
 import { useQuill } from "react-quilljs";
-
 import agent from "../../../app/api/agent";
 import { Setting } from "../../../app/models/Setting";
-// import { toast } from "react-toastify";
 import { FieldValues, useForm } from "react-hook-form";
 import { Box, Grid, Typography } from "@mui/material";
 import AppTextInput from "../../../app/components/AppTextInput";
-import AppDropzone from "../../../app/components/AppDropzone";
 import { LoadingButton } from "@mui/lab";
 import InputLabel from "@mui/material/InputLabel";
 import { validationSchema } from "./validation";
@@ -33,10 +27,9 @@ export default function AdminSettings() {
   const [settings, setSettings] = useState<Setting>();
   const [isSubmitting, setisSubmitting] = useState(false);
 
-  const { control, handleSubmit, watch, reset } = useForm({
+  const { control, handleSubmit, reset } = useForm({
     resolver: yupResolver<any>(validationSchema),
   });
-  const watchFile = watch("file", null);
 
   const generateValues = useCallback(
     (values: any): Omit<Setting, "id"> => {
@@ -45,13 +38,13 @@ export default function AdminSettings() {
         email: values.email ?? null,
         address: values.address ?? null,
         phone: values.phone ?? null,
+        footerText: values.footerText ?? null,
         contactUsRitchText: JSON.stringify(
           quillRef1.current.firstChild.innerHTML
         ),
         servicesRitchText: JSON.stringify(
           quillRef2.current.firstChild.innerHTML
         ),
-        servicePictureUrl: values.file,
       };
     },
     [quillRef1, quillRef2]
@@ -139,10 +132,23 @@ export default function AdminSettings() {
             <AppTextInput control={control} name="email" label="ایمیل سایت" />
           </Grid>
           <Grid item xs={12} sm={12}>
-            <AppTextInput control={control} name="address" label="آدرس سایت" />
+            <AppTextInput
+              control={control}
+              multiline
+              rows={3}
+              name="address"
+              label="آدرس سایت"
+            />
           </Grid>
           <Grid item xs={12}>
             <AppTextInput control={control} name="phone" label="تلفن سایت" />
+          </Grid>
+          <Grid item xs={12}>
+            <AppTextInput
+              control={control}
+              name="footerText"
+              label="متن پاصفحه"
+            />
           </Grid>
 
           <Grid item xs={12} style={{ height: 300, direction: "rtl" }}>
@@ -162,33 +168,8 @@ export default function AdminSettings() {
               ref={quillRef2}
             />
           </Grid>
-
-          <Grid item xs={12} mt={15}>
-            <InputLabel> بنر خدمات </InputLabel>
-
-            <Box
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-            >
-              <AppDropzone control={control} name="file" />
-              {watchFile ? (
-                <img
-                  src={watchFile.preview}
-                  alt="preview"
-                  style={{ maxHeight: 200 }}
-                />
-              ) : (
-                <img
-                  src={settings?.servicePictureUrl ?? undefined}
-                  alt={settings?.description ?? undefined}
-                  style={{ maxHeight: 200 }}
-                />
-              )}
-            </Box>
-          </Grid>
         </Grid>
-        <Box display="flex" justifyContent="space-between" p={10}>
+        <Box mt={10} display="flex" justifyContent="space-between" p={10}>
           <LoadingButton
             loading={isSubmitting}
             type="submit"

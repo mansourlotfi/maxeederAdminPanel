@@ -37,6 +37,8 @@ import ProductSearch from "../../catalog/ProductSearch";
 import useBrands from "../../../app/hooks/useBrands";
 import useCategories from "../../../app/hooks/useCategories";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import { toast } from "react-toastify";
 
 const sortOptions = [
   { value: "name", label: "حروف الفبا" },
@@ -178,11 +180,14 @@ export default function AdminInventory() {
             <TableRow>
               <TableCell>#</TableCell>
               <TableCell align="left">کالا</TableCell>
-              <TableCell align="right">قیمت</TableCell>
+              <TableCell align="left">تصویر</TableCell>
+              <TableCell align="left">قیمت</TableCell>
               <TableCell align="center">نوع</TableCell>
               <TableCell align="center">برند</TableCell>
               <TableCell align="center">تعداد</TableCell>
-              <TableCell align="right"></TableCell>
+              <TableCell align="left">کپی</TableCell>
+              <TableCell align="left">ویرایش</TableCell>
+              <TableCell align="left">حذف</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -196,25 +201,40 @@ export default function AdminInventory() {
                 </TableCell>
                 <TableCell align="left">
                   <Box display="flex" alignItems="center">
+                    <span>{product.name}</span>
+                  </Box>
+                </TableCell>
+                <TableCell align="left">
+                  <Box display="flex" alignItems="center">
                     <img
                       src={product.pictureUrl}
                       alt={product.name}
                       style={{ height: 50, marginRight: 20 }}
                     />
-                    <span>{product.name}</span>
                   </Box>
                 </TableCell>
-                <TableCell align="right">
+                <TableCell align="left">
                   {currencyFormat(product.price)}
                 </TableCell>
                 <TableCell align="center">{product.type}</TableCell>
                 <TableCell align="center">{product.brand}</TableCell>
                 <TableCell align="center">{product.quantityInStock}</TableCell>
-                <TableCell align="right">
+                <TableCell align="left">
+                  <Button
+                    onClick={() => {
+                      navigator.clipboard.writeText(product.name);
+                      toast.success("کپی شد");
+                    }}
+                    startIcon={<ContentCopyIcon />}
+                  />
+                </TableCell>
+                <TableCell align="left">
                   <Button
                     onClick={() => handleSelectProduct(product)}
                     startIcon={<Edit />}
                   />
+                </TableCell>
+                <TableCell align="left">
                   <LoadingButton
                     loading={loading && target === product.id}
                     onClick={() => handleDeleteProduct(product.id)}

@@ -61,7 +61,7 @@ export default function AdminUserList() {
     <>
       <Box display="flex" justifyContent="space-between">
         <Typography sx={{ p: 2 }} variant="h4">
-          لیست کاربران
+          لیست همکاران
         </Typography>
         <Button
           onClick={() => setIsOpen(true)}
@@ -71,7 +71,7 @@ export default function AdminUserList() {
           size="small"
           variant="contained"
         >
-          کاربر جدید
+          همکار جدید
         </Button>
       </Box>
       <TableContainer component={Paper}>

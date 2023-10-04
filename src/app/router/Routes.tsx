@@ -28,6 +28,7 @@ import AdminQuickAccessMenu from "../../features/admin/quickAccessMenu/QuickAcce
 import AdminPartners from "../../features/admin/partners/Partners";
 import AdminDepartments from "../../features/admin/departments/Departments";
 import AdminMessages from "../../features/admin/messages/Messages";
+import AdminLogos from "../../features/admin/logo/Logos";
 
 export const router = createBrowserRouter([
   {
@@ -105,6 +106,10 @@ export const router = createBrowserRouter([
               {
                 path: "messages",
                 element: <AdminMessages />,
+              },
+              {
+                path: "logo",
+                element: <AdminLogos />,
               },
             ],
           },

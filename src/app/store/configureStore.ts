@@ -14,6 +14,7 @@ import { QuickAccessMenulice } from "../../features/admin/quickAccessMenu/quickA
 import { PartnersSlice } from "../../features/admin/partners/partnersSlice";
 import { departmentsSlice } from "../../features/admin/departments/departmentsSlice";
 import { messagesSlice } from "../../features/admin/messages/messagesSlice";
+import { logoSlice } from "../../features/admin/logo/logosSlice";
 
 export const store = configureStore({
   reducer: {
@@ -31,6 +32,7 @@ export const store = configureStore({
     partners: PartnersSlice.reducer,
     departments: departmentsSlice.reducer,
     messages: messagesSlice.reducer,
+    logo: logoSlice.reducer,
   },
 });
 

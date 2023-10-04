@@ -1,4 +1,4 @@
-import { Delete } from "@mui/icons-material";
+import { Edit, Delete } from "@mui/icons-material";
 import { LoadingButton } from "@mui/lab";
 import {
   Box,
@@ -22,6 +22,7 @@ import FormHandler from "./formHandler";
 import { toast } from "react-toastify";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
+import { Category } from "../../../app/models/Category";
 
 export default function AdminCategory() {
   const { categories, categoriesLoaded, status } = useCategories();
@@ -31,6 +32,15 @@ export default function AdminCategory() {
 
   const [loading, setLoading] = useState(false);
   const [target, setTarget] = useState(0);
+
+  const [selectedItem, setSelectedItem] = useState<Category | undefined>(
+    undefined
+  );
+
+  function handleSelectItem(cat: Category) {
+    setSelectedItem(cat);
+    setIsOpen(true);
+  }
 
   function handleDeleteCategory(id: number) {
     setLoading(true);
@@ -72,8 +82,12 @@ export default function AdminCategory() {
             <TableRow>
               <TableCell>#</TableCell>
               <TableCell align="left">نام</TableCell>
+              <TableCell align="left">لینک</TableCell>
               <TableCell align="left">تصویر</TableCell>
-              <TableCell align="right">عملیات</TableCell>
+              <TableCell align="left">اولویت</TableCell>
+              <TableCell align="left">کپی</TableCell>
+              <TableCell align="left">ویرایش</TableCell>
+              <TableCell align="left">حذف</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -92,6 +106,11 @@ export default function AdminCategory() {
                 </TableCell>
                 <TableCell align="left">
                   <Box display="flex" alignItems="center">
+                    <span>{category.link}</span>
+                  </Box>
+                </TableCell>
+                <TableCell align="left">
+                  <Box display="flex" alignItems="center">
                     <img
                       src={category.pictureUrl}
                       alt={category.name}
@@ -99,15 +118,30 @@ export default function AdminCategory() {
                     />
                   </Box>
                 </TableCell>
+                <TableCell align="left">
+                  <Box display="flex" alignItems="center">
+                    <span>{category.priority}</span>
+                  </Box>
+                </TableCell>
 
-                <TableCell align="right">
+                <TableCell align="left">
                   <Button
                     onClick={() => {
-                      navigator.clipboard.writeText(category.name);
-                      toast.success("دسته بندی کپی شد");
+                      navigator.clipboard.writeText(
+                        category.link ?? category.name
+                      );
+                      toast.success("کپی شد");
                     }}
                     startIcon={<ContentCopyIcon />}
                   />
+                </TableCell>
+                <TableCell align="left">
+                  <Button
+                    onClick={() => handleSelectItem(category)}
+                    startIcon={<Edit />}
+                  />
+                </TableCell>
+                <TableCell align="left">
                   <LoadingButton
                     loading={loading && target === category.id}
                     onClick={() => handleDeleteCategory(category.id)}
@@ -122,7 +156,10 @@ export default function AdminCategory() {
       </TableContainer>
       {isOpen && (
         <DialogComponent open={true}>
-          <FormHandler closeModalHandler={closeModalHandler} />
+          <FormHandler
+            closeModalHandler={closeModalHandler}
+            itemToEdit={selectedItem}
+          />
         </DialogComponent>
       )}
     </>

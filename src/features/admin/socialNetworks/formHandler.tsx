@@ -30,8 +30,6 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
   const watchFile = watch("file", null);
   const dispatch = useAppDispatch();
 
-  console.log("watchFile", watchFile);
-  console.log("isDirty", isDirty);
   useEffect(() => {
     if (!watchFile && !isDirty) reset(itemToEdit);
     return () => {

@@ -165,6 +165,8 @@ const Admin = {
   //category
   createCategory: (category: any) =>
     requests.postForm("Categories", createFormData(category)),
+  updateCategory: (Category: any) =>
+    requests.putForm("Categories", createFormData(Category)),
   deleteCategory: (id: number) => requests.delete(`Categories/${id}`),
   //brand
   createBrand: (Brands: any) =>
@@ -233,6 +235,12 @@ const Admin = {
   createMessage: (message: any) =>
     requests.postForm("Messages", createFormData(message)),
   deleteMessage: (id: number) => requests.delete(`Messages/${id}`),
+  //logos
+  logoList: (params: URLSearchParams) => requests.get("Logo", params),
+  createLogo: (network: any) =>
+    requests.postForm("Logo", createFormData(network)),
+  updateLogo: (Logo: any) => requests.putForm("Logo", createFormData(Logo)),
+  deleteLogo: (id: number) => requests.delete(`Logo/${id}`),
 };
 
 const agent = {

@@ -10,6 +10,7 @@ import ListIcon from "@mui/icons-material/List";
 import GroupsIcon from "@mui/icons-material/Groups";
 import ApartmentIcon from "@mui/icons-material/Apartment";
 import MessageIcon from "@mui/icons-material/Message";
+import DiamondIcon from "@mui/icons-material/Diamond";
 export const AdminLinks = [
   {
     id: 1,
@@ -61,6 +62,12 @@ export const AdminLinks = [
     link: "/admin-dashboard/messages",
     title: "پیام ها",
     icon: <MessageIcon color="primary" />,
+  },
+  {
+    id: 1222,
+    link: "/admin-dashboard/logo",
+    title: "لوگوها",
+    icon: <DiamondIcon color="primary" />,
   },
 
   {

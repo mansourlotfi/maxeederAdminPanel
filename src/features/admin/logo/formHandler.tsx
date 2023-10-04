@@ -7,14 +7,15 @@ import { validationSchema } from "./validation";
 import agent from "../../../app/api/agent";
 import { useAppDispatch } from "../../../app/store/configureStore";
 import { LoadingButton } from "@mui/lab";
-import { Category } from "../../../app/models/Category";
-import { setCategory } from "./categorySlice";
+import { setLogo } from "./logosSlice";
 import { useEffect } from "react";
+import { SocialNetworks } from "../../../app/models/socialNetwork";
 import { enNumberConvertor } from "../../../app/util/util";
+import { Logo } from "../../../app/models/Logo";
 
 interface Props {
+  itemToEdit?: Logo;
   closeModalHandler: () => void;
-  itemToEdit?: Category;
 }
 
 export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
@@ -39,14 +40,13 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
 
   async function handleSubmitData(data: FieldValues) {
     try {
-      let response: Category;
-
+      let response: Logo;
       if (itemToEdit) {
-        response = await agent.Admin.updateCategory(data);
+        response = await agent.Admin.updateLogo(data);
       } else {
-        response = await agent.Admin.createCategory(data);
+        response = await agent.Admin.createLogo(data);
       }
-      dispatch(setCategory(response));
+      dispatch(setLogo(response));
       closeModalHandler();
     } catch (error) {
       console.log(error);
@@ -56,12 +56,12 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
   return (
     <Box component={Paper} sx={{ p: 4 }}>
       <Typography variant="h4" gutterBottom sx={{ mb: 4 }}>
-        افزودن دسته بندی
+        افزودن لوگو
       </Typography>
       <form onSubmit={handleSubmit(handleSubmitData)}>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={12}>
-            <AppTextInput control={control} name="name" label="نام دسته بندی" />
+            <AppTextInput control={control} name="name" label="نام" />
           </Grid>
           <Grid item xs={12} sm={12}>
             <AppTextInput control={control} name="link" label="لینک" />

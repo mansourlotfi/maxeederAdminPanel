@@ -7,15 +7,15 @@ import { validationSchema } from "./validation";
 import agent from "../../../app/api/agent";
 import { useAppDispatch } from "../../../app/store/configureStore";
 import { LoadingButton } from "@mui/lab";
-import { setSlide } from "./slidesSlice";
+import { setPageItem } from "./pageItemsSlice";
 import { useEffect } from "react";
 import { enNumberConvertor } from "../../../app/util/util";
-import { Slide } from "../../../app/models/Slide";
 import AppSelectList from "../../../app/components/AppSelectList";
-import { pagesObj } from "./data";
+import { pagesItemsObj } from "./data";
+import { pageItems } from "../../../app/models/PageItems";
 
 interface Props {
-  itemToEdit?: Slide;
+  itemToEdit?: pageItems;
   closeModalHandler: () => void;
 }
 
@@ -36,7 +36,7 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
     if (!watchFile && !isDirty && itemToEdit)
       reset({
         ...itemToEdit,
-        page: pagesObj.find((P) => P.id === itemToEdit.page)?.displayName,
+        page: pagesItemsObj.find((P) => P.id === itemToEdit.page)?.displayName,
       });
     return () => {
       if (watchFile) URL.revokeObjectURL(watchFile.preview);
@@ -44,15 +44,15 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
   }, [reset, watchFile, isDirty, itemToEdit]);
 
   async function handleSubmitData(data: FieldValues) {
-    data.page = pagesObj.find((I) => I.displayName === data.page)?.id;
+    data.page = pagesItemsObj.find((I) => I.displayName === data.page)?.id;
     try {
-      let response: Slide;
+      let response: pageItems;
       if (itemToEdit) {
-        response = await agent.Admin.updateSlide(data);
+        response = await agent.Admin.updatePageItem(data);
       } else {
-        response = await agent.Admin.createSlide(data);
+        response = await agent.Admin.createPageItem(data);
       }
-      dispatch(setSlide(response));
+      dispatch(setPageItem(response));
       closeModalHandler();
     } catch (error) {
       console.log(error);
@@ -62,12 +62,21 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
   return (
     <Box component={Paper} sx={{ p: 4 }}>
       <Typography variant="h4" gutterBottom sx={{ mb: 4 }}>
-        {itemToEdit ? "ویرایش" : "افزودن"} اسلاید
+        {itemToEdit ? "ویرایش" : "افزودن"} ایتم صفحه
       </Typography>
       <form onSubmit={handleSubmit(handleSubmitData)}>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={12}>
-            <AppTextInput control={control} name="name" label="نام" />
+            <AppTextInput control={control} name="title" label="عنوان" />
+          </Grid>
+          <Grid item xs={12} sm={12}>
+            <AppTextInput
+              control={control}
+              name="text"
+              label="متن"
+              multiline
+              rows={5}
+            />
           </Grid>
           <Grid item xs={12} sm={12}>
             <AppTextInput control={control} name="link" label="لینک" />
@@ -83,9 +92,9 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
           <Grid item xs={12} sm={6}>
             <AppSelectList
               control={control}
-              items={pagesObj.map((P) => P.displayName)}
+              items={pagesItemsObj.map((P) => P.displayName)}
               name="page"
-              label="صفحه"
+              label="ایتم صفحه"
             />
           </Grid>
           <Grid item xs={12}>

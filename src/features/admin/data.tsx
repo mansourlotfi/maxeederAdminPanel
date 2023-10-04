@@ -51,7 +51,12 @@ export const AdminLinks = [
     title: "منوی دسترسی سریع",
     icon: <ListIcon color="primary" />,
   },
-
+  {
+    id: 12442,
+    link: "/admin-dashboard/pageItems",
+    title: "ایتم های صفحات",
+    icon: <ListIcon color="primary" />,
+  },
   {
     id: 122,
     link: "/admin-dashboard/partners",

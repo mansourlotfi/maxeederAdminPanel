@@ -12,6 +12,7 @@ import { socialNetworkSlice } from "../../features/admin/socialNetworks/socialne
 import { mainMenuSlice } from "../../features/admin/mainMenu/mainMenuSlice";
 import { QuickAccessMenulice } from "../../features/admin/quickAccessMenu/quickAccessMenuSlice";
 import { PartnersSlice } from "../../features/admin/partners/partnersSlice";
+import { departmentsSlice } from "../../features/admin/departments/departmentsSlice";
 
 export const store = configureStore({
   reducer: {
@@ -27,6 +28,7 @@ export const store = configureStore({
     mainMenu: mainMenuSlice.reducer,
     quickAccess: QuickAccessMenulice.reducer,
     partners: PartnersSlice.reducer,
+    departments: departmentsSlice.reducer,
   },
 });
 

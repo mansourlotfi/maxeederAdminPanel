@@ -51,7 +51,7 @@ export const AdminLinks = [
 
   {
     id: 122,
-    link: "/admin-dashboard/department",
+    link: "/admin-dashboard/departments",
     title: "دپارتمان ها",
     icon: <ApartmentIcon color="primary" />,
   },

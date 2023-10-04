@@ -218,11 +218,16 @@ const Admin = {
   deleteQuickAccess: (id: number) => requests.delete(`QuickAccess/${id}`),
   //Partners
   partnersList: (params: URLSearchParams) => requests.get("Partners", params),
-  createPartner: (network: any) =>
-    requests.postForm("Partners", createFormData(network)),
-  updatePartner: (SocialNetwork: any) =>
-    requests.putForm("Partners", createFormData(SocialNetwork)),
+  createPartner: (partner: any) =>
+    requests.postForm("Partners", createFormData(partner)),
+  updatePartner: (partner: any) =>
+    requests.putForm("Partners", createFormData(partner)),
   deletePartner: (id: number) => requests.delete(`Partners/${id}`),
+  //Department
+  departmentList: () => requests.get("Departments"),
+  createDepartment: (Department: any) =>
+    requests.postForm("Departments", createFormData(Department)),
+  deleteDepartment: (id: number) => requests.delete(`Departments/${id}`),
 };
 
 const agent = {

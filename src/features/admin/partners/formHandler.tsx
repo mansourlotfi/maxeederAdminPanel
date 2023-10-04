@@ -48,7 +48,7 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
   return (
     <Box component={Paper} sx={{ p: 4 }}>
       <Typography variant="h4" gutterBottom sx={{ mb: 4 }}>
-        افزودن نماینده جدید
+        {itemToEdit ? "ویرایش" : "افزودن"} نماینده
       </Typography>
       <form onSubmit={handleSubmit(handleSubmitData)}>
         <Grid container spacing={3}>

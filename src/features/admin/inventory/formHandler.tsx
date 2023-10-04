@@ -66,7 +66,7 @@ export default function FormHandler({ product, cancelEdit }: Props) {
   return (
     <DialogContent>
       <Typography variant="h4" gutterBottom sx={{ mb: 4 }}>
-        افزودن کالا
+        {product ? "ویرایش" : "افزودن"} کالا
       </Typography>
       <form onSubmit={handleSubmit(handleSubmitData)}>
         <Grid container spacing={3}>

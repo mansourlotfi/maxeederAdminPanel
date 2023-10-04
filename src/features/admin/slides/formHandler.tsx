@@ -7,17 +7,20 @@ import { validationSchema } from "./validation";
 import agent from "../../../app/api/agent";
 import { useAppDispatch } from "../../../app/store/configureStore";
 import { LoadingButton } from "@mui/lab";
-import { setLogo } from "./logosSlice";
+import { setSlide } from "./slidesSlice";
 import { useEffect } from "react";
 import { enNumberConvertor } from "../../../app/util/util";
-import { Logo } from "../../../app/models/Logo";
+import { Slide } from "../../../app/models/Slide";
+import AppSelectList from "../../../app/components/AppSelectList";
+import { pagesObj } from "./data";
 
 interface Props {
-  itemToEdit?: Logo;
+  itemToEdit?: Slide;
   closeModalHandler: () => void;
 }
 
 export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
+  console.log("itemToEdit", itemToEdit);
   const {
     control,
     handleSubmit,
@@ -31,21 +34,26 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (!watchFile && !isDirty) reset(itemToEdit);
+    if (!watchFile && !isDirty && itemToEdit)
+      reset({
+        ...itemToEdit,
+        page: pagesObj.find((P) => P.id === itemToEdit.page)?.displayName,
+      });
     return () => {
       if (watchFile) URL.revokeObjectURL(watchFile.preview);
     };
   }, [reset, watchFile, isDirty, itemToEdit]);
 
   async function handleSubmitData(data: FieldValues) {
+    data.page = pagesObj.find((I) => I.displayName === data.page)?.id;
     try {
-      let response: Logo;
+      let response: Slide;
       if (itemToEdit) {
-        response = await agent.Admin.updateLogo(data);
+        response = await agent.Admin.updateSlide(data);
       } else {
-        response = await agent.Admin.createLogo(data);
+        response = await agent.Admin.createSlide(data);
       }
-      dispatch(setLogo(response));
+      dispatch(setSlide(response));
       closeModalHandler();
     } catch (error) {
       console.log(error);
@@ -55,7 +63,7 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
   return (
     <Box component={Paper} sx={{ p: 4 }}>
       <Typography variant="h4" gutterBottom sx={{ mb: 4 }}>
-        {itemToEdit ? "ویرایش" : "افزودن"} لوگو
+        {itemToEdit ? "ویرایش" : "افزودن"} اسلاید
       </Typography>
       <form onSubmit={handleSubmit(handleSubmitData)}>
         <Grid container spacing={3}>
@@ -71,6 +79,14 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
               name="priority"
               label="اولویت"
               onKeyPress={enNumberConvertor}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <AppSelectList
+              control={control}
+              items={pagesObj.map((P) => P.displayName)}
+              name="page"
+              label="صفحه"
             />
           </Grid>
           <Grid item xs={12}>

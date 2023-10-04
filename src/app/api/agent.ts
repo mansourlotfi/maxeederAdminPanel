@@ -248,6 +248,13 @@ const Admin = {
   updateArtist: (artist: any) =>
     requests.putForm("Artists", createFormData(artist)),
   deleteArtist: (id: number) => requests.delete(`Artists/${id}`),
+  //ُSlides
+  slideList: (params: URLSearchParams) => requests.get("Slides", params),
+  createSlide: (slide: any) =>
+    requests.postForm("Slides", createFormData(slide)),
+  updateSlide: (artist: any) =>
+    requests.putForm("Slides", createFormData(artist)),
+  deleteSlide: (id: number) => requests.delete(`Slides/${id}`),
 };
 
 const agent = {

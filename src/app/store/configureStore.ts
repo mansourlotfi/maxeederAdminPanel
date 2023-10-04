@@ -16,6 +16,7 @@ import { departmentsSlice } from "../../features/admin/departments/departmentsSl
 import { messagesSlice } from "../../features/admin/messages/messagesSlice";
 import { logoSlice } from "../../features/admin/logo/logosSlice";
 import { artistsSlice } from "../../features/admin/artists/artistsSlice";
+import { slidesSlice } from "../../features/admin/slides/slidesSlice";
 
 export const store = configureStore({
   reducer: {
@@ -35,6 +36,7 @@ export const store = configureStore({
     messages: messagesSlice.reducer,
     logo: logoSlice.reducer,
     artists: artistsSlice.reducer,
+    slides: slidesSlice.reducer,
   },
 });
 

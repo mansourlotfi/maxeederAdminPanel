@@ -5,10 +5,6 @@ import {
 } from "@reduxjs/toolkit";
 import agent from "../../../app/api/agent";
 import { RootState } from "../../../app/store/configureStore";
-import {
-  SocialNetworks,
-  SocialNetworksParams,
-} from "../../../app/models/socialNetwork";
 import { MetaData } from "../../../app/models/pagination";
 import { Artist, ArtistParams } from "../../../app/models/Artsts";
 
@@ -21,7 +17,7 @@ interface ArtistsState {
 
 const artistsAdapter = createEntityAdapter<Artist>();
 
-function getAxiosParams(param: SocialNetworksParams) {
+function getAxiosParams(param: ArtistParams) {
   const params = new URLSearchParams();
   params.append("pageNumber", param.pageNumber.toString());
   params.append("pageSize", param.pageSize.toString());
@@ -32,7 +28,7 @@ export const fetchArtistsAsync = createAsyncThunk<
   Artist[],
   void,
   { state: RootState }
->("SocialNetworks/fetchArtistsAsync", async (_, thunkAPI) => {
+>("Artist/fetchArtistsAsync", async (_, thunkAPI) => {
   const params = getAxiosParams(
     thunkAPI.getState().socialNetworks.socialNetworksParams
   );
@@ -45,7 +41,7 @@ export const fetchArtistsAsync = createAsyncThunk<
   }
 });
 
-function initParams(): SocialNetworksParams {
+function initParams(): ArtistParams {
   return {
     pageNumber: 1,
     pageSize: 6,

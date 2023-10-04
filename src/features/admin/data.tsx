@@ -12,6 +12,7 @@ import ApartmentIcon from "@mui/icons-material/Apartment";
 import MessageIcon from "@mui/icons-material/Message";
 import DiamondIcon from "@mui/icons-material/Diamond";
 import AlbumIcon from "@mui/icons-material/Album";
+import SlideshowIcon from "@mui/icons-material/Slideshow";
 
 export const AdminLinks = [
   {
@@ -25,6 +26,12 @@ export const AdminLinks = [
     link: "/admin-dashboard/category",
     title: "دسته بندی ها",
     icon: <CategoryIcon color="primary" />,
+  },
+  {
+    id: 0,
+    link: "/admin-dashboard/slides",
+    title: "اسلایدها",
+    icon: <SlideshowIcon color="primary" />,
   },
   {
     id: 12,

@@ -27,6 +27,7 @@ import AdminMainMenu from "../../features/admin/mainMenu/MainMenu";
 import AdminQuickAccessMenu from "../../features/admin/quickAccessMenu/QuickAccessMenu";
 import AdminPartners from "../../features/admin/partners/Partners";
 import AdminDepartments from "../../features/admin/departments/Departments";
+import AdminMessages from "../../features/admin/messages/Messages";
 
 export const router = createBrowserRouter([
   {
@@ -100,6 +101,10 @@ export const router = createBrowserRouter([
               {
                 path: "departments",
                 element: <AdminDepartments />,
+              },
+              {
+                path: "messages",
+                element: <AdminMessages />,
               },
             ],
           },

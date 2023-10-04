@@ -13,6 +13,7 @@ import { mainMenuSlice } from "../../features/admin/mainMenu/mainMenuSlice";
 import { QuickAccessMenulice } from "../../features/admin/quickAccessMenu/quickAccessMenuSlice";
 import { PartnersSlice } from "../../features/admin/partners/partnersSlice";
 import { departmentsSlice } from "../../features/admin/departments/departmentsSlice";
+import { messagesSlice } from "../../features/admin/messages/messagesSlice";
 
 export const store = configureStore({
   reducer: {
@@ -29,6 +30,7 @@ export const store = configureStore({
     quickAccess: QuickAccessMenulice.reducer,
     partners: PartnersSlice.reducer,
     departments: departmentsSlice.reducer,
+    messages: messagesSlice.reducer,
   },
 });
 

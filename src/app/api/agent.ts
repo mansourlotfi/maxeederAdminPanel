@@ -228,6 +228,11 @@ const Admin = {
   createDepartment: (Department: any) =>
     requests.postForm("Departments", createFormData(Department)),
   deleteDepartment: (id: number) => requests.delete(`Departments/${id}`),
+  //Messages
+  messageList: (params: URLSearchParams) => requests.get("Messages", params),
+  createMessage: (message: any) =>
+    requests.postForm("Messages", createFormData(message)),
+  deleteMessage: (id: number) => requests.delete(`Messages/${id}`),
 };
 
 const agent = {

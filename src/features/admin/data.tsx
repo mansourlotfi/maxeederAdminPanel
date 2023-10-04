@@ -9,7 +9,7 @@ import ConnectWithoutContactIcon from "@mui/icons-material/ConnectWithoutContact
 import ListIcon from "@mui/icons-material/List";
 import GroupsIcon from "@mui/icons-material/Groups";
 import ApartmentIcon from "@mui/icons-material/Apartment";
-
+import MessageIcon from "@mui/icons-material/Message";
 export const AdminLinks = [
   {
     id: 1,
@@ -54,6 +54,13 @@ export const AdminLinks = [
     link: "/admin-dashboard/departments",
     title: "دپارتمان ها",
     icon: <ApartmentIcon color="primary" />,
+  },
+
+  {
+    id: 1222,
+    link: "/admin-dashboard/messages",
+    title: "پیام ها",
+    icon: <MessageIcon color="primary" />,
   },
 
   {

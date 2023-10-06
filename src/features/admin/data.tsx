@@ -70,6 +70,12 @@ export const AdminLinks = [
     icon: <InventoryIcon color="primary" />,
   },
   {
+    id: 231,
+    link: "/admin-dashboard/features",
+    title: "ویژگی ها محصول",
+    icon: <InventoryIcon color="primary" />,
+  },
+  {
     id: 10,
     link: "/admin-dashboard/pageItems",
     title: "ایتم های صفحات",

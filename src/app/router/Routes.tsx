@@ -32,6 +32,7 @@ import AdminLogos from "../../features/admin/logo/Logos";
 import AdminArtists from "../../features/admin/artists/Artists";
 import AdminSlides from "../../features/admin/slides/Slides";
 import AdminPageItems from "../../features/admin/pageItems/PageItems";
+import AdminProductFeatures from "../../features/admin/productFeatures/ProductFeatures";
 
 export const router = createBrowserRouter([
   {
@@ -125,6 +126,10 @@ export const router = createBrowserRouter([
               {
                 path: "pageItems",
                 element: <AdminPageItems />,
+              },
+              {
+                path: "features",
+                element: <AdminProductFeatures />,
               },
             ],
           },

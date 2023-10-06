@@ -71,7 +71,11 @@ axios.interceptors.response.use(
 function createFormData(item: any) {
   let formData = new FormData();
   for (const key in item) {
-    formData.append(key, item[key]);
+    if (key === "features") {
+      item.features.map((f: number) => formData.append(key, f.toString()));
+    } else {
+      formData.append(key, item[key]);
+    }
   }
   return formData;
 }
@@ -262,6 +266,14 @@ const Admin = {
   updatePageItem: (artist: any) =>
     requests.putForm("PageItems", createFormData(artist)),
   deletePageItem: (id: number) => requests.delete(`PageItems/${id}`),
+  //ProductFeatures
+  productFeatureList: () => requests.get("ProductFeatures"),
+  createProductFeature: (productFeature: any) =>
+    requests.postForm("ProductFeatures", createFormData(productFeature)),
+  updateProductFeature: (ProductFeature: any) =>
+    requests.putForm("ProductFeatures", createFormData(ProductFeature)),
+  deleteProductFeature: (id: number) =>
+    requests.delete(`ProductFeatures/${id}`),
 };
 
 const agent = {

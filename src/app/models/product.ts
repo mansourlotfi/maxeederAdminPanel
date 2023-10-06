@@ -1,3 +1,5 @@
+import { ProductFeature } from "./ProductFeatures";
+
 export interface Product {
   id: number;
   name: string;
@@ -8,8 +10,13 @@ export interface Product {
   isFeatured: boolean;
   type?: string;
   quantityInStock?: number;
+  features: IFeatures[];
 }
 
+export interface IFeatures {
+  featureId: number;
+  feature: ProductFeature;
+}
 export interface ProductParams {
   orderBy: string;
   searchTerm?: string;

@@ -1,5 +1,13 @@
-import { Box, Typography, Grid, Button, DialogContent } from "@mui/material";
-import { useEffect } from "react";
+import {
+  Box,
+  Typography,
+  Grid,
+  Button,
+  DialogContent,
+  FormControlLabel,
+  Checkbox,
+} from "@mui/material";
+import { useEffect, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import AppDropzone from "../../../app/components/AppDropzone";
 import AppSelectList from "../../../app/components/AppSelectList";
@@ -15,6 +23,7 @@ import useCategories from "../../../app/hooks/useCategories";
 import useBrands from "../../../app/hooks/useBrands";
 import { toast } from "react-toastify";
 import AppCheckbox from "../../../app/components/AppCheckbox";
+import useProductFeatures from "../../../app/hooks/useProductFeatures";
 
 interface Props {
   product?: Product;
@@ -35,18 +44,39 @@ export default function FormHandler({ product, cancelEdit }: Props) {
 
   // const { brands, types } = useProducts();
   const { categories } = useCategories();
+  const { productFeatures } = useProductFeatures();
 
   const watchFile = watch("file", null);
   const dispatch = useAppDispatch();
 
+  const [checkedIds, setCheckedIds] = useState<number[]>([]);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // handle the change of checkbox state here
+    // for example, add or remove the id from the checkedIds array
+    const id = Number(event.target.value); // get the id from the value attribute
+    const checked = event.target.checked; // get the checked state from the event
+    if (checked) {
+      // if checked, add the id to the array if not already present
+      setCheckedIds((prev) => (prev.includes(id) ? prev : [...prev, id]));
+    } else {
+      // if unchecked, remove the id from the array if present
+      setCheckedIds((prev) => prev.filter((item) => item !== id));
+    }
+  };
+
   useEffect(() => {
     if (product && !watchFile && !isDirty) reset(product);
+    if (product) {
+      setCheckedIds(product.features.map((F) => F.featureId));
+    }
     return () => {
       if (watchFile) URL.revokeObjectURL(watchFile.preview);
     };
   }, [product, reset, watchFile, isDirty]);
 
   async function handleSubmitData(data: FieldValues) {
+    data.features = checkedIds;
     try {
       let response: Product;
       if (product) {
@@ -124,6 +154,25 @@ export default function FormHandler({ product, cancelEdit }: Props) {
               />
             </Box>
           </Grid>
+          <Grid item container xs={12}>
+            {productFeatures &&
+              productFeatures.map((PF) => (
+                <Box key={PF.id}>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        value={PF.id}
+                        onChange={handleChange}
+                        color="primary"
+                        checked={!!checkedIds.find((item) => item === PF.id)}
+                      />
+                    }
+                    label={PF.name}
+                  />
+                </Box>
+              ))}
+          </Grid>
+
           <Grid item container xs={12}>
             <Grid item xs={6}>
               <AppDropzone control={control} name="file" />

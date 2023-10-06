@@ -6,18 +6,38 @@ function MessagesReport() {
   const { messages } = useMessages();
   const { departments } = useDepartments();
 
+  let newArray = departments.map((I) => 0);
+  if (newArray.length) {
+    newArray.length = newArray.length - 1;
+  }
+
   return (
-    <BarChart
-      disableAxisListener
-      xAxis={[{ scaleType: "band", data: [...departments.map((D) => D.name)] }]}
-      series={[
-        ...departments.map((D) => ({
-          data: [messages.filter((M) => M.department !== D.name).length],
-        })),
-      ]}
-      width={500}
-      height={300}
-    />
+    <>
+      {newArray.length && (
+        <BarChart
+          disableAxisListener
+          xAxis={[
+            { scaleType: "band", data: [...departments.map((D) => D.name)] },
+          ]}
+          series={
+            departments.map((D) => ({
+              data: [
+                messages.filter((M) => M.department !== D.name).length,
+                ...newArray,
+              ],
+            }))
+
+            //   [
+            //   ...departments.map((D) => ({
+            //     data: [messages.filter((M) => M.department !== D.name).length, 0, 0],
+            //   })),
+            // ]
+          }
+          width={500}
+          height={300}
+        />
+      )}
+    </>
   );
 }
 

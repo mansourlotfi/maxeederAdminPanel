@@ -185,6 +185,7 @@ export default function AdminInventory() {
               <TableCell align="center">نوع</TableCell>
               <TableCell align="center">برند</TableCell>
               <TableCell align="center">تعداد</TableCell>
+              <TableCell align="center">قابلیت ها</TableCell>
               <TableCell align="left">کپی</TableCell>
               <TableCell align="left">ویرایش</TableCell>
               <TableCell align="left">حذف</TableCell>
@@ -214,11 +215,17 @@ export default function AdminInventory() {
                   </Box>
                 </TableCell>
                 <TableCell align="left">
-                  {currencyFormat(product.price)}
+                  {product.price
+                    ? currencyFormat(product.price)
+                    : "قیمت وارد نشده"}
                 </TableCell>
                 <TableCell align="center">{product.type}</TableCell>
                 <TableCell align="center">{product.brand}</TableCell>
                 <TableCell align="center">{product.quantityInStock}</TableCell>
+                <TableCell align="center">
+                  {product.features.map((F) => F.feature.name).join(", ")}
+                </TableCell>
+
                 <TableCell align="left">
                   <Button
                     onClick={() => {
@@ -258,7 +265,7 @@ export default function AdminInventory() {
         </Box>
       )}
       {editMode && (
-        <DialogComponent open={true}>
+        <DialogComponent open={true} maxWidth={"md"}>
           <ProductForm product={selectedProduct} cancelEdit={cancelEdit} />;
         </DialogComponent>
       )}

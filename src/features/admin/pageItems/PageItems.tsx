@@ -34,6 +34,7 @@ import AppPagination from "../../../app/components/AppPagination";
 import { pagesItemsObj } from "./data";
 import { pageItems } from "../../../app/models/PageItems";
 import usePageItems from "../../../app/hooks/usePageItems";
+import TypographyWithTooltip from "../../../app/components/typographyWithTooltip";
 
 export default function AdminPageItems() {
   const { pageItems, isLoaded, status, metaData, pageItemsParams } =
@@ -137,22 +138,32 @@ export default function AdminPageItems() {
                   </Box>
                 </TableCell>
                 <TableCell align="left">
-                  <Box display="flex" alignItems="center">
-                    <span>{A.text}</span>
+                  <Box
+                    display="flex"
+                    alignItems="center"
+                    sx={{ maxWidth: 150 }}
+                  >
+                    <TypographyWithTooltip text={A.text} />
+                  </Box>
+                </TableCell>
+                <TableCell align="left">
+                  <Box
+                    display="flex"
+                    alignItems="center"
+                    sx={{ maxWidth: 150 }}
+                  >
+                    <TypographyWithTooltip text={A.link} />
                   </Box>
                 </TableCell>
                 <TableCell align="left">
                   <Box display="flex" alignItems="center">
-                    <span>{A.link}</span>
-                  </Box>
-                </TableCell>
-                <TableCell align="left">
-                  <Box display="flex" alignItems="center">
-                    <img
-                      src={A.pictureUrl}
-                      alt={A.title}
-                      style={{ height: 50, marginRight: 20 }}
-                    />
+                    {A.pictureUrl ? (
+                      <img
+                        src={A.pictureUrl}
+                        alt={A.title}
+                        style={{ height: 50, marginRight: 20 }}
+                      />
+                    ) : null}
                   </Box>
                 </TableCell>
                 <TableCell align="left">
@@ -206,7 +217,7 @@ export default function AdminPageItems() {
         </Box>
       )}
       {isOpen && (
-        <DialogComponent open={true}>
+        <DialogComponent open={true} maxWidth="lg">
           <FormHandler
             closeModalHandler={closeModalHandler}
             itemToEdit={selectedItem}

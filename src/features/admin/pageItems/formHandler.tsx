@@ -1,4 +1,11 @@
-import { Box, Paper, Typography, Grid, Button } from "@mui/material";
+import {
+  Box,
+  Paper,
+  Typography,
+  Grid,
+  Button,
+  InputLabel,
+} from "@mui/material";
 import { FieldValues, useForm } from "react-hook-form";
 import AppDropzone from "../../../app/components/AppDropzone";
 import AppTextInput from "../../../app/components/AppTextInput";
@@ -13,6 +20,7 @@ import { enNumberConvertor } from "../../../app/util/util";
 import AppSelectList from "../../../app/components/AppSelectList";
 import { pagesItemsObj } from "./data";
 import { pageItems } from "../../../app/models/PageItems";
+import { useQuill } from "react-quilljs";
 
 interface Props {
   itemToEdit?: pageItems;
@@ -20,6 +28,11 @@ interface Props {
 }
 
 export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
+  const { quill: editor1, quillRef: quillRef1 } = useQuill({
+    // Specify a unique id and a unique toolbar id for the first editor
+    id: "editor1",
+    toolbarId: "toolbar1",
+  });
   const {
     control,
     handleSubmit,
@@ -43,8 +56,22 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
     };
   }, [reset, watchFile, isDirty, itemToEdit]);
 
+  useEffect(() => {
+    if (itemToEdit) {
+      let parsedQuill1 = itemToEdit.ritchText?.substring(
+        1,
+        itemToEdit.ritchText.length - 1
+      );
+
+      if (editor1) {
+        editor1.clipboard.dangerouslyPasteHTML(parsedQuill1);
+      }
+    }
+  }, [editor1]);
+
   async function handleSubmitData(data: FieldValues) {
     data.page = pagesItemsObj.find((I) => I.displayName === data.page)?.id;
+    data.ritchText = JSON.stringify(quillRef1.current.firstChild.innerHTML);
     try {
       let response: pageItems;
       if (itemToEdit) {
@@ -66,22 +93,13 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
       </Typography>
       <form onSubmit={handleSubmit(handleSubmitData)}>
         <Grid container spacing={3}>
-          <Grid item xs={12} sm={12}>
+          <Grid item xs={12} sm={6}>
             <AppTextInput control={control} name="title" label="عنوان" />
           </Grid>
-          <Grid item xs={12} sm={12}>
-            <AppTextInput
-              control={control}
-              name="text"
-              label="متن"
-              multiline
-              rows={5}
-            />
-          </Grid>
-          <Grid item xs={12} sm={12}>
+          <Grid item xs={12} sm={6}>
             <AppTextInput control={control} name="link" label="لینک" />
           </Grid>
-          <Grid item xs={12} sm={12}>
+          <Grid item xs={12} sm={6}>
             <AppTextInput
               control={control}
               name="priority"
@@ -97,6 +115,16 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
               label="ایتم صفحه"
             />
           </Grid>
+          <Grid item xs={12} sm={12}>
+            <AppTextInput
+              control={control}
+              name="text"
+              label="متن ساده"
+              multiline
+              rows={5}
+            />
+          </Grid>
+
           <Grid item xs={12}>
             <Box
               display="flex"
@@ -113,8 +141,12 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
               ) : null}
             </Box>
           </Grid>
+          <Grid item xs={12} style={{ height: 300, direction: "rtl" }}>
+            <InputLabel> متن با فرمت </InputLabel>
+            <div ref={quillRef1} />
+          </Grid>
         </Grid>
-        <Box display="flex" justifyContent="space-between" sx={{ mt: 3 }}>
+        <Box display="flex" justifyContent="space-between" sx={{ mt: 20 }}>
           <LoadingButton
             loading={isSubmitting}
             type="submit"

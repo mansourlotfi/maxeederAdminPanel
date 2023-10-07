@@ -223,7 +223,8 @@ export default function AdminInventory() {
                 <TableCell align="center">{product.brand}</TableCell>
                 <TableCell align="center">{product.quantityInStock}</TableCell>
                 <TableCell align="center">
-                  {product.features.map((F) => F.feature.name).join(", ")}
+                  {Array.isArray(product.features) &&
+                    product.features.map((F) => F.feature?.name).join(", ")}
                 </TableCell>
 
                 <TableCell align="left">

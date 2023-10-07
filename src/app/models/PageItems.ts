@@ -5,6 +5,7 @@ export interface pageItems {
   link: string;
   pictureUrl: string;
   priority: number;
+  ritchText: string | null;
   page: PageItemsEnum;
 }
 

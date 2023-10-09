@@ -24,8 +24,8 @@ export default function AppPagination({ metaData, onPageChange }: Props) {
       sx={{ marginBottom: 3 }}
     >
       <Pagination
-        color="secondary"
-        size="large"
+        color="primary"
+        size="medium"
         count={totalPages}
         page={pageNumber}
         onChange={(e, page) => handlePageChange(page)}

@@ -14,7 +14,6 @@ import App from "../layout/App";
 import RequireAuth from "./RequireAuth";
 import AdminDashboard from "../../features/admin/AdminDashboard";
 import TestPage from "../../features/about/TestPage";
-import AdminInventory from "../../features/admin/inventory/Inventory";
 import AdminCategory from "../../features/admin/category/Category";
 import AdminBrands from "../../features/admin/brands/Brands";
 import AdminSettings from "../../features/admin/settings/Settings";
@@ -33,6 +32,7 @@ import AdminArtists from "../../features/admin/artists/Artists";
 import AdminSlides from "../../features/admin/slides/Slides";
 import AdminPageItems from "../../features/admin/pageItems/PageItems";
 import AdminProductFeatures from "../../features/admin/productFeatures/ProductFeatures";
+import AdminInventory from "../../features/admin/inventory/Inventory";
 
 export const router = createBrowserRouter([
   {

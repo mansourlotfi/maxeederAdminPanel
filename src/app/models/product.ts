@@ -11,6 +11,7 @@ export interface Product {
   type?: string;
   quantityInStock?: number;
   features: IFeatures[];
+  isActive: boolean;
 }
 
 export interface IFeatures {

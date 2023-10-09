@@ -23,6 +23,7 @@ import { toast } from "react-toastify";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { Category } from "../../../app/models/Category";
+import TypographyWithTooltip from "../../../app/components/typographyWithTooltip";
 
 export default function AdminCategory() {
   const { categories, categoriesLoaded, status } = useCategories();
@@ -105,8 +106,12 @@ export default function AdminCategory() {
                   </Box>
                 </TableCell>
                 <TableCell align="left">
-                  <Box display="flex" alignItems="center">
-                    <span>{category.link}</span>
+                  <Box
+                    display="flex"
+                    alignItems="center"
+                    sx={{ maxWidth: 150 }}
+                  >
+                    <TypographyWithTooltip text={category.link} />
                   </Box>
                 </TableCell>
                 <TableCell align="left">

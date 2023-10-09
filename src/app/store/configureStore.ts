@@ -19,6 +19,7 @@ import { artistsSlice } from "../../features/admin/artists/artistsSlice";
 import { slidesSlice } from "../../features/admin/slides/slidesSlice";
 import { pageItemsSlice } from "../../features/admin/pageItems/pageItemsSlice";
 import { productFeaturesSlice } from "../../features/admin/productFeatures/productFeaturesSlice";
+import { mediaManagmentsSlice } from "../../features/admin/mediaManagment/mediaSlice";
 
 export const store = configureStore({
   reducer: {
@@ -41,6 +42,7 @@ export const store = configureStore({
     slides: slidesSlice.reducer,
     pageItems: pageItemsSlice.reducer,
     productFeature: productFeaturesSlice.reducer,
+    media: mediaManagmentsSlice.reducer,
   },
 });
 

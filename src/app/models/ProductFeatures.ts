@@ -3,6 +3,7 @@ export interface ProductFeature {
   name: string;
   description: string | null;
   pictureUrl: string;
+  isActive: boolean;
 }
 
 export interface ProductFeatureParams {

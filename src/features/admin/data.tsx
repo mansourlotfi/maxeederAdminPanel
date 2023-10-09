@@ -13,6 +13,7 @@ import MessageIcon from "@mui/icons-material/Message";
 import DiamondIcon from "@mui/icons-material/Diamond";
 import AlbumIcon from "@mui/icons-material/Album";
 import SlideshowIcon from "@mui/icons-material/Slideshow";
+import AppsIcon from "@mui/icons-material/Apps";
 
 export const AdminLinks = [
   {
@@ -105,6 +106,14 @@ export const AdminLinks = [
     title: "همکاران",
     icon: <AccountCircleIcon color="primary" />,
   },
+
+  {
+    id: 15,
+    link: "/admin-dashboard/fileManager",
+    title: "مدیریت فایل ها",
+    icon: <AppsIcon color="primary" />,
+  },
+
   // {
   //   id: 15,
   //   link: "/admin-dashboard/customRoles",

@@ -7,6 +7,7 @@ export interface Partner {
   tel: string;
   long: string;
   lat: string;
+  isActive: boolean;
 }
 
 export interface PartnerParams {

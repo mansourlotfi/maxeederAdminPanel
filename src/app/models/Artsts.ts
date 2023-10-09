@@ -4,6 +4,7 @@ export interface Artist {
   text: string;
   pictureUrl: string;
   priority: number;
+  isActive: boolean;
 }
 
 export interface ArtistParams {

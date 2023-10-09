@@ -111,7 +111,7 @@ function AdminDashboard() {
       <Grid container item>
         <Header />
       </Grid>
-      <Grid container item>
+      <Grid container item flexWrap="nowrap">
         <Grid item container width={250}>
           <Paper
             sx={{

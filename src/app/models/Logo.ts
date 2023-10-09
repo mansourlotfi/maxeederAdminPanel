@@ -4,6 +4,7 @@ export interface Logo {
   link: string;
   pictureUrl: string;
   priority: number;
+  isActive: boolean;
 }
 
 export interface LogoParams {

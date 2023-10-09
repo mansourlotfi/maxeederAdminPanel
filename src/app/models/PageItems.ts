@@ -7,6 +7,7 @@ export interface pageItems {
   priority: number;
   ritchText: string | null;
   page: PageItemsEnum;
+  isActive: boolean;
 }
 
 export interface pageItemsParams {

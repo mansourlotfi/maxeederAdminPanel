@@ -25,7 +25,6 @@ import AdminSocialNetworks from "../../features/admin/socialNetworks/SocialNetwo
 import AdminMainMenu from "../../features/admin/mainMenu/MainMenu";
 import AdminQuickAccessMenu from "../../features/admin/quickAccessMenu/QuickAccessMenu";
 import AdminPartners from "../../features/admin/partners/Partners";
-import AdminDepartments from "../../features/admin/departments/Departments";
 import AdminMessages from "../../features/admin/messages/Messages";
 import AdminLogos from "../../features/admin/logo/Logos";
 import AdminArtists from "../../features/admin/artists/Artists";
@@ -33,6 +32,8 @@ import AdminSlides from "../../features/admin/slides/Slides";
 import AdminPageItems from "../../features/admin/pageItems/PageItems";
 import AdminProductFeatures from "../../features/admin/productFeatures/ProductFeatures";
 import AdminInventory from "../../features/admin/inventory/Inventory";
+import AdminFileManager from "../../features/admin/mediaManagment/MediaManagment";
+import AdminDepartments from "../../features/admin/departments/Departments";
 
 export const router = createBrowserRouter([
   {
@@ -130,6 +131,10 @@ export const router = createBrowserRouter([
               {
                 path: "features",
                 element: <AdminProductFeatures />,
+              },
+              {
+                path: "fileManager",
+                element: <AdminFileManager />,
               },
             ],
           },

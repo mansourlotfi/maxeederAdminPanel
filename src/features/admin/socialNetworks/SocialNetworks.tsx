@@ -11,11 +11,17 @@ import {
   TableRow,
   TableCell,
   TableBody,
+  Grid,
+  Checkbox,
 } from "@mui/material";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import agent from "../../../app/api/agent";
 import { useAppDispatch } from "../../../app/store/configureStore";
-import { removeSocialNetwork, setPageNumber } from "./socialnetworksSlice";
+import {
+  fetchSocialNetworksAsync,
+  removeSocialNetwork,
+  setPageNumber,
+} from "./socialnetworksSlice";
 import DialogComponent from "../../../app/components/draggableDialog";
 import FormHandler from "./formHandler";
 import { toast } from "react-toastify";
@@ -24,6 +30,10 @@ import LoadingComponent from "../../../app/layout/LoadingComponent";
 import useSocialNetworks from "../../../app/hooks/useSocialNetworks";
 import { SocialNetworks } from "../../../app/models/socialNetwork";
 import AppPagination from "../../../app/components/AppPagination";
+import CheckIcon from "@mui/icons-material/Check";
+import CloseIcon from "@mui/icons-material/Close";
+import ConfirmDialog from "../../../app/components/confirmDialog";
+import TypographyWithTooltip from "../../../app/components/typographyWithTooltip";
 
 export default function AdminSocialNetworks() {
   const { socialNetworks, isLoaded, status, metaData } = useSocialNetworks();
@@ -56,6 +66,60 @@ export default function AdminSocialNetworks() {
     if (selectedItem) setSelectedItem(undefined);
     setIsOpen(false);
   }
+
+  const [confirmModalIsOpen, setconfirmModalIsOpen] = useState(false);
+  const [checkedIds, setCheckedIds] = useState<number[]>([]);
+  const [itemsChecked, setItemsChecked] = useState(false);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // handle the change of checkbox state here
+    // for example, add or remove the id from the checkedIds array
+    const id = Number(event.target.value); // get the id from the value attribute
+    const checked = event.target.checked; // get the checked state from the event
+    if (checked) {
+      // if checked, add the id to the array if not already present
+      setCheckedIds((prev) => (prev.includes(id) ? prev : [...prev, id]));
+    } else {
+      // if unchecked, remove the id from the array if present
+      setCheckedIds((prev) => prev.filter((item) => item !== id));
+    }
+  };
+
+  const selectAllItem = (e: any) => {
+    const { checked } = e.target;
+    const collection = [];
+
+    if (checked) {
+      for (const item of socialNetworks) {
+        collection.push(item.id);
+      }
+    }
+    setCheckedIds(collection);
+    setItemsChecked(checked);
+  };
+
+  const multipleItemsDeleteHandler = useCallback(() => {
+    agent.Admin.SocialNetworkDeleteMultipleItems(checkedIds)
+      .then(() => {
+        dispatch(fetchSocialNetworksAsync());
+        toast.success("عملیات با موفقیت انجام شد");
+      })
+      .catch((err) => {
+        toast.error("مشکلی پیش آمده است");
+      });
+  }, [checkedIds, dispatch]);
+
+  const multipleItemsEditHandler = useCallback(() => {
+    agent.Admin.SocialNetworkEditMultipleItems(checkedIds)
+      .then(() => {
+        dispatch(fetchSocialNetworksAsync());
+        toast.success("عملیات با موفقیت انجام شد");
+      })
+      .catch((err) => {
+        toast.error("مشکلی پیش آمده است");
+      });
+  }, [checkedIds, dispatch]);
+
   if (!isLoaded && status === "idle") return <>something bad happened</>;
 
   if (status.includes("pending")) return <LoadingComponent />;
@@ -77,15 +141,53 @@ export default function AdminSocialNetworks() {
           شبکه جدید
         </Button>
       </Box>
+      <Grid item container xs={12} mb={2} mt={2} justifyContent="flex-end">
+        <LoadingButton
+          sx={{ marginInlineEnd: 4 }}
+          variant="contained"
+          disabled={!checkedIds.length}
+          endIcon={<CheckIcon color="success" />}
+          size="small"
+          onClick={multipleItemsEditHandler}
+        >
+          فعال/غیرفعال سازی انتخاب شده ها
+        </LoadingButton>
+        <LoadingButton
+          variant="contained"
+          disabled={!checkedIds.length}
+          endIcon={<CloseIcon color="error" />}
+          size="small"
+          onClick={() => setconfirmModalIsOpen(true)}
+        >
+          حذف انتخاب شده ها
+        </LoadingButton>
+      </Grid>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>#</TableCell>
+              <TableCell>
+                <Grid
+                  container
+                  justifyContent="space-between"
+                  flexWrap="nowrap"
+                  alignItems="center"
+                >
+                  <Box>#</Box>
+                  <Box>
+                    <Checkbox
+                      onChange={selectAllItem}
+                      color="primary"
+                      checked={itemsChecked}
+                    />
+                  </Box>
+                </Grid>
+              </TableCell>
               <TableCell align="left">نام</TableCell>
               <TableCell align="left">لینک</TableCell>
               <TableCell align="left">تصویر</TableCell>
               <TableCell align="left">اولویت</TableCell>
+              <TableCell align="center">وضعیت</TableCell>
               <TableCell align="left">کپی</TableCell>
               <TableCell align="left">ویرایش</TableCell>
               <TableCell align="left">حذف</TableCell>
@@ -98,7 +200,22 @@ export default function AdminSocialNetworks() {
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  {SN.id}
+                  <Grid
+                    container
+                    justifyContent="space-between"
+                    flexWrap="nowrap"
+                    alignItems="center"
+                  >
+                    <Box display="inline-block">{SN.id}</Box>
+                    <Box display="inline-block">
+                      <Checkbox
+                        value={SN.id}
+                        onChange={handleChange}
+                        color="primary"
+                        checked={!!checkedIds.find((item) => item === SN.id)}
+                      />
+                    </Box>
+                  </Grid>
                 </TableCell>
                 <TableCell align="left">
                   <Box display="flex" alignItems="center">
@@ -106,8 +223,12 @@ export default function AdminSocialNetworks() {
                   </Box>
                 </TableCell>
                 <TableCell align="left">
-                  <Box display="flex" alignItems="center">
-                    <span>{SN.link}</span>
+                  <Box
+                    display="flex"
+                    alignItems="center"
+                    sx={{ maxWidth: 150 }}
+                  >
+                    <TypographyWithTooltip text={SN.link} />
                   </Box>
                 </TableCell>
                 <TableCell align="left">
@@ -123,6 +244,13 @@ export default function AdminSocialNetworks() {
                   <Box display="flex" alignItems="center">
                     <span>{SN.priority}</span>
                   </Box>
+                </TableCell>
+                <TableCell align="center">
+                  {SN.isActive ? (
+                    <CheckIcon color="success" />
+                  ) : (
+                    <CloseIcon color="error" />
+                  )}
                 </TableCell>
                 <TableCell align="left">
                   <Button
@@ -170,6 +298,22 @@ export default function AdminSocialNetworks() {
           />
         </DialogComponent>
       )}
+      <ConfirmDialog
+        fullWidth
+        maxWidth="xs"
+        open={confirmModalIsOpen}
+        onSubmit={multipleItemsDeleteHandler}
+        onClose={() => setconfirmModalIsOpen(false)}
+        onCancel={() => setconfirmModalIsOpen(false)}
+        submitLabel="تایید"
+        closeLabel="کنسل"
+        title={<Typography variant="h4">حذف آیتم های انتخابی</Typography>}
+        children={
+          <Typography variant="h6">
+            آیا از حذف آیتم های انتخاب شده مطمئن هستید؟
+          </Typography>
+        }
+      />
     </>
   );
 }

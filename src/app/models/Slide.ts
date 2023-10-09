@@ -5,6 +5,7 @@ export interface Slide {
   pictureUrl: string;
   priority: number;
   page: PagesEnum;
+  isActive: boolean;
 }
 
 export interface SlideParams {

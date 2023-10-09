@@ -170,17 +170,24 @@ const Admin = {
     requests.put("Products/UpdateMultipleItems", values),
   ProductsDeleteMultipleItems: (values: number[]) =>
     requests.post("Products/DeleteMultipleItems", values),
-
   //category
   createCategory: (category: any) =>
     requests.postForm("Categories", createFormData(category)),
   updateCategory: (Category: any) =>
     requests.putForm("Categories", createFormData(Category)),
   deleteCategory: (id: number) => requests.delete(`Categories/${id}`),
+  categoriesEditMultipleItems: (values: number[]) =>
+    requests.put("Categories/UpdateMultipleItems", values),
+  categoriesDeleteMultipleItems: (values: number[]) =>
+    requests.post("Categories/DeleteMultipleItems", values),
   //brand
   createBrand: (Brands: any) =>
     requests.postForm("Brands", createFormData(Brands)),
   deleteBrand: (id: number) => requests.delete(`Brands/${id}`),
+  BrandsEditMultipleItems: (values: number[]) =>
+    requests.put("Brands/UpdateMultipleItems", values),
+  BrandsDeleteMultipleItems: (values: number[]) =>
+    requests.post("Brands/DeleteMultipleItems", values),
   //broker
   BrokerList: () => requests.get("Brokers"),
   createBroker: (Brokers: any) =>
@@ -212,6 +219,10 @@ const Admin = {
   updateSocialNetwork: (SocialNetwork: any) =>
     requests.putForm("SocialNetwork", createFormData(SocialNetwork)),
   deleteSocialNetwork: (id: number) => requests.delete(`SocialNetwork/${id}`),
+  SocialNetworkEditMultipleItems: (values: number[]) =>
+    requests.put("SocialNetwork/UpdateMultipleItems", values),
+  SocialNetworkDeleteMultipleItems: (values: number[]) =>
+    requests.post("SocialNetwork/DeleteMultipleItems", values),
   //MainMenu
   MainMenuList: (params: URLSearchParams) => requests.get("MainMenu", params),
   createMainMenu: (network: any) =>
@@ -219,6 +230,10 @@ const Admin = {
   updateMainMenu: (SocialNetwork: any) =>
     requests.putForm("MainMenu", createFormData(SocialNetwork)),
   deleteMainMenu: (id: number) => requests.delete(`MainMenu/${id}`),
+  mainMenuEditMultipleItems: (values: number[]) =>
+    requests.put("MainMenu/UpdateMultipleItems", values),
+  mainMenuDeleteMultipleItems: (values: number[]) =>
+    requests.post("MainMenu/DeleteMultipleItems", values),
   //QuickAccessMenu
   quickAccessList: (params: URLSearchParams) =>
     requests.get("QuickAccess", params),
@@ -227,6 +242,10 @@ const Admin = {
   updateQuickAccess: (SocialNetwork: any) =>
     requests.putForm("QuickAccess", createFormData(SocialNetwork)),
   deleteQuickAccess: (id: number) => requests.delete(`QuickAccess/${id}`),
+  quickAccessEditMultipleItems: (values: number[]) =>
+    requests.put("QuickAccess/UpdateMultipleItems", values),
+  quickAccessDeleteMultipleItems: (values: number[]) =>
+    requests.post("QuickAccess/DeleteMultipleItems", values),
   //Partners
   partnersList: (params: URLSearchParams) => requests.get("Partners", params),
   createPartner: (partner: any) =>
@@ -234,22 +253,38 @@ const Admin = {
   updatePartner: (partner: any) =>
     requests.putForm("Partners", createFormData(partner)),
   deletePartner: (id: number) => requests.delete(`Partners/${id}`),
+  partnersEditMultipleItems: (values: number[]) =>
+    requests.put("Partners/UpdateMultipleItems", values),
+  partnersDeleteMultipleItems: (values: number[]) =>
+    requests.post("Partners/DeleteMultipleItems", values),
   //Department
   departmentList: () => requests.get("Departments"),
   createDepartment: (Department: any) =>
     requests.postForm("Departments", createFormData(Department)),
   deleteDepartment: (id: number) => requests.delete(`Departments/${id}`),
+  departmentsEditMultipleItems: (values: number[]) =>
+    requests.put("Departments/UpdateMultipleItems", values),
+  departmentsDeleteMultipleItems: (values: number[]) =>
+    requests.post("Departments/DeleteMultipleItems", values),
   //Messages
   messageList: (params: URLSearchParams) => requests.get("Messages", params),
   createMessage: (message: any) =>
     requests.postForm("Messages", createFormData(message)),
   deleteMessage: (id: number) => requests.delete(`Messages/${id}`),
+  MessagesEditMultipleItems: (values: number[]) =>
+    requests.put("Messages/UpdateMultipleItems", values),
+  MessagesDeleteMultipleItems: (values: number[]) =>
+    requests.post("Messages/DeleteMultipleItems", values),
   //logos
   logoList: (params: URLSearchParams) => requests.get("Logo", params),
   createLogo: (network: any) =>
     requests.postForm("Logo", createFormData(network)),
   updateLogo: (Logo: any) => requests.putForm("Logo", createFormData(Logo)),
   deleteLogo: (id: number) => requests.delete(`Logo/${id}`),
+  logoEditMultipleItems: (values: number[]) =>
+    requests.put("Logo/UpdateMultipleItems", values),
+  logoDeleteMultipleItems: (values: number[]) =>
+    requests.post("Logo/DeleteMultipleItems", values),
   //Artists
   artistList: (params: URLSearchParams) => requests.get("Artists", params),
   createArtist: (artist: any) =>
@@ -257,6 +292,10 @@ const Admin = {
   updateArtist: (artist: any) =>
     requests.putForm("Artists", createFormData(artist)),
   deleteArtist: (id: number) => requests.delete(`Artists/${id}`),
+  artistsEditMultipleItems: (values: number[]) =>
+    requests.put("Artists/UpdateMultipleItems", values),
+  artistsDeleteMultipleItems: (values: number[]) =>
+    requests.post("Artists/DeleteMultipleItems", values),
   //ُSlides
   slideList: (params: URLSearchParams) => requests.get("Slides", params),
   createSlide: (slide: any) =>
@@ -264,6 +303,10 @@ const Admin = {
   updateSlide: (artist: any) =>
     requests.putForm("Slides", createFormData(artist)),
   deleteSlide: (id: number) => requests.delete(`Slides/${id}`),
+  slidesEditMultipleItems: (values: number[]) =>
+    requests.put("Slides/UpdateMultipleItems", values),
+  slidesDeleteMultipleItems: (values: number[]) =>
+    requests.post("Slides/DeleteMultipleItems", values),
   //PageItems
   pageItemList: (params: URLSearchParams) => requests.get("PageItems", params),
   createPageItem: (PageItem: any) =>
@@ -271,6 +314,10 @@ const Admin = {
   updatePageItem: (artist: any) =>
     requests.putForm("PageItems", createFormData(artist)),
   deletePageItem: (id: number) => requests.delete(`PageItems/${id}`),
+  pageItemsEditMultipleItems: (values: number[]) =>
+    requests.put("PageItems/UpdateMultipleItems", values),
+  pageItemsDeleteMultipleItems: (values: number[]) =>
+    requests.post("PageItems/DeleteMultipleItems", values),
   //ProductFeatures
   productFeatureList: () => requests.get("ProductFeatures"),
   createProductFeature: (productFeature: any) =>
@@ -279,6 +326,15 @@ const Admin = {
     requests.putForm("ProductFeatures", createFormData(ProductFeature)),
   deleteProductFeature: (id: number) =>
     requests.delete(`ProductFeatures/${id}`),
+  productFeaturesEditMultipleItems: (values: number[]) =>
+    requests.put("ProductFeatures/UpdateMultipleItems", values),
+  productFeaturesDeleteMultipleItems: (values: number[]) =>
+    requests.post("ProductFeatures/DeleteMultipleItems", values),
+  //FilesManagment
+  MediaList: () => requests.get("FilesManagment"),
+  postMedia: (media: any) =>
+    requests.postForm("FilesManagment", createFormData(media)),
+  deleteMedia: (name: string) => requests.delete(`FilesManagment/${name}`),
 };
 
 const agent = {

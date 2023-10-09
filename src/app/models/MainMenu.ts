@@ -3,6 +3,7 @@ export interface MainMenu {
   title: string;
   link: string;
   priority: number;
+  isActive: boolean;
 }
 
 export interface MainMenuParams {

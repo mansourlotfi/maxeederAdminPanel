@@ -4,4 +4,5 @@ export interface Category {
   link: string;
   pictureUrl: string;
   priority: number;
+  isActive: boolean;
 }

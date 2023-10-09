@@ -7,6 +7,7 @@ export interface Message {
   tel: string;
   text: string;
   addedDate: string;
+  isActive: boolean;
 }
 
 export interface MessageParams {

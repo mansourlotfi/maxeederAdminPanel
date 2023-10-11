@@ -67,7 +67,7 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
         editor1.clipboard.dangerouslyPasteHTML(parsedQuill1);
       }
     }
-  }, [editor1]);
+  }, [editor1, itemToEdit]);
 
   async function handleSubmitData(data: FieldValues) {
     data.page = pagesItemsObj.find((I) => I.displayName === data.page)?.id;

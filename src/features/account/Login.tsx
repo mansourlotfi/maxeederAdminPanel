@@ -1,7 +1,5 @@
-import Avatar from "@mui/material/Avatar";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { Paper } from "@mui/material";
@@ -44,12 +42,10 @@ export default function Login() {
         p: 4,
       }}
     >
-      <Avatar sx={{ m: 1 }}>
-        <LockOutlinedIcon />
-      </Avatar>
-      <Typography component="h1" variant="h5">
+      <Typography variant="h4" fontWeight={700}>
         ورود
       </Typography>
+
       <Box
         component="form"
         onSubmit={handleSubmit(submitForm)}

@@ -190,23 +190,21 @@ export default function AdminSlides() {
           <TableHead>
             <TableRow>
               <TableCell>
-                <TableCell>
-                  <Grid
-                    container
-                    justifyContent="space-between"
-                    flexWrap="nowrap"
-                    alignItems="center"
-                  >
-                    <Box>#</Box>
-                    <Box>
-                      <Checkbox
-                        onChange={selectAllItem}
-                        color="primary"
-                        checked={itemsChecked}
-                      />
-                    </Box>
-                  </Grid>
-                </TableCell>
+                <Grid
+                  container
+                  justifyContent="space-between"
+                  flexWrap="nowrap"
+                  alignItems="center"
+                >
+                  <Box>#</Box>
+                  <Box>
+                    <Checkbox
+                      onChange={selectAllItem}
+                      color="primary"
+                      checked={itemsChecked}
+                    />
+                  </Box>
+                </Grid>
               </TableCell>
               <TableCell align="left">نام</TableCell>
               <TableCell align="left">لینک</TableCell>

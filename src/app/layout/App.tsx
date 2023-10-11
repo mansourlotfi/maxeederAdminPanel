@@ -1,4 +1,11 @@
-import { CssBaseline, Grid, ThemeProvider, createTheme } from "@mui/material";
+import {
+  Box,
+  CssBaseline,
+  Grid,
+  ThemeProvider,
+  Typography,
+  createTheme,
+} from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -17,6 +24,7 @@ import { grey } from "@mui/material/colors";
 import "quill/dist/quill.snow.css"; // Add css for snow theme
 import "./styles.css";
 import Login from "../../features/account/Login";
+import { Logo } from "../components/logo";
 
 function App() {
   const location = useLocation();
@@ -103,10 +111,81 @@ function App() {
         {loading ? (
           <LoadingComponent message="در حال بارگزاری..." />
         ) : location.pathname === "/" ? (
-          <Grid mt={10}>
-            <Login />
-            {/* <Footer /> */}
-          </Grid>
+          <Box
+            component="main"
+            sx={{
+              display: "flex",
+              flex: "1 1 auto",
+              minHeight: "100Vh",
+            }}
+          >
+            <Grid container sx={{ flex: "1 1 auto" }}>
+              <Grid
+                xs={12}
+                lg={6}
+                sx={{
+                  backgroundColor: "background.paper",
+                  display: "flex",
+                  flexDirection: "column",
+                  position: "relative",
+                }}
+              >
+                <Box
+                  component="header"
+                  sx={{
+                    left: 0,
+                    p: 3,
+                    position: "fixed",
+                    top: 0,
+                    width: "100%",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: "inline-flex",
+                      height: 32,
+                      width: 32,
+                    }}
+                  >
+                    <Logo />
+                  </Box>
+                </Box>
+                <Login />
+              </Grid>
+              <Grid
+                xs={12}
+                lg={6}
+                sx={{
+                  alignItems: "center",
+                  background:
+                    "radial-gradient(50% 50% at 50% 50%, #122647 0%, #090E23 100%)",
+                  color: "white",
+                  display: "flex",
+                  justifyContent: "center",
+                  "& img": {
+                    maxWidth: "100%",
+                  },
+                }}
+              >
+                <Box sx={{ p: 3 }}>
+                  <Typography
+                    align="center"
+                    color="inherit"
+                    sx={{
+                      fontSize: "24px",
+                      lineHeight: "32px",
+                      mb: 1,
+                    }}
+                    variant="h1"
+                  >
+                    خوش آمدید
+                  </Typography>
+
+                  <img alt="" src={"/assets/auth-illustration.svg"} />
+                </Box>
+              </Grid>
+            </Grid>
+          </Box>
         ) : (
           <Outlet />
         )}

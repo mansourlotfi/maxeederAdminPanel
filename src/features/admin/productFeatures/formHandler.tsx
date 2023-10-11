@@ -9,8 +9,6 @@ import { useAppDispatch } from "../../../app/store/configureStore";
 import { LoadingButton } from "@mui/lab";
 import { setProductFeature } from "./productFeaturesSlice";
 import { useEffect } from "react";
-import { SocialNetworks } from "../../../app/models/socialNetwork";
-import { enNumberConvertor } from "../../../app/util/util";
 import { ProductFeature } from "../../../app/models/ProductFeatures";
 
 interface Props {

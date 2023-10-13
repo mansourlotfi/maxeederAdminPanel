@@ -94,6 +94,7 @@ function App() {
     direction: "rtl",
     typography: {
       fontFamily: "dana,Arial",
+      fontSize: 12,
     },
     components: {},
   });

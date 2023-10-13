@@ -14,8 +14,15 @@ import DiamondIcon from "@mui/icons-material/Diamond";
 import AlbumIcon from "@mui/icons-material/Album";
 import SlideshowIcon from "@mui/icons-material/Slideshow";
 import AppsIcon from "@mui/icons-material/Apps";
+import ArticleIcon from "@mui/icons-material/Article";
 
 export const AdminLinks = [
+  {
+    id: 0,
+    link: "/admin-dashboard/articles",
+    title: "مقالات",
+    icon: <ArticleIcon color="primary" />,
+  },
   {
     id: 1,
     link: "/admin-dashboard/socialNetworks",

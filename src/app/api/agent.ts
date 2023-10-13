@@ -336,6 +336,17 @@ const Admin = {
   postMedia: (media: any) =>
     requests.postForm("FilesManagment", createFormData(media)),
   deleteMedia: (name: string) => requests.delete(`FilesManagment/${name}`),
+  //Articles
+  articleList: (params: URLSearchParams) => requests.get("Articles", params),
+  createarticle: (article: any) =>
+    requests.postForm("Articles", createFormData(article)),
+  updatearticle: (artist: any) =>
+    requests.putForm("Articles", createFormData(artist)),
+  deletearticle: (id: number) => requests.delete(`Articles/${id}`),
+  ArticlesEditMultipleItems: (values: number[]) =>
+    requests.put("Articles/UpdateMultipleItems", values),
+  ArticlesDeleteMultipleItems: (values: number[]) =>
+    requests.post("Articles/DeleteMultipleItems", values),
 };
 
 const agent = {

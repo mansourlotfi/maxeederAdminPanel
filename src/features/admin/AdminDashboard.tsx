@@ -118,9 +118,15 @@ function AdminDashboard() {
               width: 250,
               maxWidth: "100%",
               minHeight: "calc(100vh - 48px)",
+              backgroundColor: "warning.light",
             }}
           >
-            <List>
+            <List
+              sx={{
+                maxHeight: "calc(100vh - 48px)",
+                overflowY: "auto",
+              }}
+            >
               {user
                 ? AdminLinks.map((item, key): any => (
                     <DynamicMenuItem key={key} item={item} />

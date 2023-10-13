@@ -20,6 +20,7 @@ import { slidesSlice } from "../../features/admin/slides/slidesSlice";
 import { pageItemsSlice } from "../../features/admin/pageItems/pageItemsSlice";
 import { productFeaturesSlice } from "../../features/admin/productFeatures/productFeaturesSlice";
 import { mediaManagmentsSlice } from "../../features/admin/mediaManagment/mediaSlice";
+import { articlesSlice } from "../../features/admin/articles/articlesSlice";
 
 export const store = configureStore({
   reducer: {
@@ -43,6 +44,7 @@ export const store = configureStore({
     pageItems: pageItemsSlice.reducer,
     productFeature: productFeaturesSlice.reducer,
     media: mediaManagmentsSlice.reducer,
+    article: articlesSlice.reducer,
   },
 });
 

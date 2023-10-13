@@ -2,6 +2,8 @@ export interface Artist {
   id: number;
   name: string;
   text: string;
+  nameEn: string;
+  textEn: string;
   pictureUrl: string;
   priority: number;
   isActive: boolean;

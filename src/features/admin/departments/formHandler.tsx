@@ -46,6 +46,13 @@ export default function FormHandler({ closeModalHandler }: Props) {
           <Grid item xs={12} sm={12}>
             <AppTextInput control={control} name="name" label="عنوان" />
           </Grid>
+          <Grid item xs={12} sm={12}>
+            <AppTextInput
+              control={control}
+              name="nameEn"
+              label="عنوان انگلیسی"
+            />
+          </Grid>
         </Grid>
         <Box display="flex" justifyContent="space-between" sx={{ mt: 3 }}>
           <LoadingButton

@@ -165,6 +165,7 @@ export default function AdminBrands() {
                 </Grid>
               </TableCell>
               <TableCell align="left">نام</TableCell>
+              <TableCell align="left">نام انگلیسی</TableCell>
               <TableCell align="left">تصویر</TableCell>
               <TableCell align="center">وضعیت</TableCell>
               <TableCell align="right">عملیات</TableCell>
@@ -197,6 +198,11 @@ export default function AdminBrands() {
                 <TableCell align="left">
                   <Box display="flex" alignItems="center">
                     <span>{brand.name}</span>
+                  </Box>
+                </TableCell>
+                <TableCell align="left">
+                  <Box display="flex" alignItems="center">
+                    <span>{brand.nameEn}</span>
                   </Box>
                 </TableCell>
                 <TableCell align="left">

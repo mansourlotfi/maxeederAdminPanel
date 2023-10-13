@@ -5,6 +5,7 @@ export interface SocialNetworks {
   pictureUrl: string;
   priority: number;
   isActive: boolean;
+  nameEn: string;
 }
 
 export interface SocialNetworksParams {

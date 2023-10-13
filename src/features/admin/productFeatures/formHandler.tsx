@@ -68,6 +68,16 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
               label="توضیحات"
             />
           </Grid>
+          <Grid item xs={12} sm={12}>
+            <AppTextInput control={control} name="nameEn" label="نام انگلیسی" />
+          </Grid>
+          <Grid item xs={12} sm={12}>
+            <AppTextInput
+              control={control}
+              name="descriptionEn"
+              label="توضیحات انگلیسی"
+            />
+          </Grid>
 
           <Grid item xs={12}>
             <Box

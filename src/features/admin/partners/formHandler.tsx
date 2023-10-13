@@ -52,19 +52,39 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
       </Typography>
       <form onSubmit={handleSubmit(handleSubmitData)}>
         <Grid container spacing={3}>
-          <Grid item xs={12} sm={12}>
+          <Grid item xs={12} sm={6}>
             <AppTextInput control={control} name="title" label="عنوان" />
           </Grid>
-          <Grid item xs={12} sm={12}>
+          <Grid item xs={12} sm={6}>
             <AppTextInput control={control} name="ceo" label="مدیر" />
           </Grid>
-          <Grid item xs={12} sm={12}>
+          <Grid item xs={12} sm={6}>
             <AppTextInput control={control} name="state" label="استان" />
           </Grid>
-          <Grid item xs={12} sm={12}>
+          <Grid item xs={12} sm={6}>
             <AppTextInput control={control} name="city" label="شهر" />
           </Grid>
-          <Grid item xs={12} sm={12}>
+          <Grid item xs={12} sm={6}>
+            <AppTextInput
+              control={control}
+              name="titleEn"
+              label="عنوان انگلیسی"
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <AppTextInput control={control} name="ceoEn" label="مدیر انگلیسی" />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <AppTextInput
+              control={control}
+              name="stateEn"
+              label="استان انگلیسی"
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <AppTextInput control={control} name="cityEn" label="شهر انگلیسی" />
+          </Grid>
+          <Grid item xs={12} sm={6}>
             <AppTextInput control={control} name="tel" label="تلفن" />
           </Grid>
           <Grid item xs={12} sm={6}>

@@ -1,6 +1,7 @@
 export interface Logo {
   id: number;
   name: string;
+  nameEn: string;
   link: string;
   pictureUrl: string;
   priority: number;

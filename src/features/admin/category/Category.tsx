@@ -179,6 +179,7 @@ export default function AdminCategory() {
                 </Grid>
               </TableCell>
               <TableCell align="left">نام</TableCell>
+              <TableCell align="left">نام انگلیسی</TableCell>
               <TableCell align="left">لینک</TableCell>
               <TableCell align="left">تصویر</TableCell>
               <TableCell align="left">اولویت</TableCell>
@@ -217,6 +218,11 @@ export default function AdminCategory() {
                 <TableCell align="left">
                   <Box display="flex" alignItems="center">
                     <span>{category.name}</span>
+                  </Box>
+                </TableCell>
+                <TableCell align="left">
+                  <Box display="flex" alignItems="center">
+                    <span>{category.nameEn}</span>
                   </Box>
                 </TableCell>
                 <TableCell align="left">

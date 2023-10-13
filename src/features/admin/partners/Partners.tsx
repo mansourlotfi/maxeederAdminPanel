@@ -192,6 +192,10 @@ export default function AdminPartners() {
               <TableCell align="left">مدیر</TableCell>
               <TableCell align="left">استان</TableCell>
               <TableCell align="left">شهر</TableCell>
+              <TableCell align="left">عنوان انگلیسی</TableCell>
+              <TableCell align="left">مدیر انگلیسی</TableCell>
+              <TableCell align="left">استان انگلیسی</TableCell>
+              <TableCell align="left">شهر انگلیسی</TableCell>
               <TableCell align="left">تلفن</TableCell>
               <TableCell align="left">لانگ</TableCell>
               <TableCell align="left">لت</TableCell>
@@ -243,6 +247,26 @@ export default function AdminPartners() {
                 <TableCell align="left">
                   <Box display="flex" alignItems="center">
                     <span>{P.city}</span>
+                  </Box>
+                </TableCell>
+                <TableCell align="left">
+                  <Box display="flex" alignItems="center">
+                    <span>{P.titleEn}</span>
+                  </Box>
+                </TableCell>
+                <TableCell align="left">
+                  <Box display="flex" alignItems="center">
+                    <span>{P.ceoEn}</span>
+                  </Box>
+                </TableCell>
+                <TableCell align="left">
+                  <Box display="flex" alignItems="center">
+                    <span>{P.stateEn}</span>
+                  </Box>
+                </TableCell>
+                <TableCell align="left">
+                  <Box display="flex" alignItems="center">
+                    <span>{P.cityEn}</span>
                   </Box>
                 </TableCell>
                 <TableCell align="left">

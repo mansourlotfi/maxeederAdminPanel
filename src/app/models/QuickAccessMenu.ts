@@ -1,6 +1,7 @@
 export interface QuickAccessMenu {
   id: number;
   title: string;
+  titleEn: string;
   link: string;
   priority: number;
   isActive: boolean;

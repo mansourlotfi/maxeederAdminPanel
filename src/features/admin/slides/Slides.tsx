@@ -207,6 +207,7 @@ export default function AdminSlides() {
                 </Grid>
               </TableCell>
               <TableCell align="left">نام</TableCell>
+              <TableCell align="left">نام انگلیسی</TableCell>
               <TableCell align="left">لینک</TableCell>
               <TableCell align="left">تصویر</TableCell>
               <TableCell align="left">اولویت</TableCell>
@@ -244,6 +245,11 @@ export default function AdminSlides() {
                 <TableCell align="left">
                   <Box display="flex" alignItems="center">
                     <span>{A.name}</span>
+                  </Box>
+                </TableCell>
+                <TableCell align="left">
+                  <Box display="flex" alignItems="center">
+                    <span>{A.nameEn}</span>
                   </Box>
                 </TableCell>
                 <TableCell align="left">

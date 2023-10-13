@@ -186,6 +186,8 @@ export default function AdminProductFeatures() {
               </TableCell>
               <TableCell align="left">نام</TableCell>
               <TableCell align="left">توضیحات</TableCell>
+              <TableCell align="left">نام انگلیسی</TableCell>
+              <TableCell align="left"> توضیحات انگلیسی</TableCell>
               <TableCell align="left">تصویر</TableCell>
               <TableCell align="center">وضعیت</TableCell>
               <TableCell align="left">کپی</TableCell>
@@ -225,6 +227,16 @@ export default function AdminProductFeatures() {
                 <TableCell align="left">
                   <Box display="flex" alignItems="center">
                     <span>{PF.description}</span>
+                  </Box>
+                </TableCell>
+                <TableCell align="left">
+                  <Box display="flex" alignItems="center">
+                    <span>{PF.nameEn}</span>
+                  </Box>
+                </TableCell>
+                <TableCell align="left">
+                  <Box display="flex" alignItems="center">
+                    <span>{PF.descriptionEn}</span>
                   </Box>
                 </TableCell>
                 <TableCell align="left">

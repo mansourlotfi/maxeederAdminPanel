@@ -8,6 +8,10 @@ export interface Partner {
   long: string;
   lat: string;
   isActive: boolean;
+  titleEn: string;
+  ceoEn: string;
+  stateEn: string;
+  cityEn: string;
 }
 
 export interface PartnerParams {

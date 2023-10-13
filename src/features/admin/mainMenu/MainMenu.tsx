@@ -183,6 +183,7 @@ export default function AdminMainMenu() {
                 </Grid>
               </TableCell>
               <TableCell align="left">عنوان</TableCell>
+              <TableCell align="left">عنوان انگلیسی</TableCell>
               <TableCell align="left">لینک</TableCell>
               <TableCell align="left">اولویت</TableCell>
               <TableCell align="center">وضعیت</TableCell>
@@ -218,6 +219,11 @@ export default function AdminMainMenu() {
                 <TableCell align="left">
                   <Box display="flex" alignItems="center">
                     <span>{Menu.title}</span>
+                  </Box>
+                </TableCell>
+                <TableCell align="left">
+                  <Box display="flex" alignItems="center">
+                    <span>{Menu.titleEn}</span>
                   </Box>
                 </TableCell>
                 <TableCell align="left">

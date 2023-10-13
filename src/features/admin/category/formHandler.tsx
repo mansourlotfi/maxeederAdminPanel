@@ -60,13 +60,16 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
       </Typography>
       <form onSubmit={handleSubmit(handleSubmitData)}>
         <Grid container spacing={3}>
-          <Grid item xs={12} sm={12}>
+          <Grid item xs={12} sm={6}>
             <AppTextInput control={control} name="name" label="نام دسته بندی" />
           </Grid>
-          <Grid item xs={12} sm={12}>
+          <Grid item xs={12} sm={6}>
+            <AppTextInput control={control} name="name" label="نام انگلیسی" />
+          </Grid>
+          <Grid item xs={12} sm={6}>
             <AppTextInput control={control} name="link" label="لینک" />
           </Grid>
-          <Grid item xs={12} sm={12}>
+          <Grid item xs={12} sm={6}>
             <AppTextInput
               control={control}
               name="priority"

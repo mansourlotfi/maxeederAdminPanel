@@ -54,7 +54,10 @@ export default function FormHandler({ closeModalHandler }: Props) {
       <form onSubmit={handleSubmit(handleSubmitData)}>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={12}>
-            <AppTextInput control={control} name="name" label="نام  برند" />
+            <AppTextInput control={control} name="name" label="نام برند" />
+          </Grid>
+          <Grid item xs={12} sm={12}>
+            <AppTextInput control={control} name="nameEn" label="نام انگلیسی" />
           </Grid>
           <Grid item xs={12}>
             <Box

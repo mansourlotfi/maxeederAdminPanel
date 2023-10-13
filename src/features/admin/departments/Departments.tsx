@@ -167,6 +167,7 @@ export default function AdminDepartments() {
                 </Grid>
               </TableCell>
               <TableCell align="left">عنوان</TableCell>
+              <TableCell align="left">عنوان انگلیسی</TableCell>
               <TableCell align="center">وضعیت</TableCell>
               <TableCell align="left">کپی</TableCell>
               <TableCell align="left">جذف</TableCell>
@@ -199,6 +200,11 @@ export default function AdminDepartments() {
                 <TableCell align="left">
                   <Box display="flex" alignItems="center">
                     <span>{D.name}</span>
+                  </Box>
+                </TableCell>
+                <TableCell align="left">
+                  <Box display="flex" alignItems="center">
+                    <span>{D.nameEn}</span>
                   </Box>
                 </TableCell>
                 <TableCell align="center">

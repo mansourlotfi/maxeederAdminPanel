@@ -99,7 +99,7 @@ export default function AdminArticlesPage() {
   };
 
   const multipleItemsDeleteHandler = useCallback(() => {
-    agent.Admin.pageItemsDeleteMultipleItems(checkedIds)
+    agent.Admin.ArticlesDeleteMultipleItems(checkedIds)
       .then(() => {
         dispatch(fetchArticlesAsync());
         toast.success("عملیات با موفقیت انجام شد");
@@ -110,7 +110,7 @@ export default function AdminArticlesPage() {
   }, [checkedIds, dispatch]);
 
   const multipleItemsEditHandler = useCallback(() => {
-    agent.Admin.pageItemsEditMultipleItems(checkedIds)
+    agent.Admin.ArticlesEditMultipleItems(checkedIds)
       .then(() => {
         dispatch(fetchArticlesAsync());
         toast.success("عملیات با موفقیت انجام شد");

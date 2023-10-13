@@ -44,6 +44,7 @@ import { toast } from "react-toastify";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import ConfirmDialog from "../../../app/components/confirmDialog";
+import { productUsageObj } from "./data";
 
 const sortOptions = [
   { value: "name", label: "حروف الفبا" },
@@ -279,6 +280,8 @@ export default function AdminInventory() {
               <TableCell align="center">نوع</TableCell>
               <TableCell align="center">برند</TableCell>
               <TableCell align="center">تعداد</TableCell>
+              <TableCell align="center">کاربری</TableCell>
+              <TableCell align="center">سایز</TableCell>
               <TableCell align="center">قابلیت ها</TableCell>
               <TableCell align="center">وضعیت</TableCell>
               <TableCell align="left">کپی</TableCell>
@@ -335,6 +338,16 @@ export default function AdminInventory() {
                 <TableCell align="center">{product.brand}</TableCell>
                 <TableCell align="center">{product.quantityInStock}</TableCell>
                 <TableCell align="center">
+                  <span>
+                    {
+                      productUsageObj.find((P) => P.id === product.usage)
+                        ?.displayName
+                    }
+                  </span>
+                </TableCell>
+                <TableCell align="center">{product.size}</TableCell>
+
+                <TableCell align="center">
                   {Array.isArray(product.features) &&
                     product.features.map((F) => F.feature?.name).join(", ")}
                 </TableCell>
@@ -385,7 +398,7 @@ export default function AdminInventory() {
         </Box>
       )}
       {editMode && (
-        <DialogComponent open={true} maxWidth={"md"}>
+        <DialogComponent open={true} maxWidth={"xl"}>
           <ProductForm product={selectedProduct} cancelEdit={cancelEdit} />;
         </DialogComponent>
       )}

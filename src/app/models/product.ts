@@ -12,6 +12,15 @@ export interface Product {
   quantityInStock?: number;
   features: IFeatures[];
   isActive: boolean;
+  nameEn: string | null;
+  descriptionEn: string | null;
+  size: string;
+  usage: ProductUsage;
+}
+
+export enum ProductUsage {
+  HomeUse = 1,
+  Portable,
 }
 
 export interface IFeatures {
@@ -23,6 +32,7 @@ export interface ProductParams {
   searchTerm?: string;
   types: string[];
   brands: string[];
+  size: string[];
   pageNumber: number;
   pageSize: number;
 }

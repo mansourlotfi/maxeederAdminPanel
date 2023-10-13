@@ -24,6 +24,7 @@ import useBrands from "../../../app/hooks/useBrands";
 import { toast } from "react-toastify";
 import AppCheckbox from "../../../app/components/AppCheckbox";
 import useProductFeatures from "../../../app/hooks/useProductFeatures";
+import { productUsageObj } from "./data";
 
 interface Props {
   product?: Product;
@@ -66,7 +67,11 @@ export default function FormHandler({ product, cancelEdit }: Props) {
   };
 
   useEffect(() => {
-    if (product && !watchFile && !isDirty) reset(product);
+    if (product && !watchFile && !isDirty)
+      reset({
+        ...product,
+        usage: productUsageObj.find((P) => P.id === product.usage)?.displayName,
+      });
     if (product) {
       setCheckedIds(product.features.map((F) => F.featureId));
     }
@@ -76,6 +81,8 @@ export default function FormHandler({ product, cancelEdit }: Props) {
   }, [product, reset, watchFile, isDirty]);
 
   async function handleSubmitData(data: FieldValues) {
+    data.usage = productUsageObj.find((I) => I.displayName === data.usage)?.id;
+
     data.features = checkedIds;
     try {
       let response: Product;
@@ -100,10 +107,17 @@ export default function FormHandler({ product, cancelEdit }: Props) {
       </Typography>
       <form onSubmit={handleSubmit(handleSubmitData)}>
         <Grid container spacing={3}>
-          <Grid item xs={12} sm={12}>
+          <Grid item xs={12} sm={4}>
             <AppTextInput control={control} name="name" label="نام کالا" />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={4}>
+            <AppTextInput
+              control={control}
+              name="nameEn"
+              label="نام کالا انگلیسی"
+            />
+          </Grid>
+          <Grid item xs={12} sm={4}>
             <AppSelectList
               control={control}
               items={brands.map((B) => B.name)}
@@ -111,7 +125,7 @@ export default function FormHandler({ product, cancelEdit }: Props) {
               label="برند"
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={4}>
             <AppSelectList
               control={control}
               items={categories.map((C) => C.name) || []}
@@ -119,7 +133,7 @@ export default function FormHandler({ product, cancelEdit }: Props) {
               label="دسته بندی"
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={4}>
             <AppTextInput
               type="number"
               control={control}
@@ -127,7 +141,23 @@ export default function FormHandler({ product, cancelEdit }: Props) {
               label="قیمت"
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={4}>
+            <AppTextInput
+              type="number"
+              control={control}
+              name="size"
+              label="اندازه"
+            />
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            <AppSelectList
+              control={control}
+              items={productUsageObj.map((P) => P.displayName)}
+              name="usage"
+              label="کاربرد"
+            />
+          </Grid>
+          <Grid item xs={12} sm={4}>
             <AppTextInput
               type="number"
               control={control}
@@ -135,13 +165,22 @@ export default function FormHandler({ product, cancelEdit }: Props) {
               label="تعداد موجود"
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={6}>
             <AppTextInput
               control={control}
               multiline={true}
               rows={4}
               name="description"
               label="توضیحات"
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <AppTextInput
+              control={control}
+              multiline={true}
+              rows={4}
+              name="descriptionEn"
+              label="توضیحات انگلیسی"
             />
           </Grid>
           <Grid item xs={12}>

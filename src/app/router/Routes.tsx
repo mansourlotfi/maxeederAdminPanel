@@ -35,6 +35,8 @@ import AdminInventory from "../../features/admin/inventory/Inventory";
 import AdminFileManager from "../../features/admin/mediaManagment/MediaManagment";
 import AdminDepartments from "../../features/admin/departments/Departments";
 import AdminArticlesPage from "../../features/admin/articles/Articles";
+import AdminSizes from "../../features/admin/Sizes/Sizes";
+import AdminUsagePage from "../../features/admin/usage/Usage";
 
 export const router = createBrowserRouter([
   {
@@ -140,6 +142,14 @@ export const router = createBrowserRouter([
               {
                 path: "articles",
                 element: <AdminArticlesPage />,
+              },
+              {
+                path: "size",
+                element: <AdminSizes />,
+              },
+              {
+                path: "usage",
+                element: <AdminUsagePage />,
               },
             ],
           },

@@ -1,8 +1,8 @@
 // import BeachAccessIcon from "@mui/icons-material/BeachAccess";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SettingsIcon from "@mui/icons-material/Settings";
-import BrandingWatermarkIcon from "@mui/icons-material/BrandingWatermark";
-import CategoryIcon from "@mui/icons-material/Category";
+// import BrandingWatermarkIcon from "@mui/icons-material/BrandingWatermark";
+// import CategoryIcon from "@mui/icons-material/Category";
 import InventoryIcon from "@mui/icons-material/Inventory";
 import SummarizeIcon from "@mui/icons-material/Summarize";
 import ConnectWithoutContactIcon from "@mui/icons-material/ConnectWithoutContact";
@@ -17,6 +17,37 @@ import AppsIcon from "@mui/icons-material/Apps";
 import ArticleIcon from "@mui/icons-material/Article";
 
 export const AdminLinks = [
+  {
+    id: 666,
+    title: "محصول",
+    icon: <InventoryIcon color="primary" />,
+    items: [
+      {
+        link: "/admin-dashboard/category",
+        title: "دسته بندی ها",
+      },
+      {
+        link: "/admin-dashboard/inventory",
+        title: "محصولات",
+      },
+      {
+        link: "/admin-dashboard/features",
+        title: "ویژگی ها محصول",
+      },
+      {
+        link: "/admin-dashboard/brands",
+        title: "برندها",
+      },
+      {
+        link: "/admin-dashboard/size",
+        title: "ابعاد",
+      },
+      {
+        link: "/admin-dashboard/usage",
+        title: "کاربرد",
+      },
+    ],
+  },
   {
     id: 0,
     link: "/admin-dashboard/articles",
@@ -47,12 +78,7 @@ export const AdminLinks = [
     title: "اسلایدها",
     icon: <SlideshowIcon color="primary" />,
   },
-  {
-    id: 5,
-    link: "/admin-dashboard/category",
-    title: "دسته بندی ها",
-    icon: <CategoryIcon color="primary" />,
-  },
+
   {
     id: 6,
     link: "/admin-dashboard/partners",
@@ -71,18 +97,7 @@ export const AdminLinks = [
     title: "منوی دسترسی سریع",
     icon: <ListIcon color="primary" />,
   },
-  {
-    id: 9,
-    link: "/admin-dashboard/inventory",
-    title: "محصولات",
-    icon: <InventoryIcon color="primary" />,
-  },
-  {
-    id: 231,
-    link: "/admin-dashboard/features",
-    title: "ویژگی ها محصول",
-    icon: <InventoryIcon color="primary" />,
-  },
+
   {
     id: 10,
     link: "/admin-dashboard/pageItems",
@@ -101,12 +116,7 @@ export const AdminLinks = [
     title: "پیام ها",
     icon: <MessageIcon color="primary" />,
   },
-  {
-    id: 13,
-    link: "/admin-dashboard/brands",
-    title: "برندها",
-    icon: <BrandingWatermarkIcon color="primary" />,
-  },
+
   {
     id: 14,
     link: "/admin-dashboard/users",

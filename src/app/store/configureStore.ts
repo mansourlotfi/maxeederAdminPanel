@@ -21,6 +21,8 @@ import { pageItemsSlice } from "../../features/admin/pageItems/pageItemsSlice";
 import { productFeaturesSlice } from "../../features/admin/productFeatures/productFeaturesSlice";
 import { mediaManagmentsSlice } from "../../features/admin/mediaManagment/mediaSlice";
 import { articlesSlice } from "../../features/admin/articles/articlesSlice";
+import { sizesSlice } from "../../features/admin/Sizes/sizesSlice";
+import { usagesSlice } from "../../features/admin/usage/usageSlice";
 
 export const store = configureStore({
   reducer: {
@@ -45,6 +47,8 @@ export const store = configureStore({
     productFeature: productFeaturesSlice.reducer,
     media: mediaManagmentsSlice.reducer,
     article: articlesSlice.reducer,
+    sizes: sizesSlice.reducer,
+    usages: usagesSlice.reducer,
   },
 });
 

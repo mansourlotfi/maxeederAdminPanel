@@ -347,6 +347,23 @@ const Admin = {
     requests.put("Articles/UpdateMultipleItems", values),
   ArticlesDeleteMultipleItems: (values: number[]) =>
     requests.post("Articles/DeleteMultipleItems", values),
+  //Size
+  SizeList: () => requests.get("Size"),
+  createSize: (Size: any) => requests.postForm("Size", createFormData(Size)),
+  deleteSize: (id: number) => requests.delete(`Size/${id}`),
+  SizesEditMultipleItems: (values: number[]) =>
+    requests.put("Size/UpdateMultipleItems", values),
+  SizesDeleteMultipleItems: (values: number[]) =>
+    requests.post("Size/DeleteMultipleItems", values),
+  //Usage
+  UsageList: () => requests.get("Usage"),
+  createUsage: (Usage: any) =>
+    requests.postForm("Usage", createFormData(Usage)),
+  deleteUsage: (id: number) => requests.delete(`Usage/${id}`),
+  UsagesEditMultipleItems: (values: number[]) =>
+    requests.put("Usage/UpdateMultipleItems", values),
+  UsagesDeleteMultipleItems: (values: number[]) =>
+    requests.post("Usage/DeleteMultipleItems", values),
 };
 
 const agent = {

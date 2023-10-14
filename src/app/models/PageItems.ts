@@ -19,12 +19,13 @@ export interface pageItemsParams {
 export enum PageItemsEnum {
   ServiceMain = 1,
   ServiceItems,
-  MaxPlus,
-  WikiMax,
   ContactUs,
   AboutUsHeader,
   AboutUsHistory,
   AboutUsTestimonials,
   AboutUsWarranty,
   AboutUsHonors,
+  CoWorkersHead,
+  CoWorkersTabs,
+  CoWorkersWarranty,
 }

@@ -21,6 +21,7 @@ function getAxiosParams(param: ArticleParams) {
   const params = new URLSearchParams();
   params.append("pageNumber", param.pageNumber.toString());
   params.append("pageSize", param.pageSize.toString());
+  params.append("page", param.page.toString());
 
   return params;
 }
@@ -44,6 +45,7 @@ function initParams(): ArticleParams {
   return {
     pageNumber: 1,
     pageSize: 6,
+    page: 1,
   };
 }
 export const articlesSlice = createSlice({

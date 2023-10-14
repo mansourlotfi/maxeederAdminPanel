@@ -20,6 +20,8 @@ import { enNumberConvertor } from "../../../app/util/util";
 import { useQuill } from "react-quilljs";
 import { Article } from "../../../app/models/Article";
 import useArticles from "../../../app/hooks/useArticles";
+import AppSelectList from "../../../app/components/AppSelectList";
+import { articlesPageObj } from "./data";
 
 interface Props {
   itemToEdit?: Article;
@@ -56,6 +58,8 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
     if (!watchFile && !isDirty && itemToEdit)
       reset({
         ...itemToEdit,
+        page: articlesPageObj.find((P) => P.id === itemToEdit.page)
+          ?.displayName,
       });
     return () => {
       if (watchFile) URL.revokeObjectURL(watchFile.preview);
@@ -83,6 +87,7 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
   }, [editor1, editor2, itemToEdit]);
 
   async function handleSubmitData(data: FieldValues) {
+    data.page = articlesPageObj.find((I) => I.displayName === data.page)?.id;
     data.ritchText = JSON.stringify(quillRef1.current.firstChild.innerHTML);
     data.ritchTextEn = JSON.stringify(quillRef2.current.firstChild.innerHTML);
 
@@ -130,6 +135,14 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
           </Grid>
           <Grid item xs={12} sm={6}>
             <AppTextInput control={control} name="link" label="لینک" />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <AppSelectList
+              control={control}
+              items={articlesPageObj.map((P) => P.displayName)}
+              name="page"
+              label="ایتم صفحه"
+            />
           </Grid>
           <Grid item xs={12} sm={6}>
             <AppTextInput

@@ -10,14 +10,6 @@ export const pagesItemsObj = [
     displayName: "ایتم های خدمات",
   },
   {
-    id: PageItemsEnum.MaxPlus,
-    displayName: "ایتم های مکس پلاس",
-  },
-  {
-    id: PageItemsEnum.WikiMax,
-    displayName: "ایتم های ویکی مکس",
-  },
-  {
     id: PageItemsEnum.ContactUs,
     displayName: "ایتم های تماس با ما",
   },
@@ -40,5 +32,17 @@ export const pagesItemsObj = [
   {
     id: PageItemsEnum.AboutUsHonors,
     displayName: "ایتم های  افتخارات درباره ما",
+  },
+  {
+    id: PageItemsEnum.CoWorkersHead,
+    displayName: "ایتم های هد صفحه همکاران",
+  },
+  {
+    id: PageItemsEnum.CoWorkersTabs,
+    displayName: "ایتم تب های صفحه همکاران",
+  },
+  {
+    id: PageItemsEnum.CoWorkersWarranty,
+    displayName: "ایتم وارانتی صفحه همکاران",
   },
 ];

@@ -13,6 +13,10 @@ import {
   TableBody,
   Grid,
   Checkbox,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
 } from "@mui/material";
 import { useCallback, useState } from "react";
 import agent from "../../../app/api/agent";
@@ -21,6 +25,7 @@ import {
   removeArticle,
   setPageNumber,
   fetchArticlesAsync,
+  setArticlesParams,
 } from "./articlesSlice";
 import DialogComponent from "../../../app/components/draggableDialog";
 import FormHandler from "./formHandler";
@@ -34,9 +39,11 @@ import CloseIcon from "@mui/icons-material/Close";
 import ConfirmDialog from "../../../app/components/confirmDialog";
 import useArticles from "../../../app/hooks/useArticles";
 import { Article } from "../../../app/models/Article";
+import { articlesPageObj } from "./data";
 
 export default function AdminArticlesPage() {
-  const { articles, isLoaded, status, metaData } = useArticles();
+  const { articles, isLoaded, status, metaData, articlesParams } =
+    useArticles();
   const dispatch = useAppDispatch();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -141,7 +148,24 @@ export default function AdminArticlesPage() {
           مقاله جدید
         </Button>
       </Box>
-
+      <Grid container sm={4} mb={5}>
+        <FormControl fullWidth>
+          <InputLabel>انتخاب صفحه</InputLabel>
+          <Select
+            value={articlesParams.page}
+            label="انتخاب صفحه"
+            onChange={(e: any) =>
+              dispatch(setArticlesParams({ page: e.target.value }))
+            }
+          >
+            {articlesPageObj.map((item, index) => (
+              <MenuItem value={item.id} key={index}>
+                {item.displayName}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </Grid>
       <Grid item container xs={12} mb={2} mt={2} justifyContent="flex-end">
         <LoadingButton
           sx={{ marginInlineEnd: 4 }}
@@ -189,6 +213,7 @@ export default function AdminArticlesPage() {
               <TableCell align="left">لینک</TableCell>
               <TableCell align="left">تصویر</TableCell>
               <TableCell align="left">اولویت</TableCell>
+              <TableCell align="left">صفحه</TableCell>
               <TableCell align="center">وضعیت</TableCell>
               <TableCell align="left">کپی</TableCell>
               <TableCell align="left">ویرایش</TableCell>
@@ -247,6 +272,16 @@ export default function AdminArticlesPage() {
                 <TableCell align="left">
                   <Box display="flex" alignItems="center">
                     <span>{A.priority}</span>
+                  </Box>
+                </TableCell>
+                <TableCell align="left">
+                  <Box display="flex" alignItems="center">
+                    <span>
+                      {
+                        articlesPageObj.find((P) => P.id === A.page)
+                          ?.displayName
+                      }
+                    </span>
                   </Box>
                 </TableCell>
                 <TableCell align="center">

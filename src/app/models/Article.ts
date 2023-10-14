@@ -8,9 +8,16 @@ export interface Article {
   isActive: boolean;
   titleEn: string | null;
   ritchTextEn: string | null;
+  page: ArticlesEnum;
 }
 
 export interface ArticleParams {
   pageNumber: number;
   pageSize: number;
+  page: ArticlesEnum;
+}
+
+export enum ArticlesEnum {
+  WikiMax = 1,
+  MaxPlus,
 }

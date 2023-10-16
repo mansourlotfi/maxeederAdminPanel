@@ -46,6 +46,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import ConfirmDialog from "../../../app/components/confirmDialog";
 import useSizes from "../../../app/hooks/useSizes";
 import useUsages from "../../../app/hooks/useUsages";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import UploaderFormHandler from "./uploaderFormHandler";
 
 const sortOptions = [
   { value: "name", label: "حروف الفبا" },
@@ -65,6 +67,7 @@ export default function AdminInventory() {
 
   const dispatch = useAppDispatch();
   const [editMode, setEditMode] = useState(false);
+  const [mediaModal, setMediaModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | undefined>(
     undefined
   );
@@ -74,6 +77,16 @@ export default function AdminInventory() {
   function handleSelectProduct(product: Product) {
     setSelectedProduct(product);
     setEditMode(true);
+  }
+
+  const handleUploadProductMedia = useCallback((product: Product) => {
+    setSelectedProduct(product);
+    setMediaModal(true);
+  }, []);
+
+  function cancelMediaUpload() {
+    if (selectedProduct) setSelectedProduct(undefined);
+    setMediaModal(false);
   }
 
   function handleDeleteProduct(id: number) {
@@ -325,6 +338,7 @@ export default function AdminInventory() {
               <TableCell align="center">سایز</TableCell>
               <TableCell align="center">قابلیت ها</TableCell>
               <TableCell align="center">وضعیت</TableCell>
+              <TableCell align="center">افزودن فایل</TableCell>
               <TableCell align="left">کپی</TableCell>
               <TableCell align="left">ویرایش</TableCell>
               <TableCell align="left">حذف</TableCell>
@@ -394,7 +408,12 @@ export default function AdminInventory() {
                     <CloseIcon color="error" />
                   )}
                 </TableCell>
-
+                <TableCell align="left">
+                  <Button
+                    onClick={() => handleUploadProductMedia(product)}
+                    startIcon={<CloudUploadIcon />}
+                  />
+                </TableCell>
                 <TableCell align="left">
                   <Button
                     onClick={() => {
@@ -438,6 +457,15 @@ export default function AdminInventory() {
           <ProductForm product={selectedProduct} cancelEdit={cancelEdit} />;
         </DialogComponent>
       )}
+
+      {selectedProduct ? (
+        <DialogComponent open={mediaModal} maxWidth={"md"}>
+          <UploaderFormHandler
+            product={selectedProduct}
+            cancelEdit={cancelMediaUpload}
+          />
+        </DialogComponent>
+      ) : null}
       <ConfirmDialog
         fullWidth
         maxWidth="xs"

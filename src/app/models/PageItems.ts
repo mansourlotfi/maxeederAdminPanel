@@ -8,6 +8,10 @@ export interface pageItems {
   ritchText: string | null;
   page: PageItemsEnum;
   isActive: boolean;
+  titleEn: string;
+  textEn: string;
+  shortDesc: string;
+  shortDescEn: string;
 }
 
 export interface pageItemsParams {

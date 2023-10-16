@@ -97,6 +97,13 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
             <AppTextInput control={control} name="title" label="عنوان" />
           </Grid>
           <Grid item xs={12} sm={6}>
+            <AppTextInput
+              control={control}
+              name="titleEn"
+              label="عوان انگلیسی"
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
             <AppTextInput control={control} name="link" label="لینک" />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -115,6 +122,7 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
               label="ایتم صفحه"
             />
           </Grid>
+
           <Grid item xs={12} sm={12}>
             <AppTextInput
               control={control}
@@ -124,7 +132,33 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
               rows={5}
             />
           </Grid>
-
+          <Grid item xs={12} sm={12}>
+            <AppTextInput
+              control={control}
+              name="textEn"
+              label="متن ساده انگلیسی"
+              multiline
+              rows={5}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <AppTextInput
+              control={control}
+              name="shortDesc"
+              label="توضیح کوتاه"
+              multiline
+              rows={3}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <AppTextInput
+              control={control}
+              name="shortDescEn"
+              label="توضیح کوتاه انگلیسی"
+              multiline
+              rows={3}
+            />
+          </Grid>
           <Grid item xs={12}>
             <Box
               display="flex"

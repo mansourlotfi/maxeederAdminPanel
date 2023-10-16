@@ -12,6 +12,8 @@ export interface Partner {
   ceoEn: string;
   stateEn: string;
   cityEn: string;
+  address: string;
+  addressEn: string;
 }
 
 export interface PartnerParams {

@@ -9,6 +9,8 @@ export interface Article {
   titleEn: string | null;
   ritchTextEn: string | null;
   page: ArticlesEnum;
+  shortDesc: string;
+  shortDescEn: string;
 }
 
 export interface ArticleParams {

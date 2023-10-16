@@ -152,7 +152,25 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
               onKeyPress={enNumberConvertor}
             />
           </Grid>
-
+          <Grid item xs={12} sm={6}></Grid>
+          <Grid item xs={12} sm={6}>
+            <AppTextInput
+              control={control}
+              name="shortDesc"
+              label="توضیح کوتاه"
+              multiline
+              rows={3}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <AppTextInput
+              control={control}
+              name="shortDescEn"
+              label="توضیح کوتاه انگلیسی"
+              multiline
+              rows={3}
+            />
+          </Grid>
           <Grid item xs={12}>
             <Box
               display="flex"

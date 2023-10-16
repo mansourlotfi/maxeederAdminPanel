@@ -88,6 +88,16 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
             <AppTextInput control={control} name="tel" label="تلفن" />
           </Grid>
           <Grid item xs={12} sm={6}>
+            <AppTextInput control={control} name="address" label="آدرس" />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <AppTextInput
+              control={control}
+              name="addressEn"
+              label="آدرس انگلیسی"
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
             <AppTextInput control={control} name="long" label="لانگ" />
           </Grid>
           <Grid item xs={12} sm={6}>

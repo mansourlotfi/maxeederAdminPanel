@@ -1,7 +1,13 @@
 export interface Users {
   id: number;
   email: string;
-  customUserRoles: ICustomUserRoles[];
+  isActive: boolean;
+}
+
+export interface User {
+  id: number;
+  phoneNumber: string;
+  email: string;
   isActive: boolean;
 }
 

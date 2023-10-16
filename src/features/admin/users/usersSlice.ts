@@ -5,7 +5,7 @@ import {
 } from "@reduxjs/toolkit";
 import agent from "../../../app/api/agent";
 import { RootState } from "../../../app/store/configureStore";
-import { Users, UsersParams } from "../../../app/models/users";
+import { User, UsersParams } from "../../../app/models/users";
 import { MetaData } from "../../../app/models/pagination";
 
 interface UsersState {
@@ -15,7 +15,7 @@ interface UsersState {
   metaData: MetaData | null;
 }
 
-const usersAdapter = createEntityAdapter<Users>();
+const usersAdapter = createEntityAdapter<User>();
 
 function getAxiosParams(userParams: UsersParams) {
   const params = new URLSearchParams();
@@ -26,7 +26,7 @@ function getAxiosParams(userParams: UsersParams) {
 }
 
 export const fetchUsersAsync = createAsyncThunk<
-  Users[],
+  User[],
   void,
   { state: RootState }
 >("Users/fetchUsersAsync", async (_, thunkAPI) => {

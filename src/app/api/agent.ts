@@ -8,7 +8,7 @@ import { store } from "../store/configureStore";
 
 // axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 
-// axios.defaults.baseURL = "http://localhost:5000/api/";
+//axios.defaults.baseURL = "http://localhost:5000/api/";
 axios.defaults.baseURL = "https://maxeeder-api.darkube.app/api/";
 
 axios.defaults.withCredentials = true;
@@ -136,6 +136,7 @@ const Basket = {
 const Account = {
   login: (values: any) => requests.post("account/login", values),
   register: (values: any) => requests.post("account/register", values),
+  otpRegister: (values: any) => requests.post("Otp/register", values),
   currentUser: () => requests.get("account/currentUser"),
   fetchAddress: () => requests.get("account/savedAddress"),
 };

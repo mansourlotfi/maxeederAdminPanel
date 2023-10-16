@@ -51,7 +51,7 @@ export default function Register(props: IProps) {
       <Box
         component="form"
         onSubmit={handleSubmit((data: any) =>
-          agent.Account.register(data)
+          agent.Account.otpRegister(data)
             .then(() => {
               toast.success("ثبت کاربر با موفقیت انجام شد");
               props.closeModalHandler();
@@ -64,45 +64,14 @@ export default function Register(props: IProps) {
         <TextField
           margin="normal"
           fullWidth
-          label="نام کاربری"
+          label="شماره همراه"
           autoFocus
           size="small"
-          {...register("username", { required: "نام کاربری اجباری" })}
-          error={!!errors.username}
-          helperText={<>{errors?.username?.message}</>}
+          {...register("phoneNumber", { required: " شماره همراه اجباری" })}
+          error={!!errors.phoneNumber}
+          helperText={<>{errors?.phoneNumber?.message}</>}
         />
-        <TextField
-          margin="normal"
-          fullWidth
-          label="آدرس ایمیل"
-          size="small"
-          {...register("email", {
-            required: "ایمیل اجباری",
-            pattern: {
-              value: /^\w+[\w-.]*@\w+((-\w+)|(\w*)).[a-z]{2,3}$/,
-              message: "Not a valid email address",
-            },
-          })}
-          error={!!errors.email}
-          helperText={<>{errors?.email?.message}</>}
-        />
-        <TextField
-          margin="normal"
-          fullWidth
-          label="رمز عبور"
-          type="password"
-          size="small"
-          {...register("password", {
-            required: "رمز عبور اجباری",
-            // pattern: {
-            //   value:
-            //     /(?=^.{6,10}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?/&gt;.&lt;,])(?!.*\s).*$/,
-            //   message: "Password is not complex enough",
-            // },
-          })}
-          error={!!errors.password}
-          helperText={<>{errors?.password?.message}</>}
-        />
+
         <Grid item container justifyContent="space-between" mt={3}>
           <LoadingButton
             disabled={!isValid}

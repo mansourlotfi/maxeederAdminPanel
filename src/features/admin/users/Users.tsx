@@ -16,10 +16,7 @@ import {
 } from "@mui/material";
 import { useCallback, useState } from "react";
 import agent from "../../../app/api/agent";
-import {
-  useAppDispatch,
-  useAppSelector,
-} from "../../../app/store/configureStore";
+import { useAppDispatch } from "../../../app/store/configureStore";
 import FormHandler from "./FormHandler";
 import {
   fetchUsersAsync,
@@ -40,7 +37,6 @@ import ConfirmDialog from "../../../app/components/confirmDialog";
 export default function AdminUserList() {
   const { users, isLoaded, status, metaData } = useUsers();
   const dispatch = useAppDispatch();
-  const { user } = useAppSelector((state) => state.account);
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -181,77 +177,73 @@ export default function AdminUserList() {
                   </Box>
                 </Grid>
               </TableCell>
-              <TableCell align="left">ایمیل</TableCell>
+              <TableCell align="left">تلفن</TableCell>
               <TableCell align="left">نقش ها</TableCell>
               <TableCell align="left">وضعیت</TableCell>
               <TableCell align="right">عملیات</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {users.map((U) => (
-              <TableRow
-                key={U.id}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  <Grid
-                    container
-                    justifyContent="space-between"
-                    flexWrap="nowrap"
-                    alignItems="center"
-                  >
-                    <Box display="inline-block">{U.id}</Box>
-                    <Box display="inline-block">
-                      <Checkbox
-                        value={U.id}
-                        onChange={handleChange}
-                        color="primary"
-                        checked={!!checkedIds.find((item) => item === U.id)}
-                      />
+            {users
+              .filter((U) => U.email !== "admin@maxeeder.com")
+              .map((U) => (
+                <TableRow
+                  key={U.id}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    <Grid
+                      container
+                      justifyContent="space-between"
+                      flexWrap="nowrap"
+                      alignItems="center"
+                    >
+                      <Box display="inline-block">{U.id}</Box>
+                      <Box display="inline-block">
+                        <Checkbox
+                          value={U.id}
+                          onChange={handleChange}
+                          color="primary"
+                          checked={!!checkedIds.find((item) => item === U.id)}
+                        />
+                      </Box>
+                    </Grid>
+                  </TableCell>
+                  <TableCell align="left">
+                    <Box display="flex" alignItems="center">
+                      <span>{U.phoneNumber}</span>
                     </Box>
-                  </Grid>
-                </TableCell>
-                <TableCell align="left">
-                  <Box display="flex" alignItems="center">
-                    <span>{U.email}</span>
-                  </Box>
-                </TableCell>
-                <TableCell align="left">
-                  <Box display="flex" alignItems="center">
-                    <span>
-                      {U.email === user?.email
-                        ? "ادمین"
-                        : U.customUserRoles.map((R) => R.name).join(", ") +
-                          "همکار"}
-                    </span>
-                  </Box>
-                </TableCell>
-                <TableCell align="center">
-                  {U.isActive ? (
-                    <CheckIcon color="success" />
-                  ) : (
-                    <CloseIcon color="error" />
-                  )}
-                </TableCell>
+                  </TableCell>
+                  <TableCell align="left">
+                    <Box display="flex" alignItems="center">
+                      <span>همکار</span>
+                    </Box>
+                  </TableCell>
+                  <TableCell align="center">
+                    {U.isActive ? (
+                      <CheckIcon color="success" />
+                    ) : (
+                      <CloseIcon color="error" />
+                    )}
+                  </TableCell>
 
-                <TableCell align="right">
-                  <LoadingButton
-                    onClick={() => {
-                      navigator.clipboard.writeText(U.email);
-                      toast.success("ایمیل کاربر کپی شد");
-                    }}
-                    startIcon={<ContentCopyIcon />}
-                  />
-                  <LoadingButton
-                    loading={loading && target === U.id}
-                    disabled={U.email === user?.email}
-                    onClick={() => handleDeleteUser(U.id)}
-                    startIcon={<Delete />}
-                    color="error"
-                  />
-                </TableCell>
-              </TableRow>
-            ))}
+                  <TableCell align="right">
+                    <LoadingButton
+                      onClick={() => {
+                        navigator.clipboard.writeText(U.phoneNumber);
+                        toast.success("ایمیل کاربر کپی شد");
+                      }}
+                      startIcon={<ContentCopyIcon />}
+                    />
+                    <LoadingButton
+                      loading={loading && target === U.id}
+                      onClick={() => handleDeleteUser(U.id)}
+                      startIcon={<Delete />}
+                      color="error"
+                    />
+                  </TableCell>
+                </TableRow>
+              ))}
           </TableBody>
         </Table>
       </TableContainer>

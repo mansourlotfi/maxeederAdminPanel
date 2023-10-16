@@ -36,6 +36,8 @@ function getAxiosParams(productParams: ProductParams) {
     params.append("brands", productParams.brands.toString());
   if (productParams.size.length > 0)
     params.append("size", productParams.size.toString());
+  if (productParams.usage.length > 0)
+    params.append("usage", productParams.usage.toString());
   return params;
 }
 
@@ -98,6 +100,7 @@ function initParams(): ProductParams {
     brands: [],
     types: [],
     size: [],
+    usage: [],
   };
 }
 

@@ -15,12 +15,7 @@ export interface Product {
   nameEn: string | null;
   descriptionEn: string | null;
   size: string;
-  usage: ProductUsage;
-}
-
-export enum ProductUsage {
-  HomeUse = 1,
-  Portable,
+  usage: string;
 }
 
 export interface IFeatures {
@@ -33,6 +28,7 @@ export interface ProductParams {
   types: string[];
   brands: string[];
   size: string[];
+  usage: string[];
   pageNumber: number;
   pageSize: number;
 }

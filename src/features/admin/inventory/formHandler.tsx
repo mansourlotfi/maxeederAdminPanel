@@ -24,7 +24,8 @@ import useBrands from "../../../app/hooks/useBrands";
 import { toast } from "react-toastify";
 import AppCheckbox from "../../../app/components/AppCheckbox";
 import useProductFeatures from "../../../app/hooks/useProductFeatures";
-import { productUsageObj } from "./data";
+import useSizes from "../../../app/hooks/useSizes";
+import useUsages from "../../../app/hooks/useUsages";
 
 interface Props {
   product?: Product;
@@ -45,6 +46,9 @@ export default function FormHandler({ product, cancelEdit }: Props) {
 
   // const { brands, types } = useProducts();
   const { categories } = useCategories();
+  const { sizes } = useSizes();
+  const { usages } = useUsages();
+
   const { productFeatures } = useProductFeatures();
 
   const watchFile = watch("file", null);
@@ -70,7 +74,6 @@ export default function FormHandler({ product, cancelEdit }: Props) {
     if (product && !watchFile && !isDirty)
       reset({
         ...product,
-        usage: productUsageObj.find((P) => P.id === product.usage)?.displayName,
       });
     if (product) {
       setCheckedIds(product.features.map((F) => F.featureId));
@@ -81,8 +84,6 @@ export default function FormHandler({ product, cancelEdit }: Props) {
   }, [product, reset, watchFile, isDirty]);
 
   async function handleSubmitData(data: FieldValues) {
-    data.usage = productUsageObj.find((I) => I.displayName === data.usage)?.id;
-
     data.features = checkedIds;
     try {
       let response: Product;
@@ -142,9 +143,9 @@ export default function FormHandler({ product, cancelEdit }: Props) {
             />
           </Grid>
           <Grid item xs={12} sm={4}>
-            <AppTextInput
-              type="number"
+            <AppSelectList
               control={control}
+              items={sizes.map((C) => C.sizeName) || []}
               name="size"
               label="اندازه"
             />
@@ -152,7 +153,7 @@ export default function FormHandler({ product, cancelEdit }: Props) {
           <Grid item xs={12} sm={4}>
             <AppSelectList
               control={control}
-              items={productUsageObj.map((P) => P.displayName)}
+              items={usages.map((C) => C.name) || []}
               name="usage"
               label="کاربرد"
             />

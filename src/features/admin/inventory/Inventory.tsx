@@ -44,7 +44,8 @@ import { toast } from "react-toastify";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import ConfirmDialog from "../../../app/components/confirmDialog";
-import { productUsageObj } from "./data";
+import useSizes from "../../../app/hooks/useSizes";
+import useUsages from "../../../app/hooks/useUsages";
 
 const sortOptions = [
   { value: "name", label: "حروف الفبا" },
@@ -56,6 +57,8 @@ export default function AdminInventory() {
   const { products, metaData, productParams, status } = useProducts();
   const { brands } = useBrands();
   const { categories } = useCategories();
+  const { sizes } = useSizes();
+  const { usages } = useUsages();
   const [confirmModalIsOpen, setconfirmModalIsOpen] = useState(false);
   const [checkedIds, setCheckedIds] = useState<number[]>([]);
   const [itemsChecked, setItemsChecked] = useState(false);
@@ -156,7 +159,7 @@ export default function AdminInventory() {
         </Button>
       </Grid>
       <Grid item container xs={12} spacing={4} mb={2}>
-        <Grid item xs={3}>
+        <Grid item xs={2}>
           <ProductSearch />
         </Grid>
         <Grid item xs={2}>
@@ -213,10 +216,48 @@ export default function AdminInventory() {
             </Select>
           </FormControl>
         </Grid>
-        <Grid item alignSelf="center">
+        <Grid item xs={2}>
+          <FormControl fullWidth>
+            <InputLabel>سایز</InputLabel>
+            <Select
+              value={productParams.size}
+              label="انتخاب سایز"
+              onChange={(e) =>
+                dispatch(setProductParams({ size: e.target.value }))
+              }
+            >
+              {sizes.map((item, index) => (
+                <MenuItem value={item.sizeName} key={index}>
+                  {item.sizeName}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item xs={2}>
+          <FormControl fullWidth>
+            <InputLabel>کاربرد</InputLabel>
+            <Select
+              value={productParams.usage}
+              label="انتخاب کاربرد"
+              onChange={(e) =>
+                dispatch(setProductParams({ usage: e.target.value }))
+              }
+            >
+              {usages.map((item, index) => (
+                <MenuItem value={item.name} key={index}>
+                  {item.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item xs={2} alignSelf="center">
           {productParams.searchTerm?.length ||
           productParams.brands.length ||
-          productParams.types.length ? (
+          productParams.types.length ||
+          productParams.size.length ||
+          productParams.usage.length ? (
             <Button
               sx={{ mb: 2 }}
               variant="contained"
@@ -338,12 +379,7 @@ export default function AdminInventory() {
                 <TableCell align="center">{product.brand}</TableCell>
                 <TableCell align="center">{product.quantityInStock}</TableCell>
                 <TableCell align="center">
-                  <span>
-                    {
-                      productUsageObj.find((P) => P.id === product.usage)
-                        ?.displayName
-                    }
-                  </span>
+                  <span>{product.usage}</span>
                 </TableCell>
                 <TableCell align="center">{product.size}</TableCell>
 

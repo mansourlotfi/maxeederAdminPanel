@@ -1,17 +1,17 @@
 export interface pageItems {
   id: number;
-  title: string;
-  text: string;
-  link: string;
-  pictureUrl: string;
+  title: string | null;
+  text: string | null;
+  link: string | null;
+  pictureUrl: string | null;
   priority: number;
   ritchText: string | null;
   page: PageItemsEnum;
   isActive: boolean;
-  titleEn: string;
-  textEn: string;
-  shortDesc: string;
-  shortDescEn: string;
+  titleEn: string | null;
+  textEn: string | null;
+  shortDesc: string | null;
+  shortDescEn: string | null;
 }
 
 export interface pageItemsParams {

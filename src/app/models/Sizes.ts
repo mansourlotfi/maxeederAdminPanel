@@ -1,6 +1,6 @@
 export interface Size {
   id: number;
   sizeName: string;
-  sizeNameEn: string;
+  sizeNameEn: string | null;
   isActive: boolean;
 }

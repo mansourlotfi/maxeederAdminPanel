@@ -23,6 +23,7 @@ import { mediaManagmentsSlice } from "../../features/admin/mediaManagment/mediaS
 import { articlesSlice } from "../../features/admin/articles/articlesSlice";
 import { sizesSlice } from "../../features/admin/Sizes/sizesSlice";
 import { usagesSlice } from "../../features/admin/usage/usageSlice";
+import { seoOptItemsSlice } from "../../features/admin/seoOptimization/seoOptSlice";
 
 export const store = configureStore({
   reducer: {
@@ -49,6 +50,7 @@ export const store = configureStore({
     article: articlesSlice.reducer,
     sizes: sizesSlice.reducer,
     usages: usagesSlice.reducer,
+    seoOptItems: seoOptItemsSlice.reducer,
   },
 });
 

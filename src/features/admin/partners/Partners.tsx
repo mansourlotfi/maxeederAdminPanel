@@ -294,7 +294,7 @@ export default function AdminPartners() {
                 <TableCell align="left">
                   <Button
                     onClick={() => {
-                      navigator.clipboard.writeText(P.tel);
+                      navigator.clipboard.writeText(P.tel ?? "-");
                       toast.success("کپی شد");
                     }}
                     startIcon={<ContentCopyIcon />}

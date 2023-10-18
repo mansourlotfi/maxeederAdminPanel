@@ -1,10 +1,11 @@
 export interface Setting {
   id: number;
-  description: string | null;
-  email: string | null;
+  email: string;
   address: string | null;
+  addressEn: string | null;
   phone: string | null;
   footerText: string | null;
-  contactUsRitchText: string | null;
-  servicesRitchText: string | null;
+  footerTextEn: string | null;
+  workHours: string | null;
+  workHoursEn: string | null;
 }

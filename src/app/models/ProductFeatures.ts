@@ -2,7 +2,7 @@ export interface ProductFeature {
   id: number;
   name: string;
   description: string | null;
-  nameEn: string;
+  nameEn: string | null;
   descriptionEn: string | null;
   pictureUrl: string;
   isActive: boolean;

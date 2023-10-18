@@ -22,28 +22,28 @@ import { useCallback, useState } from "react";
 import agent from "../../../app/api/agent";
 import { useAppDispatch } from "../../../app/store/configureStore";
 import {
-  removePageItem,
+  removeSeoOpt,
   setPageNumber,
-  setPageItemParams,
-  fetchPageItemsAsync,
-} from "./pageItemsSlice";
+  fetchSeoOptItemsAsync,
+  setSeoOptParams,
+} from "./seoOptSlice";
 import DialogComponent from "../../../app/components/draggableDialog";
 import FormHandler from "./formHandler";
 import { toast } from "react-toastify";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import AppPagination from "../../../app/components/AppPagination";
-import { pagesItemsObj } from "./data";
-import { pageItems } from "../../../app/models/PageItems";
-import usePageItems from "../../../app/hooks/usePageItems";
+import { seoOptPageObj } from "./data";
 import TypographyWithTooltip from "../../../app/components/typographyWithTooltip";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import ConfirmDialog from "../../../app/components/confirmDialog";
+import useSeoOptItems from "../../../app/hooks/useSeoOptItems";
+import { SeoOptimization } from "../../../app/models/SeoOptimization";
 
 export default function AdminPageItems() {
-  const { pageItems, isLoaded, status, metaData, pageItemsParams } =
-    usePageItems();
+  const { seoOptItems, isLoaded, status, metaData, seoOptParams } =
+    useSeoOptItems();
   const dispatch = useAppDispatch();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -51,11 +51,11 @@ export default function AdminPageItems() {
   const [loading, setLoading] = useState(false);
   const [target, setTarget] = useState(0);
 
-  const [selectedItem, setSelectedItem] = useState<pageItems | undefined>(
+  const [selectedItem, setSelectedItem] = useState<SeoOptimization | undefined>(
     undefined
   );
 
-  function handleSelectItem(pageItems: pageItems) {
+  function handleSelectItem(pageItems: SeoOptimization) {
     setSelectedItem(pageItems);
     setIsOpen(true);
   }
@@ -63,8 +63,8 @@ export default function AdminPageItems() {
   function handleDelete(id: number) {
     setLoading(true);
     setTarget(id);
-    agent.Admin.deletePageItem(id)
-      .then(() => dispatch(removePageItem(id)))
+    agent.Admin.deleteSeoOptimization(id)
+      .then(() => dispatch(removeSeoOpt(id)))
       .catch((error) => console.log(error))
       .finally(() => setLoading(false));
   }
@@ -97,7 +97,7 @@ export default function AdminPageItems() {
     const collection = [];
 
     if (checked) {
-      for (const item of pageItems) {
+      for (const item of seoOptItems) {
         collection.push(item.id);
       }
     }
@@ -106,9 +106,9 @@ export default function AdminPageItems() {
   };
 
   const multipleItemsDeleteHandler = useCallback(() => {
-    agent.Admin.pageItemsDeleteMultipleItems(checkedIds)
+    agent.Admin.SeoOptimizationsDeleteMultipleItems(checkedIds)
       .then(() => {
-        dispatch(fetchPageItemsAsync());
+        dispatch(fetchSeoOptItemsAsync());
         toast.success("عملیات با موفقیت انجام شد");
       })
       .catch((err) => {
@@ -117,9 +117,9 @@ export default function AdminPageItems() {
   }, [checkedIds, dispatch]);
 
   const multipleItemsEditHandler = useCallback(() => {
-    agent.Admin.pageItemsEditMultipleItems(checkedIds)
+    agent.Admin.SeoOptimizationsEditMultipleItems(checkedIds)
       .then(() => {
-        dispatch(fetchPageItemsAsync());
+        dispatch(fetchSeoOptItemsAsync());
         toast.success("عملیات با موفقیت انجام شد");
       })
       .catch((err) => {
@@ -135,7 +135,7 @@ export default function AdminPageItems() {
     <>
       <Box display="flex" justifyContent="space-between">
         <Typography sx={{ p: 2 }} variant="h4">
-          لیست ایتم های صفحات
+          سئو و بهینه سازی
         </Typography>
         <Button
           onClick={() => setIsOpen(true)}
@@ -150,15 +150,15 @@ export default function AdminPageItems() {
       </Box>
       <Grid container sm={4} mb={5}>
         <FormControl fullWidth>
-          <InputLabel>انتخاب ایتم و صفحه </InputLabel>
+          <InputLabel>انتخاب صفحه </InputLabel>
           <Select
-            value={pageItemsParams.page}
-            label="انتخاب ایتم و صفحه"
+            value={seoOptParams.page}
+            label="انتخاب صفحه"
             onChange={(e: any) =>
-              dispatch(setPageItemParams({ page: e.target.value }))
+              dispatch(setSeoOptParams({ page: e.target.value }))
             }
           >
-            {pagesItemsObj.map((item, index) => (
+            {seoOptPageObj.map((item, index) => (
               <MenuItem value={item.id} key={index}>
                 {item.displayName}
               </MenuItem>
@@ -209,10 +209,10 @@ export default function AdminPageItems() {
                   </Box>
                 </Grid>
               </TableCell>
-              <TableCell align="left">عنوان</TableCell>
               <TableCell align="left">متن</TableCell>
-              <TableCell align="left">لینک</TableCell>
-              <TableCell align="left">تصویر</TableCell>
+              <TableCell align="left">توضیحات</TableCell>
+              <TableCell align="left">متاتگ کیورد</TableCell>
+              <TableCell align="left">متاتگ دسکریپشن</TableCell>
               <TableCell align="left">اولویت</TableCell>
               <TableCell align="left">صفحه</TableCell>
               <TableCell align="center">وضعیت</TableCell>
@@ -222,7 +222,7 @@ export default function AdminPageItems() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {pageItems.map((A) => (
+            {seoOptItems.map((A) => (
               <TableRow
                 key={A.id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -247,7 +247,7 @@ export default function AdminPageItems() {
                 </TableCell>
                 <TableCell align="left">
                   <Box display="flex" alignItems="center">
-                    <span>{A.title}</span>
+                    <span>{A.text}</span>
                   </Box>
                 </TableCell>
                 <TableCell align="left">
@@ -256,7 +256,7 @@ export default function AdminPageItems() {
                     alignItems="center"
                     sx={{ maxWidth: 150 }}
                   >
-                    <TypographyWithTooltip text={A.text ?? "-"} />
+                    <TypographyWithTooltip text={A.description ?? "-"} />
                   </Box>
                 </TableCell>
                 <TableCell align="left">
@@ -265,18 +265,16 @@ export default function AdminPageItems() {
                     alignItems="center"
                     sx={{ maxWidth: 150 }}
                   >
-                    <TypographyWithTooltip text={A.link ?? "-"} />
+                    <TypographyWithTooltip text={A.metaTagKeyWords ?? "-"} />
                   </Box>
                 </TableCell>
                 <TableCell align="left">
-                  <Box display="flex" alignItems="center">
-                    {A.pictureUrl ? (
-                      <img
-                        src={A.pictureUrl}
-                        alt={A.title ?? ""}
-                        style={{ height: 50, marginRight: 20 }}
-                      />
-                    ) : null}
+                  <Box
+                    display="flex"
+                    alignItems="center"
+                    sx={{ maxWidth: 150 }}
+                  >
+                    <TypographyWithTooltip text={A.metaTagDescription ?? "-"} />
                   </Box>
                 </TableCell>
                 <TableCell align="left">
@@ -287,7 +285,7 @@ export default function AdminPageItems() {
                 <TableCell align="left">
                   <Box display="flex" alignItems="center">
                     <span>
-                      {pagesItemsObj.find((P) => P.id === A.page)?.displayName}
+                      {seoOptPageObj.find((P) => P.id === A.page)?.displayName}
                     </span>
                   </Box>
                 </TableCell>
@@ -302,7 +300,7 @@ export default function AdminPageItems() {
                 <TableCell align="left">
                   <Button
                     onClick={() => {
-                      navigator.clipboard.writeText(A.link ?? "-");
+                      navigator.clipboard.writeText(A.text ?? "-");
                       toast.success("کپی شد");
                     }}
                     startIcon={<ContentCopyIcon />}

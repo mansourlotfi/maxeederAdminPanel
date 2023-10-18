@@ -75,7 +75,9 @@ function createFormData(item: any) {
     if (key === "features") {
       item.features.map((f: number) => formData.append(key, f.toString()));
     } else {
-      formData.append(key, item[key]);
+      if (item[key] === null) {
+        formData.append(key, "");
+      } else formData.append(key, item[key]);
     }
   }
   return formData;
@@ -203,10 +205,20 @@ const Admin = {
   getSettingsData: () => requests.get("Settings"),
   postSettingsData: (settings: any) =>
     requests.postForm("Settings", createFormData(settings)),
-  //Ceo Optimization
-  getCeoOptimizationsData: () => requests.get("CeoOptimization"),
-  postCeoOptimizationData: (values: any) =>
-    requests.postForm("CeoOptimization", createFormData(values)),
+
+  //Seo Optimization
+  getSeoOptimizationsData: (params: URLSearchParams) =>
+    requests.get("SeoOptimization", params),
+  postSeoOptimizationData: (values: any) =>
+    requests.postForm("SeoOptimization", createFormData(values)),
+  updateSeoOptimization: (artist: any) =>
+    requests.putForm("SeoOptimization", createFormData(artist)),
+  deleteSeoOptimization: (id: number) =>
+    requests.delete(`SeoOptimization/${id}`),
+  SeoOptimizationsEditMultipleItems: (values: number[]) =>
+    requests.put("SeoOptimization/UpdateMultipleItems", values),
+  SeoOptimizationsDeleteMultipleItems: (values: number[]) =>
+    requests.post("SeoOptimization/DeleteMultipleItems", values),
   //Users
   userList: (params: URLSearchParams) =>
     requests.get("Account/GetAllUsers", params),

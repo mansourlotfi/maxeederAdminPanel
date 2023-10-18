@@ -14,8 +14,8 @@ export interface Product {
   isActive: boolean;
   nameEn: string | null;
   descriptionEn: string | null;
-  size: string;
-  usage: string;
+  size: string | null;
+  usage: string | null;
 }
 
 export interface IFeatures {

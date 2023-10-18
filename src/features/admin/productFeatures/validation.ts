@@ -6,4 +6,5 @@ export const validationSchema = yup.object({
   //   is: (value: string) => !value,
   //   then: yup.mixed().required("Please provide an image"),
   // }),
+  description: yup.string().required(),
 });

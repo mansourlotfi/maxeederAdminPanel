@@ -17,7 +17,7 @@ import TestPage from "../../features/about/TestPage";
 import AdminCategory from "../../features/admin/category/Category";
 import AdminBrands from "../../features/admin/brands/Brands";
 import AdminSettings from "../../features/admin/settings/Settings";
-import AdminCeoOptimazation from "../../features/admin/seoOptimization/seoOptimization";
+import AdminSeoOptimazation from "../../features/admin/seoOptimization/seoOptimization";
 import AdminUserList from "../../features/admin/users/Users";
 import AdminCustomRoles from "../../features/admin/customRoles/CustomRoles";
 import AdminReports from "../../features/admin/reports/Reports";
@@ -80,8 +80,8 @@ export const router = createBrowserRouter([
                 element: <AdminSettings />,
               },
               {
-                path: "ceo",
-                element: <AdminCeoOptimazation />,
+                path: "seo",
+                element: <AdminSeoOptimazation />,
               },
               {
                 path: "customRoles",

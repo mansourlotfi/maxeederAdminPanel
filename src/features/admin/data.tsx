@@ -148,7 +148,7 @@ export const AdminLinks = [
       },
       {
         title: "سئو و بهینه سازی",
-        link: "/admin-dashboard/ceo",
+        link: "/admin-dashboard/seo",
       },
     ],
   },

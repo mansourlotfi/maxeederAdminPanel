@@ -210,9 +210,9 @@ const Admin = {
   getSeoOptimizationsData: (params: URLSearchParams) =>
     requests.get("SeoOptimization", params),
   postSeoOptimizationData: (values: any) =>
-    requests.postForm("SeoOptimization", createFormData(values)),
+    requests.post("SeoOptimization", values),
   updateSeoOptimization: (artist: any) =>
-    requests.putForm("SeoOptimization", createFormData(artist)),
+    requests.put("SeoOptimization", artist),
   deleteSeoOptimization: (id: number) =>
     requests.delete(`SeoOptimization/${id}`),
   SeoOptimizationsEditMultipleItems: (values: number[]) =>

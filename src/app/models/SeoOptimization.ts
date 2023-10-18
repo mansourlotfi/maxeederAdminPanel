@@ -1,14 +1,14 @@
 export interface SeoOptimization {
   id: number;
-  text: string | null;
-  textEn: string | null;
-  description: string | null;
-  descriptionEn: string | null;
-  metaTagKeyWords: string | null;
-  metaTagKeyWordsEn: string | null;
-  metaTagDescription: string | null;
-  metaTagDescriptionEn: string | null;
-  priority: string | null;
+  text: string;
+  textEn: string;
+  description: string;
+  descriptionEn: string;
+  metaTagKeyWords: string;
+  metaTagKeyWordsEn: string;
+  metaTagDescription: string;
+  metaTagDescriptionEn: string;
+  priority: string;
   page: PageEnum;
   isActive: boolean;
 }

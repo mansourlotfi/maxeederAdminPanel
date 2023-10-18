@@ -136,7 +136,7 @@ function AdminDashboard() {
           </Paper>
         </Grid>
         <Grid item container xs>
-          <Container>
+          <Container maxWidth="xl">
             <Outlet />
           </Container>
         </Grid>

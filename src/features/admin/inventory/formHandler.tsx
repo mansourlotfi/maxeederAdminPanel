@@ -17,15 +17,15 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { validationSchema } from "./productValidation";
 import agent from "../../../app/api/agent";
 import { useAppDispatch } from "../../../app/store/configureStore";
-import { setProduct } from "../../catalog/catalogSlice";
 import { LoadingButton } from "@mui/lab";
 import useCategories from "../../../app/hooks/useCategories";
 import useBrands from "../../../app/hooks/useBrands";
-import { toast } from "react-toastify";
 import AppCheckbox from "../../../app/components/AppCheckbox";
 import useProductFeatures from "../../../app/hooks/useProductFeatures";
 import useSizes from "../../../app/hooks/useSizes";
 import useUsages from "../../../app/hooks/useUsages";
+import { setProduct } from "./catalogSlice";
+import { toast } from "react-toastify";
 
 interface Props {
   product?: Product;
@@ -94,10 +94,10 @@ export default function FormHandler({ product, cancelEdit }: Props) {
       }
       dispatch(setProduct(response));
       cancelEdit();
-    } catch (error) {
-      toast.error("خطا در بارگزاری");
-
-      console.log(error);
+    } catch (errors: any) {
+      for (const key in errors) {
+        toast.error(errors[key]);
+      }
     }
   }
 

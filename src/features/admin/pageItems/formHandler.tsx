@@ -21,6 +21,7 @@ import AppSelectList from "../../../app/components/AppSelectList";
 import { pagesItemsObj } from "./data";
 import { pageItems } from "../../../app/models/PageItems";
 import { useQuill } from "react-quilljs";
+import usePageItems from "../../../app/hooks/usePageItems";
 
 interface Props {
   itemToEdit?: pageItems;
@@ -28,6 +29,7 @@ interface Props {
 }
 
 export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
+  const { pageItems } = usePageItems();
   const { quill: editor1, quillRef: quillRef1 } = useQuill({
     // Specify a unique id and a unique toolbar id for the first editor
     id: "editor1",
@@ -38,6 +40,7 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
     handleSubmit,
     watch,
     reset,
+    setValue,
     formState: { isDirty, isSubmitting },
   } = useForm({
     resolver: yupResolver<any>(validationSchema),
@@ -85,6 +88,17 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
       console.log(error);
     }
   }
+
+  useEffect(() => {
+    if (pageItems && !itemToEdit) {
+      setValue(
+        "priority",
+        Math.max(...pageItems.map((o) => o.priority), 0)
+          ? Math.max(...pageItems.map((o) => o.priority), 0) + 1
+          : 1
+      );
+    }
+  }, [pageItems, itemToEdit, setValue]);
 
   return (
     <Box component={Paper} sx={{ p: 4 }}>

@@ -25,17 +25,10 @@ import useProducts from "../../../app/hooks/useProducts";
 import { Product } from "../../../app/models/product";
 import { useAppDispatch } from "../../../app/store/configureStore";
 import { currencyFormat } from "../../../app/util/util";
-import {
-  fetchProductsAsync,
-  removeProduct,
-  resetProductParams,
-  setPageNumber,
-  setProductParams,
-} from "../../catalog/catalogSlice";
 import ProductForm from "./formHandler";
 import DialogComponent from "../../../app/components/draggableDialog";
 import FilterAltOffIcon from "@mui/icons-material/FilterAltOff";
-import ProductSearch from "../../catalog/ProductSearch";
+import ProductSearch from "./ProductSearch";
 import useBrands from "../../../app/hooks/useBrands";
 import useCategories from "../../../app/hooks/useCategories";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
@@ -48,6 +41,13 @@ import useSizes from "../../../app/hooks/useSizes";
 import useUsages from "../../../app/hooks/useUsages";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import UploaderFormHandler from "./uploaderFormHandler";
+import {
+  fetchProductsAsync,
+  removeProduct,
+  resetProductParams,
+  setPageNumber,
+  setProductParams,
+} from "./catalogSlice";
 
 const sortOptions = [
   { value: "name", label: "حروف الفبا" },

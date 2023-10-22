@@ -11,6 +11,7 @@ import { setArtist } from "./artistsSlice";
 import { useEffect } from "react";
 import { enNumberConvertor } from "../../../app/util/util";
 import { Artist } from "../../../app/models/Artsts";
+import useArtists from "../../../app/hooks/useArtists";
 
 interface Props {
   itemToEdit?: Artist;
@@ -18,11 +19,14 @@ interface Props {
 }
 
 export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
+  const { artists } = useArtists();
+
   const {
     control,
     handleSubmit,
     watch,
     reset,
+    setValue,
     formState: { isDirty, isSubmitting },
   } = useForm({
     resolver: yupResolver<any>(validationSchema),
@@ -52,6 +56,16 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
     }
   }
 
+  useEffect(() => {
+    if (artists && !itemToEdit) {
+      setValue(
+        "priority",
+        Math.max(...artists.map((o) => o.priority), 0)
+          ? Math.max(...artists.map((o) => o.priority), 0) + 1
+          : 1
+      );
+    }
+  }, [artists, itemToEdit, setValue]);
   return (
     <Box component={Paper} sx={{ p: 4 }}>
       <Typography variant="h4" gutterBottom sx={{ mb: 4 }}>

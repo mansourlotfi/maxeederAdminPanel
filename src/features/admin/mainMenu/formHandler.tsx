@@ -10,6 +10,7 @@ import { setMenu } from "./mainMenuSlice";
 import { useEffect } from "react";
 import { enNumberConvertor } from "../../../app/util/util";
 import { MainMenu } from "../../../app/models/MainMenu";
+import useMainMenu from "../../../app/hooks/useMainMenu";
 
 interface Props {
   itemToEdit?: MainMenu;
@@ -17,10 +18,12 @@ interface Props {
 }
 
 export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
+  const { mainMenu } = useMainMenu();
   const {
     control,
     handleSubmit,
     reset,
+    setValue,
     formState: { isDirty, isSubmitting },
   } = useForm({
     resolver: yupResolver<any>(validationSchema),
@@ -45,6 +48,17 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
       console.log(error);
     }
   }
+
+  useEffect(() => {
+    if (mainMenu && !itemToEdit) {
+      setValue(
+        "priority",
+        Math.max(...mainMenu.map((o) => o.priority), 0)
+          ? Math.max(...mainMenu.map((o) => o.priority), 0) + 1
+          : 1
+      );
+    }
+  }, [mainMenu, itemToEdit, setValue]);
 
   return (
     <Box component={Paper} sx={{ p: 4 }}>

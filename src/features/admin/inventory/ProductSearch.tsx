@@ -1,8 +1,11 @@
 import { debounce, InputAdornment, TextField } from "@mui/material";
 import { useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../app/store/configureStore";
-import { setProductParams } from "./catalogSlice";
+import {
+  useAppDispatch,
+  useAppSelector,
+} from "../../../app/store/configureStore";
 import SearchIcon from "@mui/icons-material/Search";
+import { setProductParams } from "./catalogSlice";
 
 export default function ProductSearch() {
   const { productParams } = useAppSelector((state) => state.catalog);

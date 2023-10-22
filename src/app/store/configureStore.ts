@@ -2,7 +2,6 @@ import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { accountSlice } from "../../features/account/accountSlice";
 import { basketSlice } from "../../features/basket/basketSlice";
-import { catalogSlice } from "../../features/catalog/catalogSlice";
 import { categorySlice } from "../../features/admin/category/categorySlice";
 import { brandSlice } from "../../features/admin/brands/brandSlice";
 import { brokerSlice } from "../../features/admin/broker/brokerSlice";
@@ -24,6 +23,7 @@ import { articlesSlice } from "../../features/admin/articles/articlesSlice";
 import { sizesSlice } from "../../features/admin/Sizes/sizesSlice";
 import { usagesSlice } from "../../features/admin/usage/usageSlice";
 import { seoOptItemsSlice } from "../../features/admin/seoOptimization/seoOptSlice";
+import { catalogSlice } from "../../features/admin/inventory/catalogSlice";
 
 export const store = configureStore({
   reducer: {

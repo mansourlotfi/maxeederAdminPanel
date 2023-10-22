@@ -7,8 +7,8 @@ import { CardActionArea } from "@mui/material";
 import useCategories from "../../app/hooks/useCategories";
 import LoadingComponent from "../../app/layout/LoadingComponent";
 import { useAppDispatch } from "../../app/store/configureStore";
-import { setProductParams } from "../catalog/catalogSlice";
 import { NavLink } from "react-router-dom";
+import { setProductParams } from "../admin/inventory/catalogSlice";
 function Categories() {
   const { categories, categoriesLoaded } = useCategories();
   const dispatch = useAppDispatch();

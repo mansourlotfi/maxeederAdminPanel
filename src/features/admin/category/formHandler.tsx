@@ -11,6 +11,7 @@ import { Category } from "../../../app/models/Category";
 import { setCategory } from "./categorySlice";
 import { useEffect } from "react";
 import { enNumberConvertor } from "../../../app/util/util";
+import useCategories from "../../../app/hooks/useCategories";
 
 interface Props {
   closeModalHandler: () => void;
@@ -18,11 +19,13 @@ interface Props {
 }
 
 export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
+  const { categories } = useCategories();
   const {
     control,
     handleSubmit,
     watch,
     reset,
+    setValue,
     formState: { isDirty, isSubmitting },
   } = useForm({
     resolver: yupResolver<any>(validationSchema),
@@ -52,6 +55,17 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
       console.log(error);
     }
   }
+
+  useEffect(() => {
+    if (categories && !itemToEdit) {
+      setValue(
+        "priority",
+        Math.max(...categories.map((o) => o.priority), 0)
+          ? Math.max(...categories.map((o) => o.priority), 0) + 1
+          : 1
+      );
+    }
+  }, [categories, itemToEdit, setValue]);
 
   return (
     <Box component={Paper} sx={{ p: 4 }}>

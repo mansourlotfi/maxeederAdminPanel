@@ -8,7 +8,7 @@ export interface SeoOptimization {
   metaTagKeyWordsEn: string;
   metaTagDescription: string;
   metaTagDescriptionEn: string;
-  priority: string;
+  priority: number;
   page: PageEnum;
   isActive: boolean;
 }

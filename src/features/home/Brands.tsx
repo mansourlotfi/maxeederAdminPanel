@@ -6,10 +6,10 @@ import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import LoadingComponent from "../../app/layout/LoadingComponent";
 import { useAppDispatch } from "../../app/store/configureStore";
-import { setProductParams } from "../catalog/catalogSlice";
 import { NavLink } from "react-router-dom";
 import useBrands from "../../app/hooks/useBrands";
 import useProducts from "../../app/hooks/useProducts";
+import { setProductParams } from "../admin/inventory/catalogSlice";
 
 function Brands() {
   const { brands, brandsLoaded } = useBrands();

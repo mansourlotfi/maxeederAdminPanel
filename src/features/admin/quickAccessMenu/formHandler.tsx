@@ -10,6 +10,7 @@ import { setMenu } from "./quickAccessMenuSlice";
 import { useEffect } from "react";
 import { enNumberConvertor } from "../../../app/util/util";
 import { MainMenu } from "../../../app/models/MainMenu";
+import useQuickAccessMenu from "../../../app/hooks/useQuickAccessMenu";
 
 interface Props {
   itemToEdit?: MainMenu;
@@ -17,10 +18,12 @@ interface Props {
 }
 
 export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
+  const { quickAccessMenu } = useQuickAccessMenu();
   const {
     control,
     handleSubmit,
     reset,
+    setValue,
     formState: { isDirty, isSubmitting },
   } = useForm({
     resolver: yupResolver<any>(validationSchema),
@@ -45,6 +48,17 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
       console.log(error);
     }
   }
+
+  useEffect(() => {
+    if (quickAccessMenu && !itemToEdit) {
+      setValue(
+        "priority",
+        Math.max(...quickAccessMenu.map((o) => o.priority), 0)
+          ? Math.max(...quickAccessMenu.map((o) => o.priority), 0) + 1
+          : 1
+      );
+    }
+  }, [quickAccessMenu, itemToEdit, setValue]);
 
   return (
     <Box component={Paper} sx={{ p: 4 }}>

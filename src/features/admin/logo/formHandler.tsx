@@ -11,6 +11,7 @@ import { setLogo } from "./logosSlice";
 import { useEffect } from "react";
 import { enNumberConvertor } from "../../../app/util/util";
 import { Logo } from "../../../app/models/Logo";
+import useLogo from "../../../app/hooks/useLogo";
 
 interface Props {
   itemToEdit?: Logo;
@@ -18,11 +19,13 @@ interface Props {
 }
 
 export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
+  const { logos } = useLogo();
   const {
     control,
     handleSubmit,
     watch,
     reset,
+    setValue,
     formState: { isDirty, isSubmitting },
   } = useForm({
     resolver: yupResolver<any>(validationSchema),
@@ -52,6 +55,16 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
     }
   }
 
+  useEffect(() => {
+    if (logos && !itemToEdit) {
+      setValue(
+        "priority",
+        Math.max(...logos.map((o) => o.priority), 0)
+          ? Math.max(...logos.map((o) => o.priority), 0) + 1
+          : 1
+      );
+    }
+  }, [logos, itemToEdit, setValue]);
   return (
     <Box component={Paper} sx={{ p: 4 }}>
       <Typography variant="h4" gutterBottom sx={{ mb: 4 }}>

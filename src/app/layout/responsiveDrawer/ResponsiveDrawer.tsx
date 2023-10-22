@@ -32,10 +32,10 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import useCategories from "../../hooks/useCategories";
-import { setProductParams } from "../../../features/catalog/catalogSlice";
 import useBrands from "../../hooks/useBrands";
 import ContactSocials from "../contactSocials";
 import "./styles.css";
+import { setProductParams } from "../../../features/admin/inventory/catalogSlice";
 
 const navStyles = {
   color: "inherit",

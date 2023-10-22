@@ -7,9 +7,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { validationSchema } from "./productValidation";
 import agent from "../../../app/api/agent";
 import { useAppDispatch } from "../../../app/store/configureStore";
-import { setProduct } from "../../catalog/catalogSlice";
 import { LoadingButton } from "@mui/lab";
 import { toast } from "react-toastify";
+import { setProduct } from "./catalogSlice";
 
 interface Props {
   product: Product;

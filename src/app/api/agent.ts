@@ -36,6 +36,9 @@ axios.interceptors.response.use(
   },
   (error: AxiosError) => {
     const { data, status } = error.response as AxiosResponse;
+    console.log("data", data);
+    console.log("status", status);
+
     switch (status) {
       case 400:
         if (data.errors) {
@@ -45,9 +48,9 @@ axios.interceptors.response.use(
               modelStateErrors.push(data.errors[key]);
             }
           }
+          toast.error(data.title);
           throw modelStateErrors.flat();
         }
-        toast.error(data.title);
         break;
       case 401:
         toast.error(data.title);

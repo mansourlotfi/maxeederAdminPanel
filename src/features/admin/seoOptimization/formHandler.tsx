@@ -12,6 +12,7 @@ import { enNumberConvertor } from "../../../app/util/util";
 import AppSelectList from "../../../app/components/AppSelectList";
 import { seoOptPageObj } from "./data";
 import { PageEnum, SeoOptimization } from "../../../app/models/SeoOptimization";
+import useSeoOptItems from "../../../app/hooks/useSeoOptItems";
 
 interface Props {
   itemToEdit?: SeoOptimization;
@@ -19,10 +20,12 @@ interface Props {
 }
 
 export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
+  const { seoOptItems } = useSeoOptItems();
   const {
     control,
     handleSubmit,
     reset,
+    setValue,
     formState: { isDirty, isSubmitting },
   } = useForm({
     resolver: yupResolver<any>(validationSchema),
@@ -53,6 +56,17 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
       console.log(error);
     }
   }
+
+  useEffect(() => {
+    if (seoOptItems && !itemToEdit) {
+      setValue(
+        "priority",
+        Math.max(...seoOptItems.map((o) => o.priority), 0)
+          ? Math.max(...seoOptItems.map((o) => o.priority), 0) + 1
+          : 1
+      );
+    }
+  }, [seoOptItems, itemToEdit, setValue]);
 
   return (
     <Box component={Paper} sx={{ p: 4 }}>

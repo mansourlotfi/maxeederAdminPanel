@@ -13,6 +13,7 @@ import { enNumberConvertor } from "../../../app/util/util";
 import { Slide } from "../../../app/models/Slide";
 import AppSelectList from "../../../app/components/AppSelectList";
 import { pagesObj } from "./data";
+import useSlides from "../../../app/hooks/useSlides";
 
 interface Props {
   itemToEdit?: Slide;
@@ -20,11 +21,13 @@ interface Props {
 }
 
 export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
+  const { slides } = useSlides();
   const {
     control,
     handleSubmit,
     watch,
     reset,
+    setValue,
     formState: { isDirty, isSubmitting },
   } = useForm({
     resolver: yupResolver<any>(validationSchema),
@@ -58,6 +61,17 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
       console.log(error);
     }
   }
+
+  useEffect(() => {
+    if (slides && !itemToEdit) {
+      setValue(
+        "priority",
+        Math.max(...slides.map((o) => o.priority), 0)
+          ? Math.max(...slides.map((o) => o.priority), 0) + 1
+          : 1
+      );
+    }
+  }, [slides, itemToEdit, setValue]);
 
   return (
     <Box component={Paper} sx={{ p: 4 }}>

@@ -11,6 +11,7 @@ import { setSocialNetwork } from "./socialnetworksSlice";
 import { useEffect } from "react";
 import { SocialNetworks } from "../../../app/models/socialNetwork";
 import { enNumberConvertor } from "../../../app/util/util";
+import useSocialNetworks from "../../../app/hooks/useSocialNetworks";
 
 interface Props {
   itemToEdit?: SocialNetworks;
@@ -18,11 +19,13 @@ interface Props {
 }
 
 export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
+  const { socialNetworks } = useSocialNetworks();
   const {
     control,
     handleSubmit,
     watch,
     reset,
+    setValue,
     formState: { isDirty, isSubmitting },
   } = useForm({
     resolver: yupResolver<any>(validationSchema),
@@ -51,6 +54,17 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
       console.log(error);
     }
   }
+
+  useEffect(() => {
+    if (socialNetworks && !itemToEdit) {
+      setValue(
+        "priority",
+        Math.max(...socialNetworks.map((o) => o.priority), 0)
+          ? Math.max(...socialNetworks.map((o) => o.priority), 0) + 1
+          : 1
+      );
+    }
+  }, [socialNetworks, itemToEdit, setValue]);
 
   return (
     <Box component={Paper} sx={{ p: 4 }}>

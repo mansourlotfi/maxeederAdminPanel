@@ -16,6 +16,9 @@ export interface Product {
   descriptionEn: string | null;
   size: string | null;
   usage: string | null;
+  priority: number;
+  showPrice: boolean;
+  subCategory: string;
 }
 
 export interface IFeatures {

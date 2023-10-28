@@ -332,7 +332,10 @@ export default function AdminInventory() {
               <TableCell align="left">تصویر</TableCell>
               <TableCell align="left">قیمت</TableCell>
               <TableCell align="center">نوع</TableCell>
+              <TableCell align="center">زیر دسته بندی</TableCell>
               <TableCell align="center">برند</TableCell>
+              <TableCell align="center">اولویت</TableCell>
+              <TableCell align="center">نمایش قیمت</TableCell>
               <TableCell align="center">تعداد</TableCell>
               <TableCell align="center">کاربری</TableCell>
               <TableCell align="center">سایز</TableCell>
@@ -390,7 +393,16 @@ export default function AdminInventory() {
                     : "قیمت وارد نشده"}
                 </TableCell>
                 <TableCell align="center">{product.type}</TableCell>
+                <TableCell align="center">{product.subCategory}</TableCell>
                 <TableCell align="center">{product.brand}</TableCell>
+                <TableCell align="center">{product.priority}</TableCell>
+                <TableCell align="center">
+                  {product.showPrice ? (
+                    <CheckIcon color="success" />
+                  ) : (
+                    <CloseIcon color="error" />
+                  )}
+                </TableCell>
                 <TableCell align="center">{product.quantityInStock}</TableCell>
                 <TableCell align="center">
                   <span>{product.usage}</span>
@@ -443,14 +455,36 @@ export default function AdminInventory() {
         </Table>
       </TableContainer>
       {metaData && (
-        <Box sx={{ pt: 2 }}>
-          <AppPagination
-            metaData={metaData}
-            onPageChange={(page: number) =>
-              dispatch(setPageNumber({ pageNumber: page }))
-            }
-          />
-        </Box>
+        <Grid container mt={5} justifyContent="space-between">
+          <Grid item xs={2}>
+            <Box sx={{ pt: 2 }}>
+              <AppPagination
+                metaData={metaData}
+                onPageChange={(page: number) =>
+                  dispatch(setPageNumber({ pageNumber: page }))
+                }
+              />
+            </Box>
+          </Grid>
+          <Grid item xs={1}>
+            <FormControl fullWidth>
+              <InputLabel>تعداد در صفحه</InputLabel>
+              <Select
+                value={productParams.pageSize}
+                label="تعداد در صفحه"
+                onChange={(e) =>
+                  dispatch(setProductParams({ pageSize: e.target.value }))
+                }
+              >
+                {[6, 10, 25, 50].map((item, index) => (
+                  <MenuItem value={item} key={index}>
+                    {item}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+        </Grid>
       )}
       {editMode && (
         <DialogComponent open={true} maxWidth={"xl"}>

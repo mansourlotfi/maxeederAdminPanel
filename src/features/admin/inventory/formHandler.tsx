@@ -26,6 +26,9 @@ import useSizes from "../../../app/hooks/useSizes";
 import useUsages from "../../../app/hooks/useUsages";
 import { setProduct } from "./catalogSlice";
 import { toast } from "react-toastify";
+import useProducts from "../../../app/hooks/useProducts";
+import { enNumberConvertor } from "../../../app/util/util";
+import useSubCategories from "../../../app/hooks/useSubCategories";
 
 interface Props {
   product?: Product;
@@ -33,11 +36,14 @@ interface Props {
 }
 
 export default function FormHandler({ product, cancelEdit }: Props) {
+  const { products } = useProducts();
+
   const {
     control,
     reset,
     handleSubmit,
     watch,
+    setValue,
     formState: { isDirty, isSubmitting },
   } = useForm({
     resolver: yupResolver<any>(validationSchema),
@@ -46,6 +52,8 @@ export default function FormHandler({ product, cancelEdit }: Props) {
 
   // const { brands, types } = useProducts();
   const { categories } = useCategories();
+  const { subCategories } = useSubCategories();
+
   const { sizes } = useSizes();
   const { usages } = useUsages();
 
@@ -101,6 +109,17 @@ export default function FormHandler({ product, cancelEdit }: Props) {
     }
   }
 
+  useEffect(() => {
+    if (products && !product) {
+      setValue(
+        "priority",
+        Math.max(...products.map((o) => o.priority), 0)
+          ? Math.max(...products.map((o) => o.priority), 0) + 1
+          : 1
+      );
+    }
+  }, [products, product, setValue]);
+
   return (
     <DialogContent>
       <Typography variant="h4" gutterBottom sx={{ mb: 4 }}>
@@ -135,6 +154,14 @@ export default function FormHandler({ product, cancelEdit }: Props) {
             />
           </Grid>
           <Grid item xs={12} sm={4}>
+            <AppSelectList
+              control={control}
+              items={subCategories.map((C) => C.name) || []}
+              name="subCategory"
+              label="زیر دسته بندی"
+            />
+          </Grid>
+          <Grid item xs={12} sm={4}>
             <AppTextInput
               type="number"
               control={control}
@@ -166,6 +193,15 @@ export default function FormHandler({ product, cancelEdit }: Props) {
               label="تعداد موجود"
             />
           </Grid>
+          <Grid item xs={12} sm={4}>
+            <AppTextInput
+              control={control}
+              name="priority"
+              label="اولویت"
+              onKeyPress={enNumberConvertor}
+            />
+          </Grid>
+          <Grid item xs={12} sm={8}></Grid>
           <Grid item xs={6}>
             <AppTextInput
               control={control}
@@ -184,12 +220,22 @@ export default function FormHandler({ product, cancelEdit }: Props) {
               label="توضیحات انگلیسی"
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={6}>
             <Box>
               <AppCheckbox
                 disabled={false}
                 name="isFeatured"
                 label="محصول ویژه"
+                control={control}
+              />
+            </Box>
+          </Grid>
+          <Grid item xs={6}>
+            <Box>
+              <AppCheckbox
+                disabled={false}
+                name="showPrice"
+                label="نمایش قیمت"
                 control={control}
               />
             </Box>

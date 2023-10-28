@@ -23,6 +23,10 @@ export const AdminLinks = [
     icon: <InventoryIcon color="primary" />,
     items: [
       {
+        link: "/admin-dashboard/inventory",
+        title: "محصولات",
+      },
+      {
         link: "/admin-dashboard/category",
         title: "دسته بندی ها",
       },
@@ -31,12 +35,8 @@ export const AdminLinks = [
         title: "زیر دسته بندی ها",
       },
       {
-        link: "/admin-dashboard/inventory",
-        title: "محصولات",
-      },
-      {
         link: "/admin-dashboard/features",
-        title: "ویژگی ها محصول",
+        title: "ویژگی های محصول",
       },
       {
         link: "/admin-dashboard/brands",

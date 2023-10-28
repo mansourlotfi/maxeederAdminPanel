@@ -8,6 +8,7 @@ import { LoadingButton } from "@mui/lab";
 import { validationSchema } from "./validation";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-toastify";
+import { enNumberConvertor } from "../../../app/util/util";
 
 export default function AdminSettings() {
   const [settings, setSettings] = useState<Setting | null>();
@@ -104,6 +105,14 @@ export default function AdminSettings() {
               control={control}
               name="workHoursEn"
               label="ساعات کار انگلیسی"
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <AppTextInput
+              control={control}
+              name="ProductCountInPage"
+              label="تعداد نمایش محصول در صفحه"
+              onKeyPress={enNumberConvertor}
             />
           </Grid>
         </Grid>

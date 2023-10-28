@@ -188,6 +188,18 @@ const Admin = {
     requests.put("Categories/UpdateMultipleItems", values),
   categoriesDeleteMultipleItems: (values: number[]) =>
     requests.post("Categories/DeleteMultipleItems", values),
+  //subCategory
+  subCategorylist: () => requests.get("SubCategory"),
+  subCategoryDetails: (id: number) => requests.get(`SubCategory/${id}`),
+  createSubCategory: (Subcategory: any) =>
+    requests.postForm("SubCategory", createFormData(Subcategory)),
+  updateSubCategory: (SubCategory: any) =>
+    requests.putForm("SubCategory", createFormData(SubCategory)),
+  deleteSubCategory: (id: number) => requests.delete(`SubCategory/${id}`),
+  subCategoriesEditMultipleItems: (values: number[]) =>
+    requests.put("SubCategory/UpdateMultipleItems", values),
+  subCategoriesDeleteMultipleItems: (values: number[]) =>
+    requests.post("SubCategory/DeleteMultipleItems", values),
   //brand
   createBrand: (Brands: any) =>
     requests.postForm("Brands", createFormData(Brands)),
@@ -381,6 +393,15 @@ const Admin = {
     requests.put("Usage/UpdateMultipleItems", values),
   UsagesDeleteMultipleItems: (values: number[]) =>
     requests.post("Usage/DeleteMultipleItems", values),
+  //Comment
+  CommentList: (params: URLSearchParams) => requests.get("Comment", params),
+  createComment: (Comment: any) =>
+    requests.postForm("Comment", createFormData(Comment)),
+  deleteComment: (id: number) => requests.delete(`Comment/${id}`),
+  CommentEditMultipleItems: (values: number[]) =>
+    requests.put("Comment/UpdateMultipleItems", values),
+  CommentDeleteMultipleItems: (values: number[]) =>
+    requests.post("Comment/DeleteMultipleItems", values),
 };
 
 const agent = {

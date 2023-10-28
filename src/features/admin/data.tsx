@@ -15,7 +15,7 @@ import AlbumIcon from "@mui/icons-material/Album";
 import SlideshowIcon from "@mui/icons-material/Slideshow";
 import AppsIcon from "@mui/icons-material/Apps";
 import ArticleIcon from "@mui/icons-material/Article";
-
+import AddCommentIcon from "@mui/icons-material/AddComment";
 export const AdminLinks = [
   {
     id: 666,
@@ -25,6 +25,10 @@ export const AdminLinks = [
       {
         link: "/admin-dashboard/category",
         title: "دسته بندی ها",
+      },
+      {
+        link: "/admin-dashboard/subCategory",
+        title: "زیر دسته بندی ها",
       },
       {
         link: "/admin-dashboard/inventory",
@@ -115,6 +119,12 @@ export const AdminLinks = [
     link: "/admin-dashboard/messages",
     title: "پیام ها",
     icon: <MessageIcon color="primary" />,
+  },
+  {
+    id: 125,
+    link: "/admin-dashboard/comments",
+    title: "نظرات",
+    icon: <AddCommentIcon color="primary" />,
   },
 
   {

@@ -29,6 +29,8 @@ import AdminDepartments from "../../features/admin/departments/Departments";
 import AdminArticlesPage from "../../features/admin/articles/Articles";
 import AdminSizes from "../../features/admin/Sizes/Sizes";
 import AdminUsagePage from "../../features/admin/usage/Usage";
+import AdminSubCategory from "../../features/admin/subCategory/SubCategory";
+import AdminComments from "../../features/admin/comments/Comments";
 
 export const router = createBrowserRouter([
   {
@@ -135,6 +137,14 @@ export const router = createBrowserRouter([
               {
                 path: "usage",
                 element: <AdminUsagePage />,
+              },
+              {
+                path: "subCategory",
+                element: <AdminSubCategory />,
+              },
+              {
+                path: "comments",
+                element: <AdminComments />,
               },
             ],
           },

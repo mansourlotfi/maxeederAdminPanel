@@ -24,6 +24,8 @@ import { sizesSlice } from "../../features/admin/Sizes/sizesSlice";
 import { usagesSlice } from "../../features/admin/usage/usageSlice";
 import { seoOptItemsSlice } from "../../features/admin/seoOptimization/seoOptSlice";
 import { catalogSlice } from "../../features/admin/inventory/catalogSlice";
+import { subCategorySlice } from "../../features/admin/subCategory/subCategorySlice";
+import { commentsSlice } from "../../features/admin/comments/comentsSlice";
 
 export const store = configureStore({
   reducer: {
@@ -51,6 +53,8 @@ export const store = configureStore({
     sizes: sizesSlice.reducer,
     usages: usagesSlice.reducer,
     seoOptItems: seoOptItemsSlice.reducer,
+    subCategory: subCategorySlice.reducer,
+    comments: commentsSlice.reducer,
   },
 });
 

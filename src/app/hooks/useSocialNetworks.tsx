@@ -7,7 +7,7 @@ import {
 
 export default function useSocialNetworks() {
   const socialNetworks = useAppSelector(socialNetworkSelectors.selectAll);
-  const { isLoaded, status, metaData } = useAppSelector(
+  const { isLoaded, status, metaData, socialNetworksParams } = useAppSelector(
     (state) => state.socialNetworks
   );
   const dispatch = useAppDispatch();
@@ -21,5 +21,6 @@ export default function useSocialNetworks() {
     isLoaded,
     status,
     metaData,
+    socialNetworksParams,
   };
 }

@@ -13,6 +13,10 @@ import {
   TableBody,
   Grid,
   Checkbox,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
 } from "@mui/material";
 import { useCallback, useState } from "react";
 import agent from "../../../app/api/agent";
@@ -36,7 +40,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import ConfirmDialog from "../../../app/components/confirmDialog";
 
 export default function AdminPartners() {
-  const { partners, isLoaded, status, metaData } = usePartners();
+  const { partners, isLoaded, status, metaData, partnerParams } = usePartners();
   const dispatch = useAppDispatch();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -320,14 +324,36 @@ export default function AdminPartners() {
         </Table>
       </TableContainer>
       {metaData && (
-        <Box sx={{ pt: 2 }}>
-          <AppPagination
-            metaData={metaData}
-            onPageChange={(page: number) =>
-              dispatch(setPageNumber({ pageNumber: page }))
-            }
-          />
-        </Box>
+        <Grid container mt={5} justifyContent="space-between">
+          <Grid item xs={2}>
+            <Box sx={{ pt: 2 }}>
+              <AppPagination
+                metaData={metaData}
+                onPageChange={(page: number) =>
+                  dispatch(setPageNumber({ pageNumber: page }))
+                }
+              />
+            </Box>
+          </Grid>
+          <Grid item xs={1}>
+            <FormControl fullWidth>
+              <InputLabel>تعداد در صفحه</InputLabel>
+              <Select
+                value={partnerParams.pageSize}
+                label="تعداد در صفحه"
+                onChange={(e) =>
+                  dispatch(setPageNumber({ pageSize: e.target.value }))
+                }
+              >
+                {[6, 10, 25, 50].map((item, index) => (
+                  <MenuItem value={item} key={index}>
+                    {item}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+        </Grid>
       )}
       {isOpen && (
         <DialogComponent open={true}>

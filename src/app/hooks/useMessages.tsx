@@ -7,7 +7,7 @@ import {
 
 export default function useMessages() {
   const messages = useAppSelector(messagesSelectors.selectAll);
-  const { isLoaded, status, metaData } = useAppSelector(
+  const { isLoaded, status, metaData, messageParams } = useAppSelector(
     (state) => state.messages
   );
   const dispatch = useAppDispatch();
@@ -21,5 +21,6 @@ export default function useMessages() {
     isLoaded,
     status,
     metaData,
+    messageParams,
   };
 }

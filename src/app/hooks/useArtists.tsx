@@ -7,7 +7,7 @@ import {
 
 export default function useArtists() {
   const artists = useAppSelector(artistsSelectors.selectAll);
-  const { isLoaded, status, metaData } = useAppSelector(
+  const { isLoaded, status, metaData, artistsParams } = useAppSelector(
     (state) => state.artists
   );
   const dispatch = useAppDispatch();
@@ -21,5 +21,6 @@ export default function useArtists() {
     isLoaded,
     status,
     metaData,
+    artistsParams,
   };
 }

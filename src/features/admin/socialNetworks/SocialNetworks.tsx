@@ -13,6 +13,10 @@ import {
   TableBody,
   Grid,
   Checkbox,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
 } from "@mui/material";
 import { useCallback, useState } from "react";
 import agent from "../../../app/api/agent";
@@ -36,7 +40,8 @@ import ConfirmDialog from "../../../app/components/confirmDialog";
 import TypographyWithTooltip from "../../../app/components/typographyWithTooltip";
 
 export default function AdminSocialNetworks() {
-  const { socialNetworks, isLoaded, status, metaData } = useSocialNetworks();
+  const { socialNetworks, isLoaded, status, metaData, socialNetworksParams } =
+    useSocialNetworks();
   const dispatch = useAppDispatch();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -287,14 +292,36 @@ export default function AdminSocialNetworks() {
         </Table>
       </TableContainer>
       {metaData && (
-        <Box sx={{ pt: 2 }}>
-          <AppPagination
-            metaData={metaData}
-            onPageChange={(page: number) =>
-              dispatch(setPageNumber({ pageNumber: page }))
-            }
-          />
-        </Box>
+        <Grid container mt={5} justifyContent="space-between">
+          <Grid item xs={2}>
+            <Box sx={{ pt: 2 }}>
+              <AppPagination
+                metaData={metaData}
+                onPageChange={(page: number) =>
+                  dispatch(setPageNumber({ pageNumber: page }))
+                }
+              />
+            </Box>
+          </Grid>
+          <Grid item xs={1}>
+            <FormControl fullWidth>
+              <InputLabel>تعداد در صفحه</InputLabel>
+              <Select
+                value={socialNetworksParams.pageSize}
+                label="تعداد در صفحه"
+                onChange={(e) =>
+                  dispatch(setPageNumber({ pageSize: e.target.value }))
+                }
+              >
+                {[6, 10, 25, 50].map((item, index) => (
+                  <MenuItem value={item} key={index}>
+                    {item}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+        </Grid>
       )}
       {isOpen && (
         <DialogComponent open={true}>

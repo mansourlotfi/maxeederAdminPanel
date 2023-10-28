@@ -13,6 +13,10 @@ import {
   TableBody,
   Checkbox,
   Grid,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
 } from "@mui/material";
 import { useCallback, useState } from "react";
 import agent from "../../../app/api/agent";
@@ -32,7 +36,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import TypographyWithTooltip from "../../../app/components/typographyWithTooltip";
 
 export default function AdminLogos() {
-  const { logos, isLoaded, status, metaData } = useLogo();
+  const { logos, isLoaded, status, metaData, logoParams } = useLogo();
   const dispatch = useAppDispatch();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -287,14 +291,36 @@ export default function AdminLogos() {
         </Table>
       </TableContainer>
       {metaData && (
-        <Box sx={{ pt: 2 }}>
-          <AppPagination
-            metaData={metaData}
-            onPageChange={(page: number) =>
-              dispatch(setPageNumber({ pageNumber: page }))
-            }
-          />
-        </Box>
+        <Grid container mt={5} justifyContent="space-between">
+          <Grid item xs={2}>
+            <Box sx={{ pt: 2 }}>
+              <AppPagination
+                metaData={metaData}
+                onPageChange={(page: number) =>
+                  dispatch(setPageNumber({ pageNumber: page }))
+                }
+              />
+            </Box>
+          </Grid>
+          <Grid item xs={1}>
+            <FormControl fullWidth>
+              <InputLabel>تعداد در صفحه</InputLabel>
+              <Select
+                value={logoParams.pageSize}
+                label="تعداد در صفحه"
+                onChange={(e) =>
+                  dispatch(setPageNumber({ pageSize: e.target.value }))
+                }
+              >
+                {[6, 10, 25, 50].map((item, index) => (
+                  <MenuItem value={item} key={index}>
+                    {item}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+        </Grid>
       )}
       {isOpen && (
         <DialogComponent open={true}>

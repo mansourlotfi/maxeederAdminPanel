@@ -7,7 +7,9 @@ import {
 
 export default function useSocialNetworks() {
   const logos = useAppSelector(logoSelectors.selectAll);
-  const { isLoaded, status, metaData } = useAppSelector((state) => state.logo);
+  const { isLoaded, status, metaData, logoParams } = useAppSelector(
+    (state) => state.logo
+  );
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -19,5 +21,6 @@ export default function useSocialNetworks() {
     isLoaded,
     status,
     metaData,
+    logoParams,
   };
 }

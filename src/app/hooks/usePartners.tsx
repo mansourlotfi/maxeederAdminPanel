@@ -7,7 +7,7 @@ import {
 
 export default function usePartners() {
   const partners = useAppSelector(partnersSelectors.selectAll);
-  const { isLoaded, status, metaData } = useAppSelector(
+  const { isLoaded, status, metaData, partnerParams } = useAppSelector(
     (state) => state.partners
   );
   const dispatch = useAppDispatch();
@@ -21,5 +21,6 @@ export default function usePartners() {
     isLoaded,
     status,
     metaData,
+    partnerParams,
   };
 }

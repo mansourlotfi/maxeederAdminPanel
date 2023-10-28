@@ -7,7 +7,7 @@ import {
 
 export default function useQuickAccessMenu() {
   const quickAccessMenu = useAppSelector(quickAccessMenuSelectors.selectAll);
-  const { isLoaded, status, metaData } = useAppSelector(
+  const { isLoaded, status, metaData, quickAccessMenuParams } = useAppSelector(
     (state) => state.quickAccess
   );
   const dispatch = useAppDispatch();
@@ -21,5 +21,6 @@ export default function useQuickAccessMenu() {
     isLoaded,
     status,
     metaData,
+    quickAccessMenuParams,
   };
 }

@@ -7,7 +7,7 @@ import {
 
 export default function useMainMenu() {
   const mainMenu = useAppSelector(mainMenuSelectors.selectAll);
-  const { isLoaded, status, metaData } = useAppSelector(
+  const { isLoaded, status, metaData, mainMenuParams } = useAppSelector(
     (state) => state.mainMenu
   );
   const dispatch = useAppDispatch();
@@ -21,5 +21,6 @@ export default function useMainMenu() {
     isLoaded,
     status,
     metaData,
+    mainMenuParams,
   };
 }

@@ -7,7 +7,7 @@ import {
 
 export default function useComments() {
   const comments = useAppSelector(commentSelectors.selectAll);
-  const { isLoaded, status, metaData } = useAppSelector(
+  const { isLoaded, status, metaData, messageParams } = useAppSelector(
     (state) => state.comments
   );
   const dispatch = useAppDispatch();
@@ -21,5 +21,6 @@ export default function useComments() {
     isLoaded,
     status,
     metaData,
+    messageParams,
   };
 }

@@ -8,7 +8,9 @@ import {
 export default function useUsers() {
   const users = useAppSelector(usersSelectors.selectAll);
 
-  const { isLoaded, metaData, status } = useAppSelector((state) => state.users);
+  const { isLoaded, metaData, status, userParams } = useAppSelector(
+    (state) => state.users
+  );
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -20,5 +22,6 @@ export default function useUsers() {
     isLoaded,
     status,
     metaData,
+    userParams,
   };
 }

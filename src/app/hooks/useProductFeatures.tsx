@@ -7,7 +7,7 @@ import {
 
 export default function useProductFeatures() {
   const productFeatures = useAppSelector(productFeaturesSelectors.selectAll);
-  const { isLoaded, status, metaData } = useAppSelector(
+  const { isLoaded, status, metaData, productFeatureParams } = useAppSelector(
     (state) => state.productFeature
   );
   const dispatch = useAppDispatch();
@@ -21,5 +21,6 @@ export default function useProductFeatures() {
     isLoaded,
     status,
     metaData,
+    productFeatureParams,
   };
 }

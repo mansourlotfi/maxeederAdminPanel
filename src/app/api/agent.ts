@@ -117,7 +117,7 @@ const Category = {
 };
 
 const Brand = {
-  list: () => requests.get("Brands"),
+  list: (params: URLSearchParams) => requests.get("Brands", params),
   details: (id: number) => requests.get(`Brands/${id}`),
 };
 const TestErrors = {

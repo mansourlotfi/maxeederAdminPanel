@@ -7,7 +7,9 @@ import {
 
 export default function useBrands() {
   const brands = useAppSelector(brandSelectors.selectAll);
-  const { brandsLoaded, status } = useAppSelector((state) => state.brands);
+  const { brandsLoaded, status, metaData, brandParams } = useAppSelector(
+    (state) => state.brands
+  );
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -18,5 +20,7 @@ export default function useBrands() {
     brands,
     brandsLoaded,
     status,
+    brandParams,
+    metaData,
   };
 }

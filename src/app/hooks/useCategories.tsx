@@ -7,7 +7,7 @@ import {
 
 export default function useCategories() {
   const categories = useAppSelector(categorySelectors.selectAll);
-  const { categoriesLoaded, status } = useAppSelector(
+  const { categoriesLoaded, status, metaData, params } = useAppSelector(
     (state) => state.category
   );
   const dispatch = useAppDispatch();
@@ -20,5 +20,7 @@ export default function useCategories() {
     categories,
     categoriesLoaded,
     status,
+    metaData,
+    params,
   };
 }

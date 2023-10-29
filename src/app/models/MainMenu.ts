@@ -10,4 +10,5 @@ export interface MainMenu {
 export interface MainMenuParams {
   pageNumber: number;
   pageSize: number;
+  searchTerm?: string;
 }

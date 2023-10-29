@@ -18,6 +18,7 @@ export interface pageItemsParams {
   pageNumber: number;
   pageSize: number;
   page: PageItemsEnum;
+  searchTerm?: string;
 }
 
 export enum PageItemsEnum {

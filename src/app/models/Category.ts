@@ -7,3 +7,9 @@ export interface Category {
   priority: number;
   isActive: boolean;
 }
+
+export interface CategoryParams {
+  searchTerm?: string;
+  pageNumber: number;
+  pageSize: number;
+}

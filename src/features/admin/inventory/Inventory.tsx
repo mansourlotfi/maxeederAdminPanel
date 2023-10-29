@@ -266,7 +266,7 @@ export default function AdminInventory() {
           </FormControl>
         </Grid>
         <Grid item xs={2}>
-          <InputLabel>وضعیت محصول</InputLabel>
+          <InputLabel>وضعیت محصول فعال</InputLabel>
           <Checkbox
             onChange={(e) =>
               dispatch(setProductParams({ isActive: !!e.target.checked }))
@@ -276,7 +276,7 @@ export default function AdminInventory() {
           />
         </Grid>
         <Grid item xs={2}>
-          <InputLabel>نمایش قیمت</InputLabel>
+          <InputLabel>نمایش قیمت فعال</InputLabel>
           <Checkbox
             onChange={(e) =>
               dispatch(setProductParams({ showPrice: !!e.target.checked }))

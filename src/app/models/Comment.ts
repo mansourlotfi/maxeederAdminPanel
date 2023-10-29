@@ -9,4 +9,5 @@ export interface Comment {
 export interface CommentParams {
   pageNumber: number;
   pageSize: number;
+  searchTerm?: string;
 }

@@ -5,3 +5,9 @@ export interface Brand {
   pictureUrl: string;
   isActive: boolean;
 }
+
+export interface BrandParams {
+  searchTerm?: string;
+  pageNumber: number;
+  pageSize: number;
+}

@@ -13,6 +13,7 @@ export interface SlideParams {
   pageNumber: number;
   pageSize: number;
   page: PagesEnum;
+  searchTerm?: string;
 }
 
 export enum PagesEnum {

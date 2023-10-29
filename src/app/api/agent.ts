@@ -112,7 +112,7 @@ const Catalog = {
 };
 
 const Category = {
-  list: () => requests.get("Categories"),
+  list: (params: URLSearchParams) => requests.get("Categories", params),
   details: (id: number) => requests.get(`Categories/${id}`),
 };
 

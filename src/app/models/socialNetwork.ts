@@ -11,4 +11,5 @@ export interface SocialNetworks {
 export interface SocialNetworksParams {
   pageNumber: number;
   pageSize: number;
+  searchTerm?: string;
 }

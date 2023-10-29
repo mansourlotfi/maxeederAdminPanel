@@ -14,6 +14,7 @@ export interface Article {
 }
 
 export interface ArticleParams {
+  searchTerm?: string;
   pageNumber: number;
   pageSize: number;
   page: ArticlesEnum;

@@ -11,4 +11,5 @@ export interface Logo {
 export interface LogoParams {
   pageNumber: number;
   pageSize: number;
+  searchTerm?: string;
 }

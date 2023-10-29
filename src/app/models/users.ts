@@ -19,4 +19,5 @@ export interface ICustomUserRoles {
 export interface UsersParams {
   pageNumber: number;
   pageSize: number;
+  searchTerm?: string;
 }

@@ -4,3 +4,9 @@ export interface Size {
   sizeNameEn: string | null;
   isActive: boolean;
 }
+
+export interface SizeParams {
+  searchTerm?: string;
+  pageNumber: number;
+  pageSize: number;
+}

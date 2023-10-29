@@ -4,3 +4,9 @@ export interface Department {
   nameEn: string | null;
   isActive: boolean;
 }
+
+export interface DepartmentParams {
+  pageNumber: number;
+  pageSize: number;
+  searchTerm?: string;
+}

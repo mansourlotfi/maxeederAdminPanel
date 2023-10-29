@@ -13,4 +13,5 @@ export interface Message {
 export interface MessageParams {
   pageNumber: number;
   pageSize: number;
+  searchTerm?: string;
 }

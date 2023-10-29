@@ -9,6 +9,7 @@ export interface ProductFeature {
 }
 
 export interface ProductFeatureParams {
+  searchTerm?: string;
   pageNumber: number;
   pageSize: number;
 }

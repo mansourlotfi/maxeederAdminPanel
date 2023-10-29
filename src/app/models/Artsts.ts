@@ -12,4 +12,5 @@ export interface Artist {
 export interface ArtistParams {
   pageNumber: number;
   pageSize: number;
+  searchTerm?: string;
 }

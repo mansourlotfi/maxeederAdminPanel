@@ -10,4 +10,5 @@ export interface QuickAccessMenu {
 export interface QuickAccessMenuParams {
   pageNumber: number;
   pageSize: number;
+  searchTerm?: string;
 }

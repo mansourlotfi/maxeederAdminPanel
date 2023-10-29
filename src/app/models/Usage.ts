@@ -4,3 +4,9 @@ export interface Usage {
   nameEn: string | null;
   isActive: boolean;
 }
+
+export interface UsageParams {
+  searchTerm?: string;
+  pageNumber: number;
+  pageSize: number;
+}

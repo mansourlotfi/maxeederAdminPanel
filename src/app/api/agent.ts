@@ -379,7 +379,7 @@ const Admin = {
   ArticlesDeleteMultipleItems: (values: number[]) =>
     requests.post("Articles/DeleteMultipleItems", values),
   //Size
-  SizeList: () => requests.get("Size"),
+  SizeList: (params: URLSearchParams) => requests.get("Size", params),
   createSize: (Size: any) => requests.postForm("Size", createFormData(Size)),
   deleteSize: (id: number) => requests.delete(`Size/${id}`),
   SizesEditMultipleItems: (values: number[]) =>

@@ -7,7 +7,9 @@ import {
 
 export default function useSizes() {
   const sizes = useAppSelector(sizesSelectors.selectAll);
-  const { isLoaded, status } = useAppSelector((state) => state.sizes);
+  const { isLoaded, status, metaData, sizeParams } = useAppSelector(
+    (state) => state.sizes
+  );
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -18,5 +20,7 @@ export default function useSizes() {
     sizes,
     isLoaded,
     status,
+    metaData,
+    sizeParams,
   };
 }

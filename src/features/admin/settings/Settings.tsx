@@ -20,7 +20,6 @@ export default function AdminSettings() {
 
   const postSettings = useCallback((data: FieldValues) => {
     setisSubmitting(true);
-    console.log("data", data);
     agent.Admin.postSettingsData(data)
       .then((response) => {
         toast.success("تنظیمات به روزرسانی شد");
@@ -40,9 +39,7 @@ export default function AdminSettings() {
             setSettings(response);
           }
         });
-      } catch (error) {
-        console.log("first");
-      }
+      } catch (error) {}
     };
     getQuillHtml();
   }, []);

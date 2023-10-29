@@ -55,8 +55,6 @@ export default function AdminFileManager() {
 
   if (status.includes("pending")) return <LoadingComponent />;
 
-  console.log("files", files);
-
   return (
     <>
       <Box display="flex" justifyContent="space-between">

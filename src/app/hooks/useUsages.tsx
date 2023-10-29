@@ -7,7 +7,9 @@ import {
 
 export default function useUsages() {
   const usages = useAppSelector(usagesSelectors.selectAll);
-  const { isLoaded, status } = useAppSelector((state) => state.usages);
+  const { isLoaded, status, metaData, params } = useAppSelector(
+    (state) => state.usages
+  );
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -18,5 +20,7 @@ export default function useUsages() {
     usages,
     isLoaded,
     status,
+    metaData,
+    params,
   };
 }

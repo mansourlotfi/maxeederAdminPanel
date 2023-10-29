@@ -24,6 +24,8 @@ function getAxiosParams(param: SocialNetworksParams) {
   const params = new URLSearchParams();
   params.append("pageNumber", param.pageNumber.toString());
   params.append("pageSize", param.pageSize.toString());
+  if (param.searchTerm) params.append("searchTerm", param.searchTerm);
+
   return params;
 }
 
@@ -73,6 +75,14 @@ export const socialNetworkSlice = createSlice({
     setMetaData: (state, action) => {
       state.metaData = action.payload;
     },
+    setsocialNetworksParams: (state, action) => {
+      state.isLoaded = false;
+      state.socialNetworksParams = {
+        ...state.socialNetworksParams,
+        ...action.payload,
+        pageNumber: 1,
+      };
+    },
     removeSocialNetwork: (state, action) => {
       socialNetworksAdapter.removeOne(state, action.payload);
       state.isLoaded = false;
@@ -102,4 +112,5 @@ export const {
   setSocialNetwork,
   removeSocialNetwork,
   setPageNumber,
+  setsocialNetworksParams,
 } = socialNetworkSlice.actions;

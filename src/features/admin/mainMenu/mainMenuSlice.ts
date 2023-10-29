@@ -21,6 +21,8 @@ function getAxiosParams(param: MainMenuParams) {
   const params = new URLSearchParams();
   params.append("pageNumber", param.pageNumber.toString());
   params.append("pageSize", param.pageSize.toString());
+  if (param.searchTerm) params.append("searchTerm", param.searchTerm);
+
   return params;
 }
 
@@ -72,6 +74,14 @@ export const mainMenuSlice = createSlice({
       mainMenuAdapter.removeOne(state, action.payload);
       state.isLoaded = false;
     },
+    setMenuParams: (state, action) => {
+      state.isLoaded = false;
+      state.mainMenuParams = {
+        ...state.mainMenuParams,
+        ...action.payload,
+        pageNumber: 1,
+      };
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchMainMenusAsync.pending, (state, action) => {
@@ -92,5 +102,10 @@ export const mainMenuSelectors = mainMenuAdapter.getSelectors(
   (state: RootState) => state.mainMenu
 );
 
-export const { setMetaData, setMenu, removeMenu, setPageNumber } =
-  mainMenuSlice.actions;
+export const {
+  setMetaData,
+  setMenu,
+  removeMenu,
+  setPageNumber,
+  setMenuParams,
+} = mainMenuSlice.actions;

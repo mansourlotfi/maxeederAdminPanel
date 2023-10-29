@@ -7,7 +7,9 @@ import {
 
 export default function useDepartments() {
   const departments = useAppSelector(departmentsSelectors.selectAll);
-  const { isLoaded, status } = useAppSelector((state) => state.departments);
+  const { isLoaded, status, metaData, params } = useAppSelector(
+    (state) => state.departments
+  );
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -18,5 +20,7 @@ export default function useDepartments() {
     departments,
     isLoaded,
     status,
+    metaData,
+    params,
   };
 }

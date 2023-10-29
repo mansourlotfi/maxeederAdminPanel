@@ -5,34 +5,58 @@ import {
 } from "@reduxjs/toolkit";
 import agent from "../../../app/api/agent";
 import { RootState } from "../../../app/store/configureStore";
-import { Department } from "../../../app/models/Department";
+import { Department, DepartmentParams } from "../../../app/models/Department";
+import { MetaData } from "../../../app/models/pagination";
 
 interface DepartmentState {
   isLoaded: boolean;
   status: string;
+  params: DepartmentParams;
+  metaData: MetaData | null;
 }
 
 const deparmentsAdapter = createEntityAdapter<Department>();
+
+function getAxiosParams(productParams: DepartmentParams) {
+  const params = new URLSearchParams();
+  params.append("pageNumber", productParams.pageNumber.toString());
+  params.append("pageSize", productParams.pageSize.toString());
+  if (productParams.searchTerm)
+    params.append("searchTerm", productParams.searchTerm);
+
+  return params;
+}
 
 export const fetchDepartmentsAsync = createAsyncThunk<
   Department[],
   void,
   { state: RootState }
 >("Department/fetchDepartmentsAsync", async (_, thunkAPI) => {
-  try {
-    var response = await agent.Admin.departmentList();
+  const params = getAxiosParams(thunkAPI.getState().departments.params);
 
-    return response;
+  try {
+    var response = await agent.Admin.departmentList(params);
+    thunkAPI.dispatch(setMetaData(response.metaData));
+
+    return response.items;
   } catch (error: any) {
     return thunkAPI.rejectWithValue({ error: error.data });
   }
 });
 
+function initParams(): DepartmentParams {
+  return {
+    pageNumber: 1,
+    pageSize: 6,
+  };
+}
 export const departmentsSlice = createSlice({
   name: "Department",
   initialState: deparmentsAdapter.getInitialState<DepartmentState>({
     isLoaded: false,
     status: "idle",
+    metaData: null,
+    params: initParams(),
   }),
   reducers: {
     setDepartment: (state, action) => {
@@ -41,6 +65,25 @@ export const departmentsSlice = createSlice({
     },
     removeDepartment: (state, action) => {
       deparmentsAdapter.removeOne(state, action.payload);
+      state.isLoaded = false;
+    },
+    setParams: (state, action) => {
+      state.isLoaded = false;
+      state.params = {
+        ...state.params,
+        ...action.payload,
+        pageNumber: 1,
+      };
+    },
+    setPageNumber: (state, action) => {
+      state.isLoaded = false;
+      state.params = { ...state.params, ...action.payload };
+    },
+    setMetaData: (state, action) => {
+      state.metaData = action.payload;
+    },
+    resetParams: (state) => {
+      state.params = initParams();
       state.isLoaded = false;
     },
   },
@@ -63,4 +106,11 @@ export const departmentsSelectors = deparmentsAdapter.getSelectors(
   (state: RootState) => state.departments
 );
 
-export const { setDepartment, removeDepartment } = departmentsSlice.actions;
+export const {
+  setDepartment,
+  removeDepartment,
+  setMetaData,
+  setPageNumber,
+  setParams,
+  resetParams,
+} = departmentsSlice.actions;

@@ -13,11 +13,20 @@ import {
   TableBody,
   Grid,
   Checkbox,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
 } from "@mui/material";
 import { useCallback, useState } from "react";
 import agent from "../../../app/api/agent";
 import { useAppDispatch } from "../../../app/store/configureStore";
-import { fetchUsagesAsync, removeUsage } from "./usageSlice";
+import {
+  fetchUsagesAsync,
+  removeUsage,
+  setPageNumber,
+  setParams,
+} from "./usageSlice";
 import DialogComponent from "../../../app/components/draggableDialog";
 import FormHandler from "./formHandler";
 import { toast } from "react-toastify";
@@ -27,9 +36,11 @@ import ConfirmDialog from "../../../app/components/confirmDialog";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import useUsages from "../../../app/hooks/useUsages";
+import AppPagination from "../../../app/components/AppPagination";
+import UsageSearch from "./Search";
 
 export default function AdminUsagePage() {
-  const { usages, isLoaded, status } = useUsages();
+  const { usages, isLoaded, status, metaData, params } = useUsages();
   const dispatch = useAppDispatch();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -124,26 +135,31 @@ export default function AdminUsagePage() {
           کاربرد جدید
         </Button>
       </Box>
-      <Grid item container xs={12} mb={2} mt={2} justifyContent="flex-end">
-        <LoadingButton
-          sx={{ marginInlineEnd: 4 }}
-          variant="contained"
-          disabled={!checkedIds.length}
-          endIcon={<CheckIcon color="success" />}
-          size="small"
-          onClick={multipleItemsEditHandler}
-        >
-          فعال/غیرفعال سازی انتخاب شده ها
-        </LoadingButton>
-        <LoadingButton
-          variant="contained"
-          disabled={!checkedIds.length}
-          endIcon={<CloseIcon color="error" />}
-          size="small"
-          onClick={() => setconfirmModalIsOpen(true)}
-        >
-          حذف انتخاب شده ها
-        </LoadingButton>
+      <Grid item container xs={12} mb={2} mt={2} justifyContent="space-between">
+        <Grid item xs={2}>
+          <UsageSearch />
+        </Grid>
+        <Grid item>
+          <LoadingButton
+            sx={{ marginInlineEnd: 4 }}
+            variant="contained"
+            disabled={!checkedIds.length}
+            endIcon={<CheckIcon color="success" />}
+            size="small"
+            onClick={multipleItemsEditHandler}
+          >
+            فعال/غیرفعال سازی انتخاب شده ها
+          </LoadingButton>
+          <LoadingButton
+            variant="contained"
+            disabled={!checkedIds.length}
+            endIcon={<CloseIcon color="error" />}
+            size="small"
+            onClick={() => setconfirmModalIsOpen(true)}
+          >
+            حذف انتخاب شده ها
+          </LoadingButton>
+        </Grid>
       </Grid>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -237,7 +253,38 @@ export default function AdminUsagePage() {
           </TableBody>
         </Table>
       </TableContainer>
-
+      {metaData && (
+        <Grid container mt={5} justifyContent="space-between">
+          <Grid item xs={2}>
+            <Box sx={{ pt: 2 }}>
+              <AppPagination
+                metaData={metaData}
+                onPageChange={(page: number) =>
+                  dispatch(setPageNumber({ pageNumber: page }))
+                }
+              />
+            </Box>
+          </Grid>
+          <Grid item xs={1}>
+            <FormControl fullWidth>
+              <InputLabel>تعداد در صفحه</InputLabel>
+              <Select
+                value={params.pageSize}
+                label="تعداد در صفحه"
+                onChange={(e) =>
+                  dispatch(setParams({ pageSize: e.target.value }))
+                }
+              >
+                {[6, 10, 25, 50].map((item, index) => (
+                  <MenuItem value={item} key={index}>
+                    {item}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+        </Grid>
+      )}
       {isOpen && (
         <DialogComponent open={true}>
           <FormHandler closeModalHandler={closeModalHandler} />

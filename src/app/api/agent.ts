@@ -289,7 +289,8 @@ const Admin = {
   partnersDeleteMultipleItems: (values: number[]) =>
     requests.post("Partners/DeleteMultipleItems", values),
   //Department
-  departmentList: () => requests.get("Departments"),
+  departmentList: (params: URLSearchParams) =>
+    requests.get("Departments", params),
   createDepartment: (Department: any) =>
     requests.postForm("Departments", createFormData(Department)),
   deleteDepartment: (id: number) => requests.delete(`Departments/${id}`),
@@ -387,7 +388,7 @@ const Admin = {
   SizesDeleteMultipleItems: (values: number[]) =>
     requests.post("Size/DeleteMultipleItems", values),
   //Usage
-  UsageList: () => requests.get("Usage"),
+  UsageList: (params: URLSearchParams) => requests.get("Usage", params),
   createUsage: (Usage: any) =>
     requests.postForm("Usage", createFormData(Usage)),
   deleteUsage: (id: number) => requests.delete(`Usage/${id}`),

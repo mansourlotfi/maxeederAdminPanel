@@ -22,6 +22,7 @@ function getAxiosParams(param: SlideParams) {
   params.append("pageNumber", param.pageNumber.toString());
   params.append("pageSize", param.pageSize.toString());
   params.append("page", param.page.toString());
+  if (param.searchTerm) params.append("searchTerm", param.searchTerm);
 
   return params;
 }

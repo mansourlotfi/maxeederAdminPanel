@@ -21,6 +21,7 @@ function getAxiosParams(userParams: UsersParams) {
   const params = new URLSearchParams();
   params.append("pageNumber", userParams.pageNumber.toString());
   params.append("pageSize", userParams.pageSize.toString());
+  if (userParams.searchTerm) params.append("searchTerm", userParams.searchTerm);
 
   return params;
 }

@@ -21,6 +21,8 @@ function getAxiosParams(param: ArtistParams) {
   const params = new URLSearchParams();
   params.append("pageNumber", param.pageNumber.toString());
   params.append("pageSize", param.pageSize.toString());
+  params.append("pageSize", param.pageSize.toString());
+  if (param.searchTerm) params.append("searchTerm", param.searchTerm);
   return params;
 }
 
@@ -29,9 +31,7 @@ export const fetchArtistsAsync = createAsyncThunk<
   void,
   { state: RootState }
 >("Artist/fetchArtistsAsync", async (_, thunkAPI) => {
-  const params = getAxiosParams(
-    thunkAPI.getState().socialNetworks.socialNetworksParams
-  );
+  const params = getAxiosParams(thunkAPI.getState().artists.artistsParams);
   try {
     var response = await agent.Admin.artistList(params);
     thunkAPI.dispatch(setMetaData(response.metaData));
@@ -74,6 +74,14 @@ export const artistsSlice = createSlice({
       artistsAdapter.removeOne(state, action.payload);
       state.isLoaded = false;
     },
+    setArtistParams: (state, action) => {
+      state.isLoaded = false;
+      state.artistsParams = {
+        ...state.artistsParams,
+        ...action.payload,
+        pageNumber: 1,
+      };
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchArtistsAsync.pending, (state, action) => {
@@ -94,5 +102,10 @@ export const artistsSelectors = artistsAdapter.getSelectors(
   (state: RootState) => state.artists
 );
 
-export const { setMetaData, setArtist, removeArtist, setPageNumber } =
-  artistsSlice.actions;
+export const {
+  setMetaData,
+  setArtist,
+  removeArtist,
+  setPageNumber,
+  setArtistParams,
+} = artistsSlice.actions;

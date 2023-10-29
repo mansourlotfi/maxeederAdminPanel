@@ -33,6 +33,7 @@ import { Artist } from "../../../app/models/Artsts";
 import ConfirmDialog from "../../../app/components/confirmDialog";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
+import ArtistsSearch from "./Search";
 
 export default function AdminArtists() {
   const { artists, isLoaded, status, metaData, artistsParams } = useArtists();
@@ -140,26 +141,31 @@ export default function AdminArtists() {
           هنرمند جدید
         </Button>
       </Box>
-      <Grid item container xs={12} mb={2} mt={2} justifyContent="flex-end">
-        <LoadingButton
-          sx={{ marginInlineEnd: 4 }}
-          variant="contained"
-          disabled={!checkedIds.length}
-          endIcon={<CheckIcon color="success" />}
-          size="small"
-          onClick={multipleItemsEditHandler}
-        >
-          فعال/غیرفعال سازی انتخاب شده ها
-        </LoadingButton>
-        <LoadingButton
-          variant="contained"
-          disabled={!checkedIds.length}
-          endIcon={<CloseIcon color="error" />}
-          size="small"
-          onClick={() => setconfirmModalIsOpen(true)}
-        >
-          حذف انتخاب شده ها
-        </LoadingButton>
+      <Grid item container xs={12} mb={2} mt={2} justifyContent="space-between">
+        <Grid item xs={3}>
+          <ArtistsSearch />
+        </Grid>
+        <Grid item>
+          <LoadingButton
+            sx={{ marginInlineEnd: 4 }}
+            variant="contained"
+            disabled={!checkedIds.length}
+            endIcon={<CheckIcon color="success" />}
+            size="small"
+            onClick={multipleItemsEditHandler}
+          >
+            فعال/غیرفعال سازی انتخاب شده ها
+          </LoadingButton>
+          <LoadingButton
+            variant="contained"
+            disabled={!checkedIds.length}
+            endIcon={<CloseIcon color="error" />}
+            size="small"
+            onClick={() => setconfirmModalIsOpen(true)}
+          >
+            حذف انتخاب شده ها
+          </LoadingButton>
+        </Grid>
       </Grid>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">

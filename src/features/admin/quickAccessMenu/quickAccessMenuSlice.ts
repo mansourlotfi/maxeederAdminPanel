@@ -24,6 +24,8 @@ function getAxiosParams(param: QuickAccessMenuParams) {
   const params = new URLSearchParams();
   params.append("pageNumber", param.pageNumber.toString());
   params.append("pageSize", param.pageSize.toString());
+  if (param.searchTerm) params.append("searchTerm", param.searchTerm);
+
   return params;
 }
 
@@ -78,6 +80,14 @@ export const QuickAccessMenulice = createSlice({
       quickAccessMenuAdapter.removeOne(state, action.payload);
       state.isLoaded = false;
     },
+    setMenuParams: (state, action) => {
+      state.isLoaded = false;
+      state.quickAccessMenuParams = {
+        ...state.quickAccessMenuParams,
+        ...action.payload,
+        pageNumber: 1,
+      };
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchQuickAccessMenuAsync.pending, (state, action) => {
@@ -98,5 +108,10 @@ export const quickAccessMenuSelectors = quickAccessMenuAdapter.getSelectors(
   (state: RootState) => state.quickAccess
 );
 
-export const { setMetaData, setMenu, removeMenu, setPageNumber } =
-  QuickAccessMenulice.actions;
+export const {
+  setMetaData,
+  setMenu,
+  removeMenu,
+  setPageNumber,
+  setMenuParams,
+} = QuickAccessMenulice.actions;

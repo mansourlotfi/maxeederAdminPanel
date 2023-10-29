@@ -21,6 +21,8 @@ function getAxiosParams(param: LogoParams) {
   const params = new URLSearchParams();
   params.append("pageNumber", param.pageNumber.toString());
   params.append("pageSize", param.pageSize.toString());
+  if (param.searchTerm) params.append("searchTerm", param.searchTerm);
+
   return params;
 }
 
@@ -68,6 +70,14 @@ export const logoSlice = createSlice({
     setMetaData: (state, action) => {
       state.metaData = action.payload;
     },
+    setLogoParams: (state, action) => {
+      state.isLoaded = false;
+      state.logoParams = {
+        ...state.logoParams,
+        ...action.payload,
+        pageNumber: 1,
+      };
+    },
     removeLogo: (state, action) => {
       logosAdapter.removeOne(state, action.payload);
       state.isLoaded = false;
@@ -92,5 +102,10 @@ export const logoSelectors = logosAdapter.getSelectors(
   (state: RootState) => state.logo
 );
 
-export const { setMetaData, setLogo, removeLogo, setPageNumber } =
-  logoSlice.actions;
+export const {
+  setMetaData,
+  setLogo,
+  removeLogo,
+  setPageNumber,
+  setLogoParams,
+} = logoSlice.actions;

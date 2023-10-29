@@ -24,6 +24,7 @@ function getAxiosParams(param: ProductFeatureParams) {
   const params = new URLSearchParams();
   params.append("pageNumber", param.pageNumber.toString());
   params.append("pageSize", param.pageSize.toString());
+  if (param.searchTerm) params.append("searchTerm", param.searchTerm);
   return params;
 }
 
@@ -71,6 +72,14 @@ export const productFeaturesSlice = createSlice({
         ...action.payload,
       };
     },
+    setProductFeatureParams: (state, action) => {
+      state.isLoaded = false;
+      state.productFeatureParams = {
+        ...state.productFeatureParams,
+        ...action.payload,
+        pageNumber: 1,
+      };
+    },
     setMetaData: (state, action) => {
       state.metaData = action.payload;
     },
@@ -103,4 +112,5 @@ export const {
   setProductFeature,
   removeProductFeature,
   setPageNumber,
+  setProductFeatureParams,
 } = productFeaturesSlice.actions;

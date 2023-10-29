@@ -38,7 +38,8 @@ export const fetchProductFeaturesAsync = createAsyncThunk<
   try {
     var response = await agent.Admin.productFeatureList(params);
     thunkAPI.dispatch(setMetaData(response.metaData));
-    return response;
+
+    return response.items;
   } catch (error: any) {
     return thunkAPI.rejectWithValue({ error: error.data });
   }

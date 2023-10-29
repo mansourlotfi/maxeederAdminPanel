@@ -20,25 +20,24 @@ interface ProductFeaturesState {
 
 const productFeaturesAdapter = createEntityAdapter<ProductFeature>();
 
-// function getAxiosParams(param: ProductFeatureParams) {
-//   const params = new URLSearchParams();
-//   params.append("pageNumber", param.pageNumber.toString());
-//   params.append("pageSize", param.pageSize.toString());
-//   return params;
-// }
+function getAxiosParams(param: ProductFeatureParams) {
+  const params = new URLSearchParams();
+  params.append("pageNumber", param.pageNumber.toString());
+  params.append("pageSize", param.pageSize.toString());
+  return params;
+}
 
 export const fetchProductFeaturesAsync = createAsyncThunk<
   ProductFeature[],
   void,
   { state: RootState }
->("SocialNetworks/fetchProductFeaturesAsync", async (_, thunkAPI) => {
-  // const params = getAxiosParams(
-  //   thunkAPI.getState().productFeature.productFeatureParams
-  // );
+>("ProductFeature/fetchProductFeaturesAsync", async (_, thunkAPI) => {
+  const params = getAxiosParams(
+    thunkAPI.getState().productFeature.productFeatureParams
+  );
   try {
-    var response = await agent.Admin.productFeatureList();
-    console.log("response", response);
-    // thunkAPI.dispatch(setMetaData(response.metaData));
+    var response = await agent.Admin.productFeatureList(params);
+    thunkAPI.dispatch(setMetaData(response.metaData));
     return response;
   } catch (error: any) {
     return thunkAPI.rejectWithValue({ error: error.data });

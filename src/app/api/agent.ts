@@ -349,7 +349,8 @@ const Admin = {
   pageItemsDeleteMultipleItems: (values: number[]) =>
     requests.post("PageItems/DeleteMultipleItems", values),
   //ProductFeatures
-  productFeatureList: () => requests.get("ProductFeatures"),
+  productFeatureList: (params: URLSearchParams) =>
+    requests.get("ProductFeatures", params),
   createProductFeature: (productFeature: any) =>
     requests.postForm("ProductFeatures", createFormData(productFeature)),
   updateProductFeature: (ProductFeature: any) =>

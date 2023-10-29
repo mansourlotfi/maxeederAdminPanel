@@ -265,12 +265,35 @@ export default function AdminInventory() {
             </Select>
           </FormControl>
         </Grid>
+        <Grid item xs={2}>
+          <InputLabel>وضعیت محصول</InputLabel>
+          <Checkbox
+            onChange={(e) =>
+              dispatch(setProductParams({ isActive: !!e.target.checked }))
+            }
+            color="primary"
+            checked={Boolean(productParams.isActive)}
+          />
+        </Grid>
+        <Grid item xs={2}>
+          <InputLabel>نمایش قیمت</InputLabel>
+          <Checkbox
+            onChange={(e) =>
+              dispatch(setProductParams({ showPrice: !!e.target.checked }))
+            }
+            color="primary"
+            checked={Boolean(productParams.showPrice)}
+          />
+        </Grid>
+
         <Grid item xs={2} alignSelf="center">
           {productParams.searchTerm?.length ||
           productParams.brands.length ||
           productParams.types.length ||
           productParams.size.length ||
-          productParams.usage.length ? (
+          productParams.usage.length ||
+          productParams.isActive !== null ||
+          productParams.showPrice !== null ? (
             <Button
               sx={{ mb: 2 }}
               variant="contained"

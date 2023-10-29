@@ -34,4 +34,6 @@ export interface ProductParams {
   usage: string[];
   pageNumber: number;
   pageSize: number;
+  showPrice: boolean | null;
+  isActive: boolean | null;
 }

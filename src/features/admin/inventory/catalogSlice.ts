@@ -38,6 +38,10 @@ function getAxiosParams(productParams: ProductParams) {
     params.append("size", productParams.size.toString());
   if (productParams.usage.length > 0)
     params.append("usage", productParams.usage.toString());
+  if (productParams.isActive !== null)
+    params.append("isActive", productParams.isActive.toString());
+  if (productParams.showPrice !== null)
+    params.append("showPrice", productParams.showPrice.toString());
   return params;
 }
 
@@ -101,6 +105,8 @@ function initParams(): ProductParams {
     types: [],
     size: [],
     usage: [],
+    isActive: null,
+    showPrice: null,
   };
 }
 

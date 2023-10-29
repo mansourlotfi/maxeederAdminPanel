@@ -189,7 +189,8 @@ const Admin = {
   categoriesDeleteMultipleItems: (values: number[]) =>
     requests.post("Categories/DeleteMultipleItems", values),
   //subCategory
-  subCategorylist: () => requests.get("SubCategory"),
+  subCategorylist: (params: URLSearchParams) =>
+    requests.get("SubCategory", params),
   subCategoryDetails: (id: number) => requests.get(`SubCategory/${id}`),
   createSubCategory: (Subcategory: any) =>
     requests.postForm("SubCategory", createFormData(Subcategory)),

@@ -8,7 +8,7 @@ import {
 
 export default function useSubCategories() {
   const subCategories = useAppSelector(subCategorySelectors.selectAll);
-  const { categoriesLoaded, status } = useAppSelector(
+  const { categoriesLoaded, status, metaData, params } = useAppSelector(
     (state) => state.subCategory
   );
   const dispatch = useAppDispatch();
@@ -21,5 +21,7 @@ export default function useSubCategories() {
     subCategories,
     categoriesLoaded,
     status,
+    metaData,
+    params,
   };
 }

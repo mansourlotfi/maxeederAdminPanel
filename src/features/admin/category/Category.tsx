@@ -38,7 +38,7 @@ import TypographyWithTooltip from "../../../app/components/typographyWithTooltip
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import ConfirmDialog from "../../../app/components/confirmDialog";
-import Search from "./Search";
+import CategorySearch from "./Search";
 import AppPagination from "../../../app/components/AppPagination";
 
 export default function AdminCategory() {
@@ -150,7 +150,7 @@ export default function AdminCategory() {
       </Box>
       <Grid item container xs={12} mb={2} mt={2} justifyContent="space-between">
         <Grid item xs={2}>
-          <Search />
+          <CategorySearch />
         </Grid>
         <Grid item>
           <LoadingButton

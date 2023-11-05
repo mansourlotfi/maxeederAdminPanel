@@ -17,6 +17,7 @@ import {
   FormControl,
   InputLabel,
   Checkbox,
+  Badge,
 } from "@mui/material";
 import { useCallback, useState } from "react";
 import agent from "../../../app/api/agent";
@@ -48,6 +49,13 @@ import {
   setPageNumber,
   setProductParams,
 } from "./catalogSlice";
+import useSubCategories from "../../../app/hooks/useSubCategories";
+import AddCommentIcon from "@mui/icons-material/AddComment";
+import CommentFormHandler from "./commentFormHandler";
+import MailIcon from "@mui/icons-material/Mail";
+import { useNavigate } from "react-router";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import ExtraFilesFormHandler from "./extraFilesFormHandler";
 
 const sortOptions = [
   { value: "name", label: "حروف الفبا" },
@@ -56,9 +64,11 @@ const sortOptions = [
 ];
 
 export default function AdminInventory() {
+  const navigate = useNavigate();
   const { products, metaData, productParams, status } = useProducts();
   const { brands } = useBrands();
   const { categories } = useCategories();
+  const { subCategories } = useSubCategories();
   const { sizes } = useSizes();
   const { usages } = useUsages();
   const [confirmModalIsOpen, setconfirmModalIsOpen] = useState(false);
@@ -68,6 +78,9 @@ export default function AdminInventory() {
   const dispatch = useAppDispatch();
   const [editMode, setEditMode] = useState(false);
   const [mediaModal, setMediaModal] = useState(false);
+  const [commentModal, setCommentModal] = useState(false);
+  const [showFiles, setshowFiles] = useState(false);
+
   const [selectedProduct, setSelectedProduct] = useState<Product | undefined>(
     undefined
   );
@@ -84,9 +97,29 @@ export default function AdminInventory() {
     setMediaModal(true);
   }, []);
 
+  const handleShowFiles = useCallback((product: Product) => {
+    setSelectedProduct(product);
+    setshowFiles(true);
+  }, []);
+
+  const handlecommentModal = useCallback((product: Product) => {
+    setSelectedProduct(product);
+    setCommentModal(true);
+  }, []);
+
   function cancelMediaUpload() {
     if (selectedProduct) setSelectedProduct(undefined);
     setMediaModal(false);
+  }
+
+  function cancelCommentUpload() {
+    if (selectedProduct) setSelectedProduct(undefined);
+    setCommentModal(false);
+  }
+
+  function cancelShowFiles() {
+    if (selectedProduct) setSelectedProduct(undefined);
+    setshowFiles(false);
   }
 
   function handleDeleteProduct(id: number) {
@@ -213,7 +246,7 @@ export default function AdminInventory() {
         </Grid>
         <Grid item xs={2}>
           <FormControl fullWidth>
-            <InputLabel>انتخاب دسته بندی</InputLabel>
+            <InputLabel>انتخاب زیر دسته بندی</InputLabel>
             <Select
               value={productParams.types}
               label="انتخاب دسته بندی"
@@ -221,7 +254,7 @@ export default function AdminInventory() {
                 dispatch(setProductParams({ types: e.target.value }))
               }
             >
-              {categories.map((item, index) => (
+              {subCategories.map((item, index) => (
                 <MenuItem value={item.name} key={index}>
                   {item.name}
                 </MenuItem>
@@ -333,9 +366,8 @@ export default function AdminInventory() {
       <TableContainer
         component={Paper}
         sx={{
-          minWidth: 650,
           maxHeight: "calc(100vh - 400px)",
-          overflowY: "auto",
+          overflowX: "auto",
         }}
       >
         <Table aria-label="simple table">
@@ -361,7 +393,7 @@ export default function AdminInventory() {
               <TableCell align="left">کالا</TableCell>
               <TableCell align="left">تصویر</TableCell>
               <TableCell align="left">قیمت</TableCell>
-              <TableCell align="center">نوع</TableCell>
+              <TableCell align="center">دسته بندی</TableCell>
               <TableCell align="center">زیر دسته بندی</TableCell>
               <TableCell align="center">برند</TableCell>
               <TableCell align="center">اولویت</TableCell>
@@ -371,7 +403,8 @@ export default function AdminInventory() {
               <TableCell align="center">سایز</TableCell>
               <TableCell align="center">قابلیت ها</TableCell>
               <TableCell align="center">وضعیت</TableCell>
-              <TableCell align="center">افزودن فایل</TableCell>
+              <TableCell align="center"> فایل</TableCell>
+              <TableCell align="center"> کامنت</TableCell>
               <TableCell align="left">کپی</TableCell>
               <TableCell align="left">ویرایش</TableCell>
               <TableCell align="left">حذف</TableCell>
@@ -422,8 +455,16 @@ export default function AdminInventory() {
                     ? currencyFormat(product.price)
                     : "قیمت وارد نشده"}
                 </TableCell>
-                <TableCell align="center">{product.type}</TableCell>
-                <TableCell align="center">{product.subCategory}</TableCell>
+                <TableCell align="center">
+                  {
+                    categories.find(
+                      (I) => I.id === product.subCategory?.categoryId
+                    )?.name
+                  }
+                </TableCell>
+                <TableCell align="center">
+                  {product.subCategory?.name}
+                </TableCell>
                 <TableCell align="center">{product.brand}</TableCell>
                 <TableCell align="center">{product.priority}</TableCell>
                 <TableCell align="center">
@@ -451,11 +492,56 @@ export default function AdminInventory() {
                   )}
                 </TableCell>
                 <TableCell align="left">
-                  <Button
-                    onClick={() => handleUploadProductMedia(product)}
-                    startIcon={<CloudUploadIcon />}
-                  />
+                  <Grid
+                    container
+                    justifyContent="space-between"
+                    alignSelf="center"
+                  >
+                    <Grid item xs={6}>
+                      <Button
+                        onClick={() => handleUploadProductMedia(product)}
+                        startIcon={<CloudUploadIcon />}
+                      />
+                    </Grid>
+                    <Grid item xs={6}>
+                      <Button onClick={() => handleShowFiles(product)}>
+                        <Badge
+                          badgeContent={product.mediaList.length}
+                          color="secondary"
+                        >
+                          <VisibilityIcon color="primary" />
+                        </Badge>
+                      </Button>
+                    </Grid>
+                  </Grid>
                 </TableCell>
+                <TableCell align="left">
+                  <Grid
+                    container
+                    justifyContent="space-between"
+                    alignSelf="center"
+                  >
+                    <Grid item xs={6}>
+                      <Button
+                        onClick={() => handlecommentModal(product)}
+                        startIcon={<AddCommentIcon />}
+                      />
+                    </Grid>
+                    <Grid item xs={6}>
+                      <Button
+                        onClick={() => navigate("/admin-dashboard/comments")}
+                      >
+                        <Badge
+                          badgeContent={product.commentList.length}
+                          color="secondary"
+                        >
+                          <MailIcon color="primary" />
+                        </Badge>
+                      </Button>
+                    </Grid>
+                  </Grid>
+                </TableCell>
+
                 <TableCell align="left">
                   <Button
                     onClick={() => {
@@ -530,6 +616,22 @@ export default function AdminInventory() {
           />
         </DialogComponent>
       ) : null}
+      {selectedProduct ? (
+        <DialogComponent open={commentModal} maxWidth={"sm"}>
+          <CommentFormHandler
+            product={selectedProduct}
+            cancel={cancelCommentUpload}
+          />
+        </DialogComponent>
+      ) : null}
+
+      <DialogComponent open={showFiles} maxWidth={"lg"}>
+        <ExtraFilesFormHandler
+          product={selectedProduct}
+          cancel={cancelShowFiles}
+        />
+      </DialogComponent>
+
       <ConfirmDialog
         fullWidth
         maxWidth="xs"

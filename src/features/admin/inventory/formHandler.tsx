@@ -60,6 +60,9 @@ export default function FormHandler({ product, cancelEdit }: Props) {
   const { productFeatures } = useProductFeatures();
 
   const watchFile = watch("file", null);
+  const watchField = watch("type", null);
+  const watchSub = watch("subCategoryId", null);
+
   const dispatch = useAppDispatch();
 
   const [checkedIds, setCheckedIds] = useState<number[]>([]);
@@ -79,10 +82,12 @@ export default function FormHandler({ product, cancelEdit }: Props) {
   };
 
   useEffect(() => {
-    if (product && !watchFile && !isDirty)
+    if (product && !watchFile && !isDirty) {
       reset({
         ...product,
+        subCategoryId: null,
       });
+    }
     if (product) {
       setCheckedIds(product.features.map((F) => F.featureId));
     }
@@ -93,6 +98,8 @@ export default function FormHandler({ product, cancelEdit }: Props) {
 
   async function handleSubmitData(data: FieldValues) {
     data.features = checkedIds;
+
+    data.subCategoryId = subCategories.find((i) => i.name === watchSub)?.id;
     try {
       let response: Product;
       if (product) {
@@ -119,6 +126,8 @@ export default function FormHandler({ product, cancelEdit }: Props) {
       );
     }
   }, [products, product, setValue]);
+
+  const filteredCategory = categories.find((I) => I.name === watchField);
 
   return (
     <DialogContent>
@@ -150,14 +159,14 @@ export default function FormHandler({ product, cancelEdit }: Props) {
               control={control}
               items={categories.map((C) => C.name) || []}
               name="type"
-              label="دسته بندی"
+              label="دسته بندی مرجع"
             />
           </Grid>
           <Grid item xs={12} sm={4}>
             <AppSelectList
               control={control}
-              items={subCategories.map((C) => C.name) || []}
-              name="subCategory"
+              items={filteredCategory?.subCategory.map((C) => C.name) || []}
+              name="subCategoryId"
               label="زیر دسته بندی"
             />
           </Grid>

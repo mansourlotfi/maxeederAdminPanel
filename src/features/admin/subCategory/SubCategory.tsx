@@ -32,7 +32,6 @@ import FormHandler from "./formHandler";
 import { toast } from "react-toastify";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
-import { Category } from "../../../app/models/Category";
 import TypographyWithTooltip from "../../../app/components/typographyWithTooltip";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
@@ -40,10 +39,14 @@ import ConfirmDialog from "../../../app/components/confirmDialog";
 import useSubCategories from "../../../app/hooks/useSubCategories";
 import AppPagination from "../../../app/components/AppPagination";
 import SubCategorySearch from "./Search";
+import useCategories from "../../../app/hooks/useCategories";
+import { SubCategory } from "../../../app/models/SubCategory";
 
 export default function AdminSubCategory() {
   const { subCategories, categoriesLoaded, status, metaData, params } =
     useSubCategories();
+  const { categories } = useCategories();
+
   const dispatch = useAppDispatch();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -51,11 +54,11 @@ export default function AdminSubCategory() {
   const [loading, setLoading] = useState(false);
   const [target, setTarget] = useState(0);
 
-  const [selectedItem, setSelectedItem] = useState<Category | undefined>(
+  const [selectedItem, setSelectedItem] = useState<SubCategory | undefined>(
     undefined
   );
 
-  function handleSelectItem(cat: Category) {
+  function handleSelectItem(cat: SubCategory) {
     setSelectedItem(cat);
     setIsOpen(true);
   }
@@ -204,6 +207,7 @@ export default function AdminSubCategory() {
               </TableCell>
               <TableCell align="left">نام</TableCell>
               <TableCell align="left">نام انگلیسی</TableCell>
+              <TableCell align="left">دسته بندی مرجع</TableCell>
               <TableCell align="left">لینک</TableCell>
               <TableCell align="left">تصویر</TableCell>
               <TableCell align="left">اولویت</TableCell>
@@ -247,6 +251,16 @@ export default function AdminSubCategory() {
                 <TableCell align="left">
                   <Box display="flex" alignItems="center">
                     <span>{category.nameEn}</span>
+                  </Box>
+                </TableCell>
+                <TableCell align="left">
+                  <Box display="flex" alignItems="center">
+                    <span>
+                      {
+                        categories.find((C) => C.id === category.categoryId)
+                          ?.name
+                      }
+                    </span>
                   </Box>
                 </TableCell>
                 <TableCell align="left">

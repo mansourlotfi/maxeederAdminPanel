@@ -172,7 +172,8 @@ const Admin = {
     requests.putForm("products", createFormData(product)),
   UpdateProductMedia: (product: any) =>
     requests.putForm("products/UpdateProductMedia", createFormData(product)),
-
+  AddCommentToProduct: (commet: any) =>
+    requests.postForm("products/UpdateProductComments", createFormData(commet)),
   deleteProduct: (id: number) => requests.delete(`products/${id}`),
   ProductsEditMultipleItems: (values: number[]) =>
     requests.put("Products/UpdateMultipleItems", values),

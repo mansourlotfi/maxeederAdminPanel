@@ -1,4 +1,5 @@
 import { ProductFeature } from "./ProductFeatures";
+import { Comment } from "../models/Comment";
 
 export interface Product {
   id: number;
@@ -8,7 +9,6 @@ export interface Product {
   price: number;
   brand: string;
   isFeatured: boolean;
-  type?: string;
   quantityInStock?: number;
   features: IFeatures[];
   isActive: boolean;
@@ -18,7 +18,21 @@ export interface Product {
   usage: string | null;
   priority: number;
   showPrice: boolean;
-  subCategory: string;
+  subCategory: ISubCategoryDto | null;
+  subCategoryId: number | null;
+  commentList: Comment[];
+  mediaList: { mediaFileName: string }[];
+}
+
+export interface ISubCategoryDto {
+  id: number;
+  isActive: boolean;
+  link: string;
+  name: string;
+  nameEn: string;
+  pictureUrl: string;
+  priority: number;
+  categoryId: number;
 }
 
 export interface IFeatures {

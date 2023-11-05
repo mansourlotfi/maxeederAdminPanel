@@ -7,19 +7,23 @@ import { validationSchema } from "./validation";
 import agent from "../../../app/api/agent";
 import { useAppDispatch } from "../../../app/store/configureStore";
 import { LoadingButton } from "@mui/lab";
-import { Category } from "../../../app/models/Category";
-import { setSubCategory } from "./subCategorySlice";
+import { resetParams, setSubCategory } from "./subCategorySlice";
 import { useEffect } from "react";
 import { enNumberConvertor } from "../../../app/util/util";
 import useSubCategories from "../../../app/hooks/useSubCategories";
+import useCategories from "../../../app/hooks/useCategories";
+import AppSelectList from "../../../app/components/AppSelectList";
+import { SubCategory } from "../../../app/models/SubCategory";
 
 interface Props {
   closeModalHandler: () => void;
-  itemToEdit?: Category;
+  itemToEdit?: SubCategory;
 }
 
 export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
   const { subCategories } = useSubCategories();
+  const { categories } = useCategories();
+
   const {
     control,
     handleSubmit,
@@ -42,7 +46,9 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
 
   async function handleSubmitData(data: FieldValues) {
     try {
-      let response: Category;
+      let response: SubCategory;
+
+      data.categoryId = categories.find((i) => i.name === data.categoryId)?.id;
 
       if (itemToEdit) {
         response = await agent.Admin.updateSubCategory(data);
@@ -50,6 +56,7 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
         response = await agent.Admin.createSubCategory(data);
       }
       dispatch(setSubCategory(response));
+      dispatch(resetParams());
       closeModalHandler();
     } catch (error) {
       console.log(error);
@@ -82,6 +89,14 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
           </Grid>
           <Grid item xs={12} sm={6}>
             <AppTextInput control={control} name="link" label="لینک" />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <AppSelectList
+              control={control}
+              items={categories.map((P) => P.name)}
+              name="categoryId"
+              label="انتخاب دسته بندی مرجع"
+            />
           </Grid>
           <Grid item xs={12} sm={6}>
             <AppTextInput

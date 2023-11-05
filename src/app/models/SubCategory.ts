@@ -1,6 +1,4 @@
-import { SubCategory } from "./SubCategory";
-
-export interface Category {
+export interface SubCategory {
   id: number;
   name: string;
   nameEn: string | null;
@@ -8,10 +6,10 @@ export interface Category {
   pictureUrl: string;
   priority: number;
   isActive: boolean;
-  subCategory: SubCategory[];
+  categoryId: number;
 }
 
-export interface CategoryParams {
+export interface SubCategoryParams {
   searchTerm?: string;
   pageNumber: number;
   pageSize: number;

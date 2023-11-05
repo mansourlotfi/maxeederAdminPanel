@@ -5,19 +5,22 @@ import {
 } from "@reduxjs/toolkit";
 import agent from "../../../app/api/agent";
 import { RootState } from "../../../app/store/configureStore";
-import { Category, CategoryParams } from "../../../app/models/Category";
 import { MetaData } from "../../../app/models/pagination";
+import {
+  SubCategory,
+  SubCategoryParams,
+} from "../../../app/models/SubCategory";
 
 interface CategoryState {
   categoriesLoaded: boolean;
   status: string;
-  params: CategoryParams;
+  params: SubCategoryParams;
   metaData: MetaData | null;
 }
 
-const subCategoriesAdapter = createEntityAdapter<Category>();
+const subCategoriesAdapter = createEntityAdapter<SubCategory>();
 
-function getAxiosParams(productParams: CategoryParams) {
+function getAxiosParams(productParams: SubCategoryParams) {
   const params = new URLSearchParams();
   params.append("pageNumber", productParams.pageNumber.toString());
   params.append("pageSize", productParams.pageSize.toString());
@@ -28,7 +31,7 @@ function getAxiosParams(productParams: CategoryParams) {
 }
 
 export const fetchSubCategoriesAsync = createAsyncThunk<
-  Category[],
+  SubCategory[],
   void,
   { state: RootState }
 >("SubCategory/fetchSubCategoriesAsync", async (_, thunkAPI) => {
@@ -44,7 +47,7 @@ export const fetchSubCategoriesAsync = createAsyncThunk<
   }
 });
 
-export const fetchCategoryAsync = createAsyncThunk<Category, number>(
+export const fetchCategoryAsync = createAsyncThunk<SubCategory, number>(
   "SubCategory/fetchCategoryAsync",
   async (categoryId, thunkAPI) => {
     try {
@@ -56,7 +59,7 @@ export const fetchCategoryAsync = createAsyncThunk<Category, number>(
   }
 );
 
-function initParams(): CategoryParams {
+function initParams(): SubCategoryParams {
   return {
     pageNumber: 1,
     pageSize: 6,

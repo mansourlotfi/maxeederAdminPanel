@@ -135,7 +135,7 @@ function AdminDashboard() {
             </List>
           </Paper>
         </Grid>
-        <Grid item container xs>
+        <Grid item container xs sx={{ maxWidth: "100%", overflowY: "auto" }}>
           <Container maxWidth="xl">
             <Outlet />
           </Container>

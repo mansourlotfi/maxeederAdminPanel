@@ -39,10 +39,13 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
 
   useEffect(() => {
     if (!watchFile && !isDirty) reset(itemToEdit);
+    setTimeout(() => {
+      setValue("categoryId", null);
+    }, 100);
     return () => {
       if (watchFile) URL.revokeObjectURL(watchFile.preview);
     };
-  }, [reset, watchFile, isDirty, itemToEdit]);
+  }, [reset, watchFile, isDirty, itemToEdit, setValue]);
 
   async function handleSubmitData(data: FieldValues) {
     try {

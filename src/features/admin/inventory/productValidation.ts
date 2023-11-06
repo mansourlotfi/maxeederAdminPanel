@@ -8,7 +8,6 @@ export const validationSchema = yup.object({
   price: yup.number().nullable().moreThan(100).notRequired(),
   description: yup.string().required(),
   subCategoryId: yup.string().required(),
-  type: yup.string().required(),
 
   // file: yup.mixed().when("pictureUrl", {
   //   is: (value: string) => !value,

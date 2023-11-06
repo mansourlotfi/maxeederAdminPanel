@@ -151,6 +151,24 @@ export default function AdminSubCategory() {
           زیر دسته بندی جدید
         </Button>
       </Box>
+      <Grid container sm={4} mb={5}>
+        <FormControl fullWidth>
+          <InputLabel>انتخاب دسته بندی مرجع </InputLabel>
+          <Select
+            value={params.categoryId}
+            label="انتخاب دسته بندی مرجع"
+            onChange={(e: any) =>
+              dispatch(setParams({ categoryId: e.target.value }))
+            }
+          >
+            {categories.map((item, index) => (
+              <MenuItem value={item.id} key={index}>
+                {item.name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </Grid>
       <Grid item container xs={12} mb={2} mt={2} justifyContent="space-between">
         <Grid item xs={2}>
           <SubCategorySearch />

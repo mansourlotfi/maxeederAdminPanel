@@ -24,6 +24,10 @@ function getAxiosParams(productParams: SubCategoryParams) {
   const params = new URLSearchParams();
   params.append("pageNumber", productParams.pageNumber.toString());
   params.append("pageSize", productParams.pageSize.toString());
+
+  if (productParams.categoryId)
+    params.append("categoryId", productParams.categoryId.toString());
+
   if (productParams.searchTerm)
     params.append("searchTerm", productParams.searchTerm);
 
@@ -63,6 +67,7 @@ function initParams(): SubCategoryParams {
   return {
     pageNumber: 1,
     pageSize: 6,
+    categoryId: null,
   };
 }
 

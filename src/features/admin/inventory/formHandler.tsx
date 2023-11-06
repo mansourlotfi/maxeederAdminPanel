@@ -6,6 +6,10 @@ import {
   DialogContent,
   FormControlLabel,
   Checkbox,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
@@ -29,6 +33,8 @@ import { toast } from "react-toastify";
 import useProducts from "../../../app/hooks/useProducts";
 import { enNumberConvertor } from "../../../app/util/util";
 import useSubCategories from "../../../app/hooks/useSubCategories";
+import { setParams } from "../subCategory/subCategorySlice";
+import { CircularProgress } from "@mui/material";
 
 interface Props {
   product?: Product;
@@ -44,6 +50,7 @@ export default function FormHandler({ product, cancelEdit }: Props) {
     handleSubmit,
     watch,
     setValue,
+
     formState: { isDirty, isSubmitting },
   } = useForm({
     resolver: yupResolver<any>(validationSchema),
@@ -52,7 +59,7 @@ export default function FormHandler({ product, cancelEdit }: Props) {
 
   // const { brands, types } = useProducts();
   const { categories } = useCategories();
-  const { subCategories } = useSubCategories();
+  const { subCategories, params, categoriesLoaded } = useSubCategories();
 
   const { sizes } = useSizes();
   const { usages } = useUsages();
@@ -60,8 +67,6 @@ export default function FormHandler({ product, cancelEdit }: Props) {
   const { productFeatures } = useProductFeatures();
 
   const watchFile = watch("file", null);
-  const watchField = watch("type", null);
-  const watchSub = watch("subCategoryId", null);
 
   const dispatch = useAppDispatch();
 
@@ -99,7 +104,9 @@ export default function FormHandler({ product, cancelEdit }: Props) {
   async function handleSubmitData(data: FieldValues) {
     data.features = checkedIds;
 
-    data.subCategoryId = subCategories.find((i) => i.name === watchSub)?.id;
+    data.subCategoryId = subCategories.find(
+      (i) => i.name === data.subCategoryId
+    )?.id;
     try {
       let response: Product;
       if (product) {
@@ -127,8 +134,6 @@ export default function FormHandler({ product, cancelEdit }: Props) {
     }
   }, [products, product, setValue]);
 
-  const filteredCategory = categories.find((I) => I.name === watchField);
-
   return (
     <DialogContent>
       <Typography variant="h4" gutterBottom sx={{ mb: 4 }}>
@@ -155,20 +160,34 @@ export default function FormHandler({ product, cancelEdit }: Props) {
             />
           </Grid>
           <Grid item xs={12} sm={4}>
-            <AppSelectList
-              control={control}
-              items={categories.map((C) => C.name) || []}
-              name="type"
-              label="دسته بندی مرجع"
-            />
+            <FormControl fullWidth>
+              <InputLabel>انتخاب دسته بندی مرجع </InputLabel>
+              <Select
+                value={params.categoryId}
+                label="انتخاب دسته بندی مرجع"
+                onChange={(e: any) =>
+                  dispatch(setParams({ categoryId: e.target.value }))
+                }
+              >
+                {categories.map((item, index) => (
+                  <MenuItem value={item.id} key={index}>
+                    {item.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
           </Grid>
           <Grid item xs={12} sm={4}>
-            <AppSelectList
-              control={control}
-              items={filteredCategory?.subCategory.map((C) => C.name) || []}
-              name="subCategoryId"
-              label="زیر دسته بندی"
-            />
+            {!categoriesLoaded ? (
+              <CircularProgress color="primary" />
+            ) : (
+              <AppSelectList
+                control={control}
+                items={subCategories.map((C) => C.name) || []}
+                name="subCategoryId"
+                label="زیر دسته بندی"
+              />
+            )}
           </Grid>
           <Grid item xs={12} sm={4}>
             <AppTextInput

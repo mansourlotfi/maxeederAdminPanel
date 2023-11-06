@@ -13,4 +13,5 @@ export interface SubCategoryParams {
   searchTerm?: string;
   pageNumber: number;
   pageSize: number;
+  categoryId: number | null;
 }

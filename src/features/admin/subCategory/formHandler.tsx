@@ -56,9 +56,8 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
 
   async function handleSubmitData(data: FieldValues) {
     try {
+      data.categoryId = categories.find((i) => i.name === data.categoryId)?.id;
       let response: SubCategory;
-
-      data.categoryId = data.category?.id;
 
       if (itemToEdit) {
         response = await agent.Admin.updateSubCategory(data);

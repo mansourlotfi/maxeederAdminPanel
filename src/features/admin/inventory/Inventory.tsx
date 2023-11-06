@@ -56,6 +56,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import { useNavigate } from "react-router";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import ExtraFilesFormHandler from "./extraFilesFormHandler";
+import TypographyWithTooltip from "../../../app/components/typographyWithTooltip";
 
 const sortOptions = [
   { value: "name", label: "حروف الفبا" },
@@ -393,15 +394,21 @@ export default function AdminInventory() {
               <TableCell align="left">کالا</TableCell>
               <TableCell align="left">تصویر</TableCell>
               <TableCell align="left">قیمت</TableCell>
-              <TableCell align="center">دسته بندی</TableCell>
-              <TableCell align="center">زیر دسته بندی</TableCell>
+              <TableCell align="center" sx={{ minWidth: 100 }}>
+                دسته بندی
+              </TableCell>
+              <TableCell align="center" sx={{ minWidth: 100 }}>
+                زیر دسته بندی
+              </TableCell>
               <TableCell align="center">برند</TableCell>
               <TableCell align="center">اولویت</TableCell>
               <TableCell align="center">نمایش قیمت</TableCell>
               <TableCell align="center">تعداد</TableCell>
               <TableCell align="center">کاربری</TableCell>
               <TableCell align="center">سایز</TableCell>
-              <TableCell align="center">قابلیت ها</TableCell>
+              <TableCell align="center" sx={{ minWidth: 150 }}>
+                قابلیت ها
+              </TableCell>
               <TableCell align="center">وضعیت</TableCell>
               <TableCell align="center"> فایل</TableCell>
               <TableCell align="center"> کامنت</TableCell>
@@ -480,9 +487,16 @@ export default function AdminInventory() {
                 </TableCell>
                 <TableCell align="center">{product.size}</TableCell>
 
-                <TableCell align="center">
-                  {Array.isArray(product.features) &&
-                    product.features.map((F) => F.feature?.name).join(", ")}
+                <TableCell align="center" sx={{ maxWidth: 150 }}>
+                  <TypographyWithTooltip
+                    text={
+                      (Array.isArray(product.features) &&
+                        product.features
+                          .map((F) => F.feature?.name)
+                          .join(", ")) ||
+                      "-"
+                    }
+                  />
                 </TableCell>
                 <TableCell align="center">
                   {product.isActive ? (

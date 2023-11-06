@@ -14,6 +14,7 @@ import useSubCategories from "../../../app/hooks/useSubCategories";
 import useCategories from "../../../app/hooks/useCategories";
 import AppSelectList from "../../../app/components/AppSelectList";
 import { SubCategory } from "../../../app/models/SubCategory";
+import { toast } from "react-toastify";
 
 interface Props {
   closeModalHandler: () => void;
@@ -57,7 +58,7 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
     try {
       let response: SubCategory;
 
-      data.categoryId = categories.find((i) => i.name === data.categoryId)?.id;
+      data.categoryId = data.category?.id;
 
       if (itemToEdit) {
         response = await agent.Admin.updateSubCategory(data);
@@ -67,8 +68,8 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
       dispatch(setSubCategory(response));
       dispatch(resetParams());
       closeModalHandler();
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      toast.error(error.data?.title ?? "Bad Request");
     }
   }
 
@@ -137,6 +138,7 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
             loading={isSubmitting}
             type="submit"
             variant="contained"
+            disabled={!isDirty}
           >
             ثبت
           </LoadingButton>

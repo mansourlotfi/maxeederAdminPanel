@@ -103,10 +103,7 @@ export default function FormHandler({ product, cancelEdit }: Props) {
 
   async function handleSubmitData(data: FieldValues) {
     data.features = checkedIds;
-
-    data.subCategoryId = subCategories.find(
-      (i) => i.name === data.subCategoryId
-    )?.id;
+    data.subCategoryId = data.subCategory?.id;
     try {
       let response: Product;
       if (product) {

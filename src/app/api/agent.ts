@@ -202,6 +202,7 @@ const Admin = {
     requests.put("SubCategory/UpdateMultipleItems", values),
   subCategoriesDeleteMultipleItems: (values: number[]) =>
     requests.post("SubCategory/DeleteMultipleItems", values),
+  getMaxPrioritySubCat: () => requests.get("SubCategory/MaxPriority"),
   //brand
   createBrand: (Brands: any) =>
     requests.postForm("Brands", createFormData(Brands)),
@@ -351,6 +352,8 @@ const Admin = {
     requests.put("PageItems/UpdateMultipleItems", values),
   pageItemsDeleteMultipleItems: (values: number[]) =>
     requests.post("PageItems/DeleteMultipleItems", values),
+  getMaxPriorityPageItems: () => requests.get("PageItems/MaxPriority"),
+
   //ProductFeatures
   productFeatureList: (params: URLSearchParams) =>
     requests.get("ProductFeatures", params),

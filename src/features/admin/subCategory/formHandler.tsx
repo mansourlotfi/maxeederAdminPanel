@@ -10,7 +10,6 @@ import { LoadingButton } from "@mui/lab";
 import { resetParams, setSubCategory } from "./subCategorySlice";
 import { useEffect } from "react";
 import { enNumberConvertor } from "../../../app/util/util";
-import useSubCategories from "../../../app/hooks/useSubCategories";
 import useCategories from "../../../app/hooks/useCategories";
 import AppSelectList from "../../../app/components/AppSelectList";
 import { SubCategory } from "../../../app/models/SubCategory";
@@ -22,7 +21,6 @@ interface Props {
 }
 
 export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
-  const { subCategories } = useSubCategories();
   const { categories } = useCategories();
 
   const {
@@ -73,15 +71,12 @@ export default function FormHandler({ closeModalHandler, itemToEdit }: Props) {
   }
 
   useEffect(() => {
-    if (subCategories && !itemToEdit) {
-      setValue(
-        "priority",
-        Math.max(...subCategories.map((o) => o.priority), 0)
-          ? Math.max(...subCategories.map((o) => o.priority), 0) + 1
-          : 1
-      );
+    if (!itemToEdit) {
+      agent.Admin.getMaxPrioritySubCat()
+        .then((res) => setValue("priority", res ? res + 1 : 1))
+        .catch((error) => setValue("priority", 1));
     }
-  }, [subCategories, itemToEdit, setValue]);
+  }, [itemToEdit, setValue]);
 
   return (
     <Box component={Paper} sx={{ p: 4 }}>

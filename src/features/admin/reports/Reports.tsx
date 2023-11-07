@@ -2,6 +2,7 @@ import { Grid, Typography } from "@mui/material";
 import UsersAndPartners from "./UsersAndPartners";
 import ProductReports from "./Products";
 import MessagesReport from "./MessagesReport";
+import Comments from "./Comments";
 
 function AdminReports() {
   return (
@@ -20,6 +21,9 @@ function AdminReports() {
 
       <Grid item xs={6}>
         <MessagesReport />
+      </Grid>
+      <Grid item xs={6} alignSelf="end">
+        <Comments />
       </Grid>
     </Grid>
   );

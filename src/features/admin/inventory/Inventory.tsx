@@ -57,6 +57,7 @@ import { useNavigate } from "react-router";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import ExtraFilesFormHandler from "./extraFilesFormHandler";
 import TypographyWithTooltip from "../../../app/components/typographyWithTooltip";
+import { setParams } from "../subCategory/subCategorySlice";
 
 const sortOptions = [
   { value: "name", label: "حروف الفبا" },
@@ -251,9 +252,22 @@ export default function AdminInventory() {
             <Select
               value={productParams.category}
               label="انتخاب دسته بندی"
-              onChange={(e) =>
-                dispatch(setProductParams({ category: e.target.value }))
-              }
+              onChange={(e) => {
+                dispatch(
+                  setProductParams({
+                    category: e.target.value,
+                    subCategory: "",
+                  })
+                );
+                categories.find((C) => C.name === e.target.value)?.id &&
+                  dispatch(
+                    setParams({
+                      categoryId: categories.find(
+                        (C) => C.name === e.target.value
+                      )?.id,
+                    })
+                  );
+              }}
             >
               {categories.map((item, index) => (
                 <MenuItem value={item.name} key={index}>

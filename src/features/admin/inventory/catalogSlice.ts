@@ -30,8 +30,10 @@ function getAxiosParams(productParams: ProductParams) {
   params.append("orderBy", productParams.orderBy);
   if (productParams.searchTerm)
     params.append("searchTerm", productParams.searchTerm);
-  if (productParams.types.length > 0)
-    params.append("types", productParams.types.toString());
+  if (productParams.category.length > 0)
+    params.append("category", productParams.category.toString());
+  if (productParams.subCategory.length > 0)
+    params.append("subCategory", productParams.subCategory.toString());
   if (productParams.brands.length > 0)
     params.append("brands", productParams.brands.toString());
   if (productParams.size.length > 0)
@@ -102,7 +104,8 @@ function initParams(): ProductParams {
     pageSize: 6,
     orderBy: "name",
     brands: [],
-    types: [],
+    category: [],
+    subCategory: [],
     size: [],
     usage: [],
     isActive: null,

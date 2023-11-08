@@ -247,12 +247,30 @@ export default function AdminInventory() {
         </Grid>
         <Grid item xs={2}>
           <FormControl fullWidth>
-            <InputLabel>انتخاب زیر دسته بندی</InputLabel>
+            <InputLabel>انتخاب دسته بندی</InputLabel>
             <Select
-              value={productParams.types}
+              value={productParams.category}
               label="انتخاب دسته بندی"
               onChange={(e) =>
-                dispatch(setProductParams({ types: e.target.value }))
+                dispatch(setProductParams({ category: e.target.value }))
+              }
+            >
+              {categories.map((item, index) => (
+                <MenuItem value={item.name} key={index}>
+                  {item.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item xs={2}>
+          <FormControl fullWidth>
+            <InputLabel>انتخاب زیر دسته بندی</InputLabel>
+            <Select
+              value={productParams.subCategory}
+              label="انتخاب زیر دسته بندی"
+              onChange={(e) =>
+                dispatch(setProductParams({ subCategory: e.target.value }))
               }
             >
               {subCategories.map((item, index) => (
@@ -323,7 +341,8 @@ export default function AdminInventory() {
         <Grid item xs={2} alignSelf="center">
           {productParams.searchTerm?.length ||
           productParams.brands.length ||
-          productParams.types.length ||
+          productParams.category.length ||
+          productParams.subCategory.length ||
           productParams.size.length ||
           productParams.usage.length ||
           productParams.isActive !== null ||

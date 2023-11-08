@@ -42,7 +42,8 @@ export interface IFeatures {
 export interface ProductParams {
   orderBy: string;
   searchTerm?: string;
-  types: string[];
+  category: string[];
+  subCategory: string[];
   brands: string[];
   size: string[];
   usage: string[];
